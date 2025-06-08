@@ -518,7 +518,7 @@
           }
           return await res.json();
         } catch (e) {
-          alert('글 목록을 불러올 수 없습니다. 네트워크 오류: ' + e.message);
+          alert('글 목록을 불러올 수 없습니다. 네트워크 오류: ' + e.message + '\n\nAPI 서버(https://hallowed-hulking-scooter.glitch.me/api) 상태 및 네트워크 연결을 확인해주세요.');
           console.error('fetchBoardList 네트워크 오류:', e);
           return [];
         }
