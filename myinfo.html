@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>내 정보 | 기프트샵 커뮤니티</title>
+  <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div class="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-extrabold text-blue-700 tracking-tight">기프트샵 커뮤니티</a>
+      <button id="logout-btn" class="text-gray-700 hover:text-blue-700">로그아웃</button>
+    </div>
+  </header>
+  <main class="flex-1 max-w-3xl mx-auto w-full px-4 py-8">
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <h1 class="text-2xl font-bold mb-6">내 정보</h1>
+      <form id="myinfo-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">닉네임</label>
+          <input id="nickname" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100" readonly>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">이름</label>
+          <input id="realname" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">생년월일</label>
+          <input id="birth" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" maxlength="8" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">연락처</label>
+          <input id="contact" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">이메일</label>
+          <input id="email" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" required>
+        </div>
+        <div class="flex gap-2">
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">정보 수정</button>
+          <button type="button" id="change-password-btn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300">비밀번호 변경</button>
+        </div>
+        <div id="myinfo-error" class="text-red-500 text-sm mt-2 hidden"></div>
+        <div id="myinfo-success" class="text-green-600 text-sm mt-2 hidden"></div>
+      </form>
+      <form id="password-form" class="space-y-4 mt-8 hidden">
+        <h2 class="text-lg font-semibold">비밀번호 변경</h2>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">현재 비밀번호</label>
+          <input id="old-password" type="password" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">새 비밀번호</label>
+          <input id="new-password" type="password" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" required>
+        </div>
+        <div class="flex gap-2">
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">비밀번호 변경</button>
+          <button type="button" id="cancel-password-btn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300">취소</button>
+        </div>
+        <div id="password-error" class="text-red-500 text-sm mt-2 hidden"></div>
+        <div id="password-success" class="text-green-600 text-sm mt-2 hidden"></div>
+      </form>
+    </div>
+  </main>
+  <script>
+    const API_BASE_URL = 'http://localhost:4000/api';
+    const nickname = localStorage.getItem('giftshop_community_nickname');
+    if (!nickname) {
+      alert('로그인이 필요합니다.');
+      window.location.href = 'index.html';
+    }
+    document.getElementById('nickname').value = nickname;
+    async function loadMyInfo() {
+      try {
+        const res = await fetch(`${API_BASE_URL}/users/${encodeURIComponent(nickname)}`);
+        const data = await res.json();
+        if (data.success && data.user) {
+          document.getElementById('realname').value = data.user.realname || '';
+          document.getElementById('birth').value = data.user.birth || '';
+          document.getElementById('contact').value = data.user.contact || '';
+          document.getElementById('email').value = data.user.email || '';
+        } else {
+          document.getElementById('myinfo-error').textContent = data.error || '회원정보를 불러올 수 없습니다.';
+          document.getElementById('myinfo-error').classList.remove('hidden');
+        }
+      } catch (e) {
+        document.getElementById('myinfo-error').textContent = '서버 오류: ' + e.message;
+        document.getElementById('myinfo-error').classList.remove('hidden');
+      }
+    }
+    loadMyInfo();
+    document.getElementById('myinfo-form').onsubmit = async function(e) {
+      e.preventDefault();
+      document.getElementById('myinfo-error').classList.add('hidden');
+      document.getElementById('myinfo-success').classList.add('hidden');
+      const realname = document.getElementById('realname').value.trim();
+      const birth = document.getElementById('birth').value.trim();
+      const contact = document.getElementById('contact').value.trim();
+      const email = document.getElementById('email').value.trim();
+      try {
+        const res = await fetch(`${API_BASE_URL}/users/${encodeURIComponent(nickname)}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ realname, birth, contact, email })
+        });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('myinfo-success').textContent = '정보가 수정되었습니다.';
+          document.getElementById('myinfo-success').classList.remove('hidden');
+        } else {
+          document.getElementById('myinfo-error').textContent = data.error || '정보 수정 실패';
+          document.getElementById('myinfo-error').classList.remove('hidden');
+        }
+      } catch (e) {
+        document.getElementById('myinfo-error').textContent = '서버 오류: ' + e.message;
+        document.getElementById('myinfo-error').classList.remove('hidden');
+      }
+    };
+    document.getElementById('change-password-btn').onclick = function() {
+      document.getElementById('password-form').classList.remove('hidden');
+    };
+    document.getElementById('cancel-password-btn').onclick = function() {
+      document.getElementById('password-form').classList.add('hidden');
+    };
+    document.getElementById('password-form').onsubmit = async function(e) {
+      e.preventDefault();
+      document.getElementById('password-error').classList.add('hidden');
+      document.getElementById('password-success').classList.add('hidden');
+      const old_password = document.getElementById('old-password').value;
+      const new_password = document.getElementById('new-password').value;
+      try {
+        const res = await fetch(`${API_BASE_URL}/users/${encodeURIComponent(nickname)}/password`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ old_password, new_password })
+        });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('password-success').textContent = '비밀번호가 변경되었습니다.';
+          document.getElementById('password-success').classList.remove('hidden');
+        } else {
+          document.getElementById('password-error').textContent = data.error || '비밀번호 변경 실패';
+          document.getElementById('password-error').classList.remove('hidden');
+        }
+      } catch (e) {
+        document.getElementById('password-error').textContent = '서버 오류: ' + e.message;
+        document.getElementById('password-error').classList.remove('hidden');
+      }
+    };
+    document.getElementById('logout-btn').onclick = function() {
+      localStorage.removeItem('giftshop_community_token');
+      localStorage.removeItem('giftshop_community_nickname');
+      window.location.href = 'index.html';
+    };
+  </script>
+</body>
+</html>

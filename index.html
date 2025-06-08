@@ -48,7 +48,7 @@
         <a href="#products-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('products'); return false;">기프트샵</a>
         <a href="#cart-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('cart'); return false;">휴대폰결제 구매방법</a>
         <a href="#postpay-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('postpay'); return false;">후불결제방법</a>
-        <a href="board.html" class="text-gray-700 hover:text-blue-700" onclick="showPage('board'); return false;">자유게시판</a>
+        <a href="board.html" class="text-gray-700 hover:text-blue-700">자유게시판</a>
       </nav>
       <div class="flex items-center space-x-4">
         <button id="login-btn" class="text-gray-700 hover:text-blue-700" onclick="handleLogin(); return false;">로그인</button>
@@ -71,7 +71,7 @@
       <a href="#products-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('products'); return false;">기프트샵</a>
       <a href="#cart-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('cart'); return false;">휴대폰결제 구매방법</a>
       <a href="#postpay-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('postpay'); return false;">후불결제방법</a>
-      <a href="board.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('board'); return false;">자유게시판</a>
+      <a href="board.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">자유게시판</a>
       <button id="mobile-login-btn" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="handleLogin(); return false;">로그인</button>
       <button id="mobile-logout-btn" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hidden" onclick="handleLogout(); return false;">로그아웃</button>
     </div>
@@ -424,8 +424,7 @@
         </div>
       </div>
     </section>
-    <!-- 게시판(방명록/문의/자유게시판) 섹션 비활성화 -->
-    <!--
+    <!-- 게시판(방명록/문의/자유게시판) 섹션 활성화 -->
     <section id="board-section" class="page-section hidden">
       <h2 class="text-2xl font-bold text-gray-800 mb-4">게시판(방명록/문의)</h2>
       <form id="board-form" class="bg-white rounded-lg shadow p-4 mb-6 flex flex-col gap-2">
@@ -613,5 +612,40 @@
       © 2023 기프트샵 커뮤니티. All rights reserved.
     </div>
   </footer>
+  <script>
+    // --- 네비게이션(상단바) section 전환 함수 ---
+    function showPage(page) {
+      // 모든 section 숨김
+      document.querySelectorAll('.page-section').forEach(function(sec){
+        sec.classList.add('hidden');
+      });
+      // 해당 section만 표시
+      var id = page + '-section';
+      var el = document.getElementById(id);
+      if (el) el.classList.remove('hidden');
+      // 모바일 메뉴 닫기(모바일 UX)
+      var mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenu) mobileMenu.classList.add('hidden');
+    }
+    // --- 모바일 메뉴(햄버거) 토글 및 메뉴 클릭 시 닫힘 ---
+    document.addEventListener('DOMContentLoaded', function() {
+      // 첫 진입 시 홈만 보이기
+      showPage('home');
+      // 모바일 메뉴 토글
+      var mobileMenuBtn = document.getElementById('mobile-menu-button');
+      var mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+          mobileMenu.classList.toggle('hidden');
+        });
+        // 모바일 메뉴 내 항목 클릭 시 닫기
+        mobileMenu.querySelectorAll('a,button').forEach(function(el) {
+          el.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>
