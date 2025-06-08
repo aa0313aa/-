@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기프트샵 커뮤니티</title>
+  <meta name="description" content="기프트샵 상품권 정보, 휴대폰결제, 자유게시판, 다양한 정보와 소통의 공간.">
+  <meta name="keywords" content="기프트샵, 상품권, 휴대폰결제, 자유게시판, 정보공유, 커뮤니티">
+  <link rel="canonical" href="http://localhost:4000/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="기프트샵 커뮤니티">
+  <meta property="og:description" content="기프트샵 상품권 정보, 휴대폰결제, 자유게시판, 다양한 정보와 소통의 공간.">
+  <meta property="og:url" content="http://localhost:4000/index.html">
+  <meta property="og:image" content="http://localhost:4000/img/Starbucks.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="기프트샵 커뮤니티">
+  <meta name="twitter:description" content="기프트샵 상품권 정보, 휴대폰결제, 자유게시판, 다양한 정보와 소통의 공간.">
+  <meta name="twitter:image" content="http://localhost:4000/img/Starbucks.png">
+  <link rel="icon" href="/img/cu.png" type="image/png">
+  <link rel="apple-touch-icon" href="/img/cu.png">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "기프트샵 커뮤니티",
+    "url": "http://localhost:4000/index.html",
+    "description": "기프트샵 상품권 정보, 휴대폰결제, 자유게시판, 다양한 정보와 소통의 공간.",
+    "inLanguage": "ko-KR"
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', 'Noto Sans KR', sans-serif; }
+    .product-card { transition: box-shadow 0.2s, transform 0.2s; }
+    .product-card:hover { box-shadow: 0 8px 32px 0 rgba(37,99,235,0.13); transform: translateY(-4px) scale(1.03); border-color: #3b82f6; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- 상단 내비게이션 -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50" role="banner">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#home-section" class="text-2xl font-extrabold text-blue-700 tracking-tight" aria-label="기프트샵 홈" onclick="showPage('home'); return false;">휴대폰결제로 상품권 구매정보사이트</a>
+      <nav class="hidden md:flex space-x-8 text-base font-medium" aria-label="주요 메뉴">
+        <a href="#home-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('home'); return false;">홈</a>
+        <a href="#products-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('products'); return false;">기프트샵</a>
+        <a href="#cart-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('cart'); return false;">휴대폰결제 구매방법</a>
+        <a href="#postpay-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('postpay'); return false;">후불결제방법</a>
+        <a href="board.html" class="text-gray-700 hover:text-blue-700">자유게시판</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <button id="login-btn" class="text-gray-700 hover:text-blue-700" onclick="handleLogin(); return false;">로그인</button>
+        <button id="logout-btn" class="text-gray-700 hover:text-blue-700 hidden" onclick="handleLogout(); return false;">로그아웃</button>
+      </div>
+    </div>
+  </header>
+  <!-- 모바일 내비게이션 -->
+  <nav class="md:hidden bg-white border-b border-gray-200 py-2 px-4" aria-label="모바일 메뉴">
+    <div class="flex justify-between items-center">
+      <a href="#home-section" class="text-xl font-bold text-blue-700" onclick="showPage('home'); return false;">기프트샵</a>
+      <button id="mobile-menu-button" class="text-gray-700 focus:outline-none" aria-label="모바일 메뉴 열기">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden">
+      <a href="#home-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('home'); return false;">홈</a>
+      <a href="#products-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('products'); return false;">기프트샵</a>
+      <a href="#cart-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('cart'); return false;">휴대폰결제 구매방법</a>
+      <a href="#postpay-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('postpay'); return false;">후불결제방법</a>
+      <a href="board.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">자유게시판</a>
+      <button id="mobile-login-btn" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="handleLogin(); return false;">로그인</button>
+      <button id="mobile-logout-btn" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hidden" onclick="handleLogout(); return false;">로그아웃</button>
+    </div>
+  </nav>
+  <main id="main-content" class="flex-1 max-w-5xl mx-auto w-full px-4 py-8" role="main">
+    <!-- 안내 버튼 영역 -->
+    <!-- 안내 버튼 영역 (모바일 가로 스크롤 개선) -->
+    <div class="overflow-x-auto -mx-4 px-4 mb-8">
+      <ul class="flex flex-nowrap gap-3 w-max min-w-full whitespace-nowrap">
+        <li class="inline-block min-w-[120px]"><a href="index.html" class="bg-blue-50 text-blue-700 font-semibold px-4 py-2 rounded hover:bg-blue-100 border border-blue-200 transition" aria-current="page" onclick="showPage('home'); return false;">기프트샵 홈</a></li>
+        <li class="inline-block min-w-[120px]"><a href="모빌.html" class="bg-cyan-50 text-cyan-700 font-semibold px-4 py-2 rounded hover:bg-cyan-100 border border-cyan-200 transition" onclick="window.open('모빌.html','_blank'); return false;">모빌카드 안내</a></li>
+        <li class="inline-block min-w-[120px]"><a href="네이버.html" class="bg-green-50 text-green-700 font-semibold px-4 py-2 rounded hover:bg-green-100 border border-green-200 transition" onclick="window.open('네이버.html','_blank'); return false;">네이버페이 안내</a></li>
+        <li class="inline-block min-w-[120px]"><a href="토스.html" class="bg-indigo-50 text-indigo-700 font-semibold px-4 py-2 rounded hover:bg-indigo-100 border border-indigo-200 transition" onclick="window.open('토스.html','_blank'); return false;">토스후불결제 안내</a></li>
+        <li class="inline-block min-w-[120px]"><a href="머니트리.html" class="bg-orange-50 text-orange-700 font-semibold px-4 py-2 rounded hover:bg-orange-100 border border-orange-200 transition" onclick="window.open('머니트리.html','_blank'); return false;">머니트리 안내</a></li>
+        <li class="inline-block min-w-[120px]"><a href="board.html" class="bg-pink-50 text-pink-700 font-semibold px-4 py-2 rounded hover:bg-pink-100 border border-pink-200 transition">자유게시판</a></li>
+      </ul>
+    </div>
+    <!-- 광고 배너 (좌/우) -->
+    <div class="hidden lg:block fixed left-0 top-32 z-40 space-y-4">
+      <a href="https://smartstore.naver.com/sk6070" target="_blank">
+        <img src="img/ad_left.png" alt="광고배너1" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://현금화.store" target="_blank">
+        <img src="img/ad_left2.png" alt="현금화.store" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://pay24.store/" target="_blank">
+        <img src="img/ad_left3.png" alt="pay24.store" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://sites.google.com/view/k090912k/" target="_blank">
+        <img src="img/ad_left4.png" alt="구글사이트" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://aa0313.github.io/-/" target="_blank">
+        <img src="img/ad_left5.png" alt="깃허브1" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://aa0313.github.io/-/21.html" target="_blank">
+        <img src="img/ad_left6.png" alt="깃허브2" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://cardcashing.kr" target="_blank">
+        <img src="img/ad_left7.png" alt="cardcashing.kr" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://cardcashing.shop" target="_blank">
+        <img src="img/ad_left8.png" alt="cardcashing.shop" class="w-40 rounded-xl shadow-lg">
+      </a>
+    </div>
+    <div class="hidden lg:block fixed right-0 top-32 z-40 space-y-4">
+      <a href="https://smartstore.naver.com/sk6070" target="_blank">
+        <img src="img/ad_right.png" alt="광고배너1" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://현금화.store" target="_blank">
+        <img src="img/ad_right2.png" alt="현금화.store" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://pay24.store/" target="_blank">
+        <img src="img/ad_right3.png" alt="pay24.store" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://sites.google.com/view/k090912k/" target="_blank">
+        <img src="img/ad_right4.png" alt="구글사이트" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://aa0313.github.io/-/" target="_blank">
+        <img src="img/ad_right5.png" alt="깃허브1" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://aa0313.github.io/-/21.html" target="_blank">
+        <img src="img/ad_right6.png" alt="깃허브2" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://cardcashing.kr" target="_blank">
+        <img src="img/ad_right7.png" alt="cardcashing.kr" class="w-40 rounded-xl shadow-lg">
+      </a>
+      <a href="https://cardcashing.shop" target="_blank">
+        <img src="img/ad_right8.png" alt="cardcashing.shop" class="w-40 rounded-xl shadow-lg">
+      </a>
+    </div>
+    <!-- 홈 -->
+    <section id="home-section" class="page-section">
+      <div class="text-center mb-10">
+        <h1 class="text-4xl font-extrabold text-blue-700 mb-2">휴대폰결제로 상품권 구매정보사이트</h1>
+        <p class="text-gray-600 text-lg mb-6">휴대폰결제로 상품권 구매정보사이트</p>
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 inline-block mb-4">
+          <p class="text-base text-gray-700 font-bold">휴대폰결제 네이버포인트 카드결제 상품권</p>
+          <p class="text-base text-gray-700 font-bold">휴대폰소액결제로 상품권 구매방법</p>
+          <p class="text-base text-gray-700 font-bold">휴대폰결제로 소액환전방법</p>
+          <p class="text-base text-gray-700 font-bold">휴대폰소액결제 충전후 계좌출금</p>
+          <p class="text-base text-gray-700 font-bold">모빌카드 휴대폰소액결제 충전후 상품권 구매</p>
+        </div>
+      </div>
+    </section>
+    <!-- 상품 리스트 -->
+    <section id="products-section" class="page-section hidden">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">전체 상품</h2>
+      <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- 데모용 인기 상품 -->
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/Starbucks.png" alt="스타벅스 카드" class="w-24 h-24 object-contain mb-3">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">스타벅스 카드 5만원권</h3>
+          <p class="text-blue-700 font-bold mb-2">50,000원</p>
+          <a href="https://smartstore.naver.com/sk6070" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/롯데5만원.JPG" alt="롯데상품권" class="w-24 h-24 object-contain mb-3">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">롯데상품권 5만원권</h3>
+          <p class="text-blue-700 font-bold mb-2">50,000원</p>
+          <a href="https://mkt.shopping.naver.com/link/6812c23662fffc0a4a49fd08" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/신세계상품.png" alt="신세계상품권" class="w-24 h-24 object-contain mb-3">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">신세계상품권 5만원권</h3>
+          <p class="text-blue-700 font-bold mb-2">50,000원</p>
+          <a href="https://현금화.store" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/card__teen.png" alt="틴캐시" class="w-24 h-24 object-contain mb-3">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">틴캐시 5만원권</h3>
+          <p class="text-blue-700 font-bold mb-2">50,000원</p>
+          <a href="https://mkt.shopping.naver.com/link/6812c23662fffc0a4a49fd08" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/dosupng.png" alt="도서문화상품권" class="w-24 h-24 object-contain mb-3">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">도서문화상품권 1만원권</h3>
+          <p class="text-blue-700 font-bold mb-2">10,000원</p>
+          <a href="https://cardcashing.shop" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/cu.png" alt="컬쳐랜드상품권" class="w-24 h-24 object-contain mb-3">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드상품권 1만원권</h3>
+          <p class="text-blue-700 font-bold mb-2">10,000원</p>
+          <a href="https://mkt.shopping.naver.com/link/683d9d1ad20fbf73c9d596bc" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/cu.png" alt="컬쳐랜드상품권" class="w-24 h-24 object-contain mb-3">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드상품권 2만원권</h3>
+          <p class="text-blue-700 font-bold mb-2">20,000원</p>
+          <a href="https://mkt.shopping.naver.com/link/683d9d1ae625370ec15afd4b" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+      </div>
+    </section>
+    <!-- 장바구니 -->
+    <section id="cart-section" class="page-section hidden">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">휴대폰결제 상품권 직접구매방법</h2>
+      <div class="bg-white rounded-lg shadow p-6 mb-4 text-gray-800 text-lg leading-relaxed">
+        <ol class="list-decimal pl-6 space-y-2">
+          <li>상단 또는 좌우 광고배너에서 원하는 상품권 판매 사이트를 클릭합니다.</li>
+          <li>이동한 사이트에서 회원가입 또는 비회원 구매를 선택합니다.</li>
+          <li>구매하려는 상품권을 선택하고, 결제수단에서 <span class="font-bold text-blue-700">휴대폰결제</span>를 선택합니다.</li>
+          <li>결제 안내에 따라 정보를 입력하고 결제를 완료합니다.</li>
+          <li>구매 완료 후 상품권은 사이트 내 마이페이지 또는 문자/이메일로 발송됩니다.</li>
+        </ol>
+        <div class="mt-6 text-blue-700 text-base">
+          ※ 각 사이트의 결제 및 상품권 발송 방식은 다를 수 있으니, 안내를 꼭 확인해 주세요.<br>
+          ※ 궁금한 점은 각 사이트의 고객센터를 이용해 주세요.
+        </div>
+      </div>
+      <!-- FAQ/고객센터(모빌.html, 토스.html) 전체 삽입 시작 -->
+      <section id="faq-section" class="my-12" style="display:none;">
+        <div class="container mx-auto px-0 md:px-4">
+          <!-- <header class="mb-10 text-center">
+            <div class="flex flex-col md:flex-row justify-center gap-4 items-center">
+              <div id="mobil-faq-title-box" class="bg-white rounded-lg shadow px-6 py-3 flex items-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800" id="faq-title-toggle" style="cursor:default;">모빌카드 휴대폰결제</h2>
+              </div>
+            </div>
+            <p class="mt-2 text-gray-600">모빌카드 휴대폰결제와 토스후불결제 FAQ가 아래에 모두 표시됩니다.</p>
+          </header> -->
+          <div id="faq-content-wrapper" class="flex flex-col md:flex-row gap-8">
+            <aside class="md:w-1/4 lg:w-1/5">
+              <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4 px-2">자주 묻는 질문</h3>
+                <nav id="faq-tabs-container-index" class="space-y-1">
+                  <button class="tab-item-faq active-tab-faq" data-tab="tab-guide-index">가입/이용안내</button>
+                  <button class="tab-item-faq" data-tab="tab-charge-index">충전</button>
+                  <button class="tab-item-faq" data-tab="tab-limit-index">한도</button>
+                  <button class="tab-item-faq" data-tab="tab-payment-index">결제/사용</button>
+                  <button class="tab-item-faq" data-tab="tab-cancel-index">취소/환불</button>
+                  <button class="tab-item-faq" data-tab="tab-etc-index">기타</button>
+                </nav>
+              </div>
+            </aside>
+            <main class="md:w-3/4 lg:w-4/5">
+              <div class="bg-white p-6 md:p-8 rounded-lg shadow overflow-x-auto">
+                <!-- FAQ 탭별 내용: 모빌.html에서 id만 -index로 변경하여 중복 방지 -->
+                <div id="tab-guide-index" class="tab-content-faq space-y-3">
+                  <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                    <h3 class="text-xl font-semibold text-blue-700 mb-4">모빌카드 상품권 구매 순서</h3>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                      <li><span class="font-medium">구글 검색:</span> <span class="text-blue-600 font-semibold">모빌카드</span> &rarr; 어플 다운로드 및 회원가입</li>
+                      <li><span class="font-medium">일반충전</span>을 누르면<br><span class="text-sm text-gray-500 ml-4">(1원을 송금할게요! 비대면 실명확인을 위해 본인 계좌 확인이 꼭 필요해요)</span> 라고 뜹니다.<br><span class="ml-4">인증 시 한도 증가를 안 하시면 한도 50만 원</span></li>
+                      <li><span class="font-medium">휴대폰충전</span> &rarr; <span class="font-medium">현재충전 가능한도</span>를 누르시면 즉시 한도 확인 가능<br><span class="ml-4">한도에 따라 충전하시면 간편하게 충전 완료</span></li>
+                      <li>화면 하단 <span class="font-medium">쿠폰샵</span>에 들어가시면 충전하신 금액으로 상품권 구매 가능</li>
+                    </ol>
+                    <div class="mt-5 text-center text-blue-600 text-xs">
+                      ※ 자세한 내용은 모빌카드 앱 내 안내를 참고하세요.
+                    </div>
+                  </div>
+                  <details class="group border-b border-gray-200">
+                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                      <span>카드보유한도 상향을 위해 실물카드는 왜 신청해야 하나요?</span>
+                    </summary>
+                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                      모빌카드는 인편 배송으로 직접 전달되며, 실물카드 수령 시 배송기사 확인 절차를 통해 본인 여부를 검증합니다.<br>
+                      카드 수령 후 앱에서 CVC 입력하여 카드 등록까지 완료해 주시면 카드보유한도 상향 신청이 가능합니다.
+                    </div>
+                  </details>
+                  <details class="group border-b border-gray-200">
+                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                      <span>페이북/간편결제 카드 등록이 안돼요.</span>
+                    </summary>
+                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                      카드번호와 소유자 정보가 불일치하는 경우 페이북 및 간편결제 등록이 불가합니다.<br>
+                      카드 신청 시, 주민등록번호 등 개인 정보를 잘못 입력하셨을 가능성이 있으니 KG모빌리언스 고객센터(1800-0678)로 문의해 주세요.
+                    </div>
+                  </details>
+                </div>
+                <div id="tab-charge-index" class="tab-content-faq hidden space-y-3">
+                  <details class="group border-b border-gray-200">
+                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                      <span>모빌리언스카드는 어떻게 충전하나요?</span>
+                    </summary>
+                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                      모빌리언스카드 APP에서 <span class="font-semibold">휴대폰, 계좌이체, 가상계좌, 상품권, 신용카드</span>를 사용하여 충전할 수 있으며, 자동 충전을 설정하면 더욱 편리하게 카드를 이용하실 수 있습니다.<br>
+                      <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li><span class="font-semibold text-blue-700">1) 휴대폰</span> - 자동 충전(매월 1일), 일반 충전, 수수료 3.5%</li>
+                        <li><span class="font-semibold text-blue-700">2) 계좌이체</span> - 자동/일반 충전</li>
+                        <li><span class="font-semibold text-blue-700">3) 가상계좌</span> - 일반 충전(최소 5만원)</li>
+                        <li><span class="font-semibold text-blue-700">4) 상품권</span> - 일반 충전, 전환 수수료 8.0%</li>
+                        <li><span class="font-semibold text-blue-700">5) 신용카드</span> - 일반 충전, 수수료 3.5%</li>
+                      </ul>
+                      <div class="text-blue-700 text-xs mt-2">※ 연결 계좌는 최대 3개까지 등록 가능<br>※ 자동충전 내역은 [APP &gt; 마이페이지 &gt; 자동충전 관리]에서 변경</div>
+                    </div>
+                  </details>
+                </div>
+                <div id="tab-limit-index" class="tab-content-faq hidden space-y-3">
+                  <details class="group border-b border-gray-200">
+                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                      <span>모빌리언스카드 충전한도가 있나요?</span>
+                    </summary>
+                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                      카드 잔액은 최대 <span class="font-semibold">성인 200만원 / 청소년 50만원</span> 보유할 수 있습니다.<br>
+                      <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li>휴대폰 : 통신사 월 결제 한도 내 충전</li>
+                        <li>계좌이체/가상계좌 : 한도 없음</li>
+                        <li>북앤라이프/컬쳐랜드/문화상품권 : 일 460~600만원, 월 600~1,000만원 (상품권 종류 및 정책에 따라 변동 가능)</li>
+                        <li>신용카드 : 일/월 100만원 (타 상품권류 포함)</li>
+                      </ul>
+                      <div class="text-blue-700 text-xs mt-2">※ 실명확인 및 KYC 미완료 시 한도 50만원 제한<br>※ 한도 상향은 고객확인, 계좌점유인증, 실물카드 등록 필요</div>
+                    </div>
+                  </details>
+                </div>
+                <div id="tab-payment-index" class="tab-content-faq hidden space-y-3">
+                  <details class="group border-b border-gray-200">
+                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                      <span>모빌리언스카드는 어디에서 이용할 수 있나요?</span>
+                    </summary>
+                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                      모빌리언스카드는 <span class="font-semibold">BC카드를 사용하는 모든 가맹점</span>에서 사용 가능합니다.
+                      <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li>오프라인 결제 : 일반 신용/체크카드와 동일하게 사용</li>
+                        <li>온라인 결제 : 카드사 "비씨카드(페이북)" 선택</li>
+                      </ul>
+                    </div>
+                  </details>
+                </div>
+                <div id="tab-cancel-index" class="tab-content-faq hidden space-y-3">
+                  <details class="group border-b border-gray-200">
+                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                      <span>휴대폰 결제 충전 금액 취소가 가능한가요?</span>
+                    </summary>
+                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                      충전일 포함 7일 이내 사용이력이 없는 경우, 수수료를 포함한 전체 금액 취소가 가능합니다.<br>[모빌리언스카드APP &gt; 메인페이지 &gt; 이용내역] 메뉴에서 충전내역을 선택하여 충전 취소할 수 있습니다.
+                      <div class="text-blue-700 text-xs mt-2">
+                        * KT 이외 통신사 고객님께서는 7일 이내이더라도 익월 취소인 경우는 고객센터(1800-0678)로 문의 부탁드립니다.
+                      </div>
+                    </div>
+                  </details>
+                </div>
+                <div id="tab-etc-index" class="tab-content-faq hidden space-y-3">
+                  <details class="group border-b border-gray-200">
+                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                      <span>모빌리언스카드 이용한 내역을 SMS로 받을 수 있나요?</span>
+                    </summary>
+                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                      모빌리언스카드 충전 및 이용내역은 APP Push로 제공되며, [모빌리언스카드 APP &gt; 마이 페이지 &gt; 카드 이용내역]에서 확인하실 수 있습니다.
+                    </div>
+                  </details>
+                </div>
+              </div>
+            </main>
+          </div>
+          <!-- 토스카드 FAQ: 토스.html 주요 FAQ 영역을 iframe이 아닌 직접 노출 (동시 노출) -->
+          <div id="toss-faq-wrapper" class="mt-10" style="display:none;">
+            <div class="bg-white rounded-lg shadow p-6">
+              <div class="flex items-center gap-2 mb-4">
+                <img src="img/Starbucks.png" alt="토스카드" class="w-8 h-8 rounded">
+                <span class="text-xl font-bold text-blue-700">토스 후불교통카드 FAQ</span>
+              </div>
+              <iframe src="토스.html" title="토스카드 FAQ" class="w-full min-h-[600px] border rounded" style="min-height:600px;"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+      <script>
+        // FAQ 탭+아코디언 동작 (index.html 내 중복 방지용)
+        document.addEventListener('DOMContentLoaded', function () {
+          const tabsContainer = document.getElementById('faq-tabs-container-index');
+          if (!tabsContainer) return;
+          const tabButtons = tabsContainer.querySelectorAll('.tab-item-faq');
+          const tabContents = document.querySelectorAll('.tab-content-faq');
+          let currentVisibleTabId = null;
+          function showTab(tabIdToShow) {
+            tabContents.forEach(function(content){ content.classList.add('hidden'); });
+            var selectedContent = document.getElementById(tabIdToShow);
+            if (selectedContent) {
+              selectedContent.classList.remove('hidden');
+              currentVisibleTabId = tabIdToShow;
+            }
+            tabButtons.forEach(function(button){
+              button.classList.remove('active-tab-faq');
+              button.classList.add('text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-800');
+            });
+            var activeButton = tabsContainer.querySelector('[data-tab="'+tabIdToShow+'"]');
+            if (activeButton) {
+              activeButton.classList.add('active-tab-faq');
+              activeButton.classList.remove('text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-800');
+            }
+          }
+          tabsContainer.addEventListener('click', function(e) {
+            if (!e.target.classList.contains('tab-item-faq')) return;
+            var tabId = e.target.getAttribute('data-tab');
+            showTab(tabId);
+          });
+          showTab('tab-guide-index');
+        });
+    </script>
+    </section>
+    <!-- 후불결제방법 안내 섹션 추가 -->
+    <section id="postpay-section" class="page-section hidden">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">후불결제방법 안내</h2>
+      <div class="bg-white rounded-lg shadow p-6 text-gray-800 text-lg leading-relaxed">
+        <ol class="list-decimal pl-6 space-y-2">
+          <li>
+            <span class="font-semibold text-blue-700">토스 후불결제</span>
+            <a href="토스.html" target="_blank" class="ml-2 text-blue-600 underline hover:text-blue-800 text-base">자세히 보기</a>
+          </li>
+          <li>
+            <span class="font-semibold text-green-700">네이버페이 후불결제</span>
+            <a href="네이버.html" target="_blank" class="ml-2 text-green-600 underline hover:text-green-800 text-base">자세히 보기</a>
+          </li>
+        </ol>
+        <div class="mt-6 text-blue-700 text-base">
+          ※ 후불결제는 신용도, 서비스 정책에 따라 한도 및 이용 조건이 다를 수 있습니다.<br>
+          ※ 자세한 내용은 각 서비스의 공식 안내를 참고해 주세요.
+        </div>
+      </div>
+    </section>
+    <!-- 게시판(방명록/문의/자유게시판) 섹션 추가 -->
+    <section id="board-section" class="page-section hidden">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">게시판(방명록/문의)</h2>
+      <form id="board-form" class="bg-white rounded-lg shadow p-4 mb-6 flex flex-col gap-2">
+        <input type="text" id="board-writer" class="border rounded px-3 py-2" placeholder="이름(닉네임)" maxlength="20" required>
+        <textarea id="board-content" class="border rounded px-3 py-2 resize-none" rows="3" placeholder="내용을 입력하세요" maxlength="300" required></textarea>
+        <label class="flex items-center gap-2 text-sm">
+          <input type="checkbox" id="board-private" class="form-checkbox"> 비공개(본인만 보기)
+        </label>
+        <div class="flex gap-2 self-end">
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">글 등록</button>
+          <button type="button" id="board-cancel-edit" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 hidden">취소</button>
+        </div>
+      </form>
+      <div id="board-login-alert" class="text-center text-red-500 mb-4 hidden">로그인 후 글쓰기가 가능합니다.</div>
+      <ul id="board-list" class="space-y-4"></ul>
+      <div id="board-empty" class="text-gray-400 text-center mt-6">아직 등록된 글이 없습니다.</div>
+    </section>
+    <!-- 로그인/회원가입 모달 -->
+    <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+      <div class="bg-white rounded-lg shadow-lg p-6 w-80 flex flex-col gap-4">
+        <h3 id="auth-modal-title" class="text-lg font-bold text-center">로그인</h3>
+        <input type="text" id="auth-nickname" class="border rounded px-3 py-2" placeholder="닉네임" maxlength="20">
+        <input type="password" id="auth-password" class="border rounded px-3 py-2" placeholder="비밀번호" maxlength="20">
+        <div id="auth-error" class="text-red-500 text-sm text-center hidden"></div>
+        <button id="auth-submit" class="bg-blue-600 text-white py-2 rounded">확인</button>
+        <button id="auth-toggle" class="text-blue-600 underline text-sm">회원가입</button>
+        <button id="auth-cancel" class="text-gray-500 text-xs mt-2">닫기</button>
+      </div>
+    </div>
+    <script>
+      // 회원가입/로그인 모달 UI 및 인증 로직
+      let isSignupMode = false;
+      function showAuthModal(signup) {
+        isSignupMode = !!signup;
+        document.getElementById('auth-modal').classList.remove('hidden');
+        document.getElementById('auth-modal-title').textContent = signup ? '회원가입' : '로그인';
+        document.getElementById('auth-submit').textContent = signup ? '회원가입' : '로그인';
+        document.getElementById('auth-toggle').textContent = signup ? '로그인' : '회원가입';
+        document.getElementById('auth-nickname').value = '';
+        document.getElementById('auth-password').value = '';
+        document.getElementById('auth-error').classList.add('hidden');
+      }
+      function hideAuthModal() {
+        document.getElementById('auth-modal').classList.add('hidden');
+      }
+      document.getElementById('login-btn').onclick = function() { handleLogin(); };
+      document.getElementById('mobile-login-btn').onclick = function() { handleLogin(); };
+      document.getElementById('auth-cancel').onclick = hideAuthModal;
+      document.getElementById('auth-toggle').onclick = function() { showAuthModal(!isSignupMode); };
+
+      document.getElementById('auth-submit').onclick = async function() {
+        const nickname = document.getElementById('auth-nickname').value.trim();
+        const password = document.getElementById('auth-password').value;
+        if (!nickname || !password) {
+          showAuthError('닉네임/비밀번호를 입력하세요.');
+          return;
+        }
+        if (isSignupMode) {
+          // 회원가입
+          const res = await fetch('http://223.130.133.185:3000/api/signup', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({nickname, password})
+          });
+          const data = await res.json();
+          if (data.success) {
+            alert('회원가입 완료! 로그인해 주세요.');
+            showAuthModal(false);
+          } else {
+            showAuthError(data.error || '회원가입 실패');
+          }
+        } else {
+          // 로그인
+          const res = await fetch('http://223.130.133.185:3000/api/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({nickname, password})
+          });
+          const data = await res.json();
+          if (data.success) {
+            localStorage.setItem('giftshop_login', 'true');
+            localStorage.setItem('giftshop_nickname', nickname);
+            localStorage.setItem('giftshop_token', data.token || '');
+            hideAuthModal();
+            updateLoginUI();
+            renderBoard();
+            alert('로그인되었습니다.');
+          } else {
+            showAuthError(data.error || '로그인 실패');
+          }
+        }
+      };
+      function showAuthError(msg) {
+        const err = document.getElementById('auth-error');
+        err.textContent = msg;
+        err.classList.remove('hidden');
+      }
+      // 로그아웃 버튼
+      function handleLogout() {
+        localStorage.removeItem('giftshop_login');
+        localStorage.removeItem('giftshop_nickname');
+        localStorage.removeItem('giftshop_token');
+        updateLoginUI();
+        alert('로그아웃되었습니다.');
+      }
+      // 로그인 상태 관리
+      function isLoggedIn() {
+        return localStorage.getItem('giftshop_login') === 'true';
+      }
+      function getLoginNickname() {
+        return localStorage.getItem('giftshop_nickname') || '';
+      }
+      function getLoginToken() {
+        return localStorage.getItem('giftshop_token') || '';
+      }
+      function updateLoginUI() {
+        const loginBtn = document.getElementById('login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const mobileLoginBtn = document.getElementById('mobile-login-btn');
+        const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+        if (isLoggedIn()) {
+          if (loginBtn) loginBtn.classList.add('hidden');
+          if (logoutBtn) logoutBtn.classList.remove('hidden');
+          if (mobileLoginBtn) mobileLoginBtn.classList.add('hidden');
+          if (mobileLogoutBtn) mobileLogoutBtn.classList.remove('hidden');
+        } else {
+          if (loginBtn) loginBtn.classList.remove('hidden');
+          if (logoutBtn) logoutBtn.classList.add('hidden');
+          if (mobileLoginBtn) mobileLoginBtn.classList.remove('hidden');
+          if (mobileLogoutBtn) mobileLogoutBtn.classList.add('hidden');
+        }
+        // 게시판 글쓰기 폼 제어
+        const boardForm = document.getElementById('board-form');
+        const boardAlert = document.getElementById('board-login-alert');
+        if (boardForm && boardAlert) {
+          if (isLoggedIn()) {
+            boardForm.classList.remove('hidden');
+            boardAlert.classList.add('hidden');
+          } else {
+            boardForm.classList.add('hidden');
+            boardAlert.classList.remove('hidden');
+          }
+        }
+      }
+      function handleLogin() {
+        showAuthModal(false); // 로그인 모달 열기
+      }
+      document.addEventListener('DOMContentLoaded', updateLoginUI);
+      // 게시판 서버 연동 구현
+      let editPostId = null; // 수정 중인 글 id
+      async function fetchBoardList() {
+        const my_id = getLoginNickname();
+        const res = await fetch('http://223.130.133.185:3000/api/posts?my_id=' + encodeURIComponent(my_id));
+        if (!res.ok) return [];
+        return await res.json();
+      }
+      async function fetchBoardWrite({writer, content, is_private}) {
+        const token = getLoginToken();
+        const res = await fetch('http://223.130.133.185:3000/api/posts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+          },
+          body: JSON.stringify({writer, content, is_private})
+        });
+        return await res.json();
+      }
+      async function fetchBoardEdit({id, content, is_private}) {
+        const my_id = getLoginNickname();
+        const token = getLoginToken();
+        const res = await fetch(`http://223.130.133.185:3000/api/posts/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+          },
+          body: JSON.stringify({content, is_private, my_id})
+        });
+        return await res.json();
+      }
+      async function fetchBoardDelete(id) {
+        const my_id = getLoginNickname();
+        const token = getLoginToken();
+        const res = await fetch(`http://223.130.133.185:3000/api/posts/${id}?my_id=${encodeURIComponent(my_id)}`, {
+          method: 'DELETE',
+          headers: token ? { 'Authorization': 'Bearer ' + token } : {}
+        });
+        return await res.json();
+      }
+      function renderBoard() {
+        const list = document.getElementById('board-list');
+        const empty = document.getElementById('board-empty');
+        fetchBoardList().then(data => {
+          const myNickname = getLoginNickname();
+          list.innerHTML = '';
+          if (!data || data.length === 0) {
+            empty.style.display = '';
+            return;
+          }
+          empty.style.display = 'none';
+          data.slice().reverse().forEach(item => {
+            // 비공개 글은 본인만 볼 수 있음
+            if (item.is_private && item.writer !== myNickname) return;
+            const li = document.createElement('li');
+            li.className = 'bg-gray-50 border rounded-lg p-4 flex flex-col gap-1 relative';
+            let html = `<div class=\"flex justify-between items-center mb-1\"><span class=\"font-semibold text-blue-700\">${item.writer}</span><span class=\"text-xs text-gray-400\">${item.date}</span></div>`;
+            if (item.is_private) html += '<div class="text-xs text-pink-500">비공개 글</div>';
+            html += `<div class=\"text-gray-800 whitespace-pre-line\">${item.content}</div>`;
+            if (isLoggedIn() && myNickname && item.writer === myNickname) {
+              html += '<div class="absolute top-2 right-2 flex gap-2">'
+                + '<button class="text-xs text-green-600 hover:underline edit-btn">수정</button>'
+                + '<button class="text-xs text-red-500 hover:underline delete-btn">삭제</button>'
+                + '</div>';
+            }
+            li.innerHTML = html;
+            // 삭제 버튼
+            const delBtn = li.querySelector('.delete-btn');
+            if (delBtn) {
+              delBtn.onclick = async function() {
+                if (confirm('정말 삭제하시겠습니까?')) {
+                  await fetchBoardDelete(item.id);
+                  renderBoard();
+                }
+              };
+            }
+            // 수정 버튼
+            const editBtn = li.querySelector('.edit-btn');
+            if (editBtn) {
+              editBtn.onclick = function() {
+                editPostId = item.id;
+                document.getElementById('board-writer').value = item.writer;
+                document.getElementById('board-content').value = item.content;
+                document.getElementById('board-private').checked = !!item.is_private;
+                document.getElementById('board-writer').disabled = true;
+                document.querySelector('#board-form button[type=submit]').textContent = '수정 완료';
+                document.getElementById('board-cancel-edit').classList.remove('hidden');
+              };
+            }
+            list.appendChild(li);
+          });
+        });
+      }
+      document.getElementById('board-form').onsubmit = async function(e) {
+        e.preventDefault();
+        if (!isLoggedIn()) {
+          alert('로그인 후 글쓰기가 가능합니다.');
+          return;
+        }
+        const writer = getLoginNickname();
+        const content = document.getElementById('board-content').value.trim();
+        const is_private = document.getElementById('board-private').checked ? 1 : 0;
+        if (!content) return alert('내용을 입력하세요.');
+        if (editPostId) {
+          // 수정
+          await fetchBoardEdit({id: editPostId, content, is_private});
+          editPostId = null;
+          document.getElementById('board-writer').disabled = false;
+          document.querySelector('#board-form button[type=submit]').textContent = '글 등록';
+          document.getElementById('board-cancel-edit').classList.add('hidden');
+        } else {
+          // 새 글
+          await fetchBoardWrite({writer, content, is_private});
+        }
+        document.getElementById('board-writer').value = '';
+        document.getElementById('board-content').value = '';
+        document.getElementById('board-private').checked = false;
+        renderBoard();
+      };
+      document.getElementById('board-cancel-edit').onclick = function() {
+        editPostId = null;
+        document.getElementById('board-writer').disabled = false;
+        document.getElementById('board-writer').value = '';
+        document.getElementById('board-content').value = '';
+        document.getElementById('board-private').checked = false;
+        document.querySelector('#board-form button[type=submit]').textContent = '글 등록';
+        document.getElementById('board-cancel-edit').classList.add('hidden');
+      };
+      // 게시판 진입 시 렌더링
+      function showPage(page) {
+        const sections = document.querySelectorAll('.page-section');
+        sections.forEach(function(section) {
+          section.classList.add('hidden');
+        });
+        if (page === 'home') {
+          document.getElementById('home-section').classList.remove('hidden');
+        } else if (page === 'products') {
+          document.getElementById('products-section').classList.remove('hidden');
+        } else if (page === 'cart') {
+          document.getElementById('cart-section').classList.remove('hidden');
+        } else if (page === 'postpay') {
+          document.getElementById('postpay-section').classList.remove('hidden');
+        } else if (page === 'board') {
+          document.getElementById('board-section').classList.remove('hidden');
+          updateLoginUI();
+          renderBoard(); // 서버에서 최신 글 목록 불러오기
+        }
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      }
+      // 모바일 메뉴(햄버거) 토글 기능 추가
+      document.addEventListener('DOMContentLoaded', function() {
+        var mobileMenuBtn = document.getElementById('mobile-menu-button');
+        var mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuBtn && mobileMenu) {
+          mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+          });
+        }
+        // 모바일 메뉴에서 항목 클릭 시 메뉴 닫기
+        if (mobileMenu) {
+          mobileMenu.querySelectorAll('a,button').forEach(function(el) {
+            el.addEventListener('click', function() {
+              mobileMenu.classList.add('hidden');
+            });
+          });
+        }
+      });
+    </script>
+  </main>
+
+  <!-- 하단 정보 -->
+  <footer class="bg-white border-t border-gray-200 py-6">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="text-center md:text-left mb-4 md:mb-0">
+          <a href="#" class="text-xl font-bold text-blue-700">기프트샵</a>
+        </div>
+        <div class="text-center md:text-right space-x-4">
+          <a href="#" class="text-gray-600 hover:text-blue-700">이용약관</a>
+          <a href="#" class="text-gray-600 hover:text-blue-700">개인정보처리방침</a>
+          <a href="#" class="text-gray-600 hover:text-blue-700">고객센터</a>
+        </div>
+      </div>
+      <div class="mt-4 text-center text-gray-500 text-sm">
+        &copy; 2023 기프트샵. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

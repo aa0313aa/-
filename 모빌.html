@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모빌 상품권 | 기프트샵 커뮤니티</title>
+  <meta name="description" content="모빌 상품권 정보, 구매 방법, 사용법 안내. 기프트샵 커뮤니티에서 확인하세요.">
+  <meta name="keywords" content="모빌, 상품권, 기프트샵, 구매, 사용법, 정보">
+  <link rel="canonical" href="http://localhost:4000/모빌.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="모빌 상품권 | 기프트샵 커뮤니티">
+  <meta property="og:description" content="모빌 상품권 정보, 구매 방법, 사용법 안내. 기프트샵 커뮤니티에서 확인하세요.">
+  <meta property="og:url" content="http://localhost:4000/모빌.html">
+  <meta property="og:image" content="http://localhost:4000/img/Starbucks.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="모빌 상품권 | 기프트샵 커뮤니티">
+  <meta name="twitter:description" content="모빌 상품권 정보, 구매 방법, 사용법 안내. 기프트샵 커뮤니티에서 확인하세요.">
+  <meta name="twitter:image" content="http://localhost:4000/img/Starbucks.png">
+  <link rel="icon" href="/img/cu.png" type="image/png">
+  <link rel="apple-touch-icon" href="/img/cu.png">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "기프트샵 커뮤니티",
+    "url": "http://localhost:4000/모빌.html",
+    "description": "모빌 상품권 정보, 구매 방법, 사용법 안내. 기프트샵 커뮤니티에서 확인하세요.",
+    "inLanguage": "ko-KR"
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 사용자 정의 스타일 */
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    }
+    .active-tab {
+      background-color: #1D4ED8; /* blue-700 */
+      color: white;
+      font-weight: 600;
+    }
+    .tab-item {
+      display: block;
+      width: 100%;
+      padding: 0.75rem 1rem; /* py-3 px-4 */
+      border-radius: 0.375rem; /* rounded-md */
+      text-align: left;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+      font-size: 0.9rem;
+    }
+    .tab-item:hover:not(.active-tab) {
+      background-color: #DBEAFE; /* blue-100 */
+      color: #1E40AF; /* blue-800 */
+    }
+    /* details summary 기본 화살표 제거 (Tailwind에서 제공하지 않음) */
+    details > summary {
+      list-style: none;
+    }
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <div class="container mx-auto px-4 py-8 md:py-12">
+    <header class="mb-10 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800">모빌카드 휴대폰결제 방법</h1>
+      <p class="mt-2 text-gray-600">상품권 구매가능 카드 발급시 일반카드처럼 사용가능</p>
+    </header>
+
+    <div class="flex flex-col md:flex-row gap-8">
+      <aside class="md:w-1/4 lg:w-1/5">
+        <div class="bg-white p-4 rounded-lg shadow">
+          <h2 class="text-lg font-semibold text-gray-700 mb-4 px-2">자주 묻는 질문</h2>
+          <nav id="faq-tabs-container" class="space-y-1">
+            <button class="tab-item active-tab" data-tab="tab-guide">가입/이용안내</button>
+            <button class="tab-item" data-tab="tab-charge">충전</button>
+            <button class="tab-item" data-tab="tab-limit">한도</button>
+            <button class="tab-item" data-tab="tab-payment">결제/사용</button>
+            <button class="tab-item" data-tab="tab-cancel">취소/환불</button>
+            <button class="tab-item" data-tab="tab-etc">기타</button>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="md:w-3/4 lg:w-4/5">
+        <!-- 안내 버튼 영역을 가운데 정렬: 카드 바깥(main 바로 아래)으로 이동 -->
+        <div class="flex justify-center mb-8">
+          <div class="flex gap-3">
+            <a href="index.html" class="bg-blue-50 text-blue-700 font-semibold px-4 py-2 rounded hover:bg-blue-100 border border-blue-200 transition">기프트샵 홈</a>
+            <a href="모빌.html" class="bg-cyan-50 text-cyan-700 font-semibold px-4 py-2 rounded hover:bg-cyan-100 border border-cyan-200 transition">모빌카드 안내</a>
+            <a href="네이버.html" class="bg-green-50 text-green-700 font-semibold px-4 py-2 rounded hover:bg-green-100 border border-green-200 transition">네이버페이 안내</a>
+            <a href="토스.html" class="bg-indigo-50 text-indigo-700 font-semibold px-4 py-2 rounded hover:bg-indigo-100 border border-indigo-200 transition">토스후불결제 안내</a>
+            <a href="머니트리.html" class="bg-orange-50 text-orange-700 font-semibold px-4 py-2 rounded hover:bg-orange-100 border border-orange-200 transition">머니트리 안내</a>
+          </div>
+        </div>
+        <div class="bg-white p-6 md:p-8 rounded-lg shadow overflow-x-auto">
+          <div id="tab-guide" class="tab-content space-y-3">
+            <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                <h3 class="text-xl font-semibold text-blue-700 mb-4">모빌카드 상품권 구매 순서</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                    <li><span class="font-medium">구글 검색:</span> <span class="text-blue-600 font-semibold">모빌카드</span> &rarr; 어플 다운로드 및 회원가입</li>
+                    <li><span class="font-medium">일반충전</span>을 누르면<br><span class="text-sm text-gray-500 ml-4">(1원을 송금할게요! 비대면 실명확인을 위해 본인 계좌 확인이 꼭 필요해요)</span> 라고 뜹니다.<br><span class="ml-4">인증 시 한도증가 인증을 안 하시면 한도 50만 원</span></li>
+                    <li><span class="font-medium">휴대폰충전</span> &rarr; <span class="font-medium">현재충전 가능한도</span>를 누르시면 즉시 한도 확인 가능<br><span class="ml-4">한도에 따라 충전하시면 간편하게 충전 완료</span></li>
+                    <li>화면 하단 <span class="font-medium">쿠폰샵</span>에 들어가시면 충전하신 금액으로 상품권 구매 가능</li>
+                </ol>
+                <div class="mt-5 text-center text-blue-600 text-xs">
+                    ※ 자세한 내용은 모빌카드 앱 내 안내를 참고하세요.
+                </div>
+            </div>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>카드보유한도 상향을 위해 실물카드는 왜 신청해야 하나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  모빌카드는 인편 배송으로 직접 전달되며, 실물카드 수령 시 배송기사 확인 절차를 통해 본인 여부를 검증합니다.<br>
+                  카드 수령 후 앱에서 CVC 입력하여 카드 등록까지 완료해 주시면 카드보유한도 상향 신청이 가능합니다.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>페이북/간편결제 카드 등록이 안돼요.</span>
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  카드번호와 소유자 정보가 불일치하는 경우 페이북 및 간편결제 등록이 불가합니다.<br>
+                  카드 신청 시, 주민등록번호 등 개인 정보를 잘못 입력하셨을 가능성이 있으니 KG모빌리언스 고객센터(1800-0678)로 문의해 주세요.
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-charge" class="tab-content hidden space-y-3">
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>모빌리언스카드는 어떻게 충전하나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  모빌리언스카드 APP에서 <span class="font-semibold">휴대폰, 계좌이체, 가상계좌, 상품권, 신용카드</span>를 사용하여 충전할 수 있으며, 자동 충전을 설정하면 더욱 편리하게 카드를 이용하실 수 있습니다.<br>
+                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                    <li><span class="font-semibold text-blue-700">1) 휴대폰</span> - 자동 충전(매월 1일), 일반 충전, 수수료 3.5%</li>
+                    <li><span class="font-semibold text-blue-700">2) 계좌이체</span> - 자동/일반 충전</li>
+                    <li><span class="font-semibold text-blue-700">3) 가상계좌</span> - 일반 충전(최소 5만원)</li>
+                    <li><span class="font-semibold text-blue-700">4) 상품권</span> - 일반 충전, 전환 수수료 8.0%</li>
+                    <li><span class="font-semibold text-blue-700">5) 신용카드</span> - 일반 충전, 수수료 3.5%</li>
+                  </ul>
+                  <div class="text-blue-700 text-xs mt-2">※ 연결 계좌는 최대 3개까지 등록 가능<br>※ 자동충전 내역은 [APP &gt; 마이페이지 &gt; 자동충전 관리]에서 변경</div>
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>휴대폰 소액결제 차단 해지는 어떻게 하나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  고객님께서 이용하시는 통신사 홈페이지 및 고객센터에서 휴대폰 소액결제 차단 해지를 할 수 있습니다.<br>아래에 차단 해지방법을 확인하시고 편리하게 모빌리언스카드를 사용하세요!
+                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                    <li><span class="font-semibold">SKT(☎114)</span> : T월드 접속 &gt; 로그인 &gt; My T &gt; 변경 &gt; 콘텐츠 서비스 변경 &gt; 소액결제 변경</li>
+                    <li><span class="font-semibold">KT(☎100 또는 114)</span> : 마이케이티 접속 &gt; 로그인 &gt; 요금조회 &gt; 소액결제내역 &gt; 이용한도 상세 내역 및 한도 변경 &gt; 한도변경 (경로가 KT 사이트/앱 버전에 따라 다를 수 있습니다. '110'은 정부민원안내콜센터 번호이므로 KT 고객센터는 '100'번 또는 휴대폰에서 '114'입니다.)</li>
+                    <li><span class="font-semibold">LGU+(☎101 또는 114)</span> : LG U+ 고객센터 APP 또는 홈페이지 &gt; 마이페이지 &gt; 소액결제/스토어 결제 &gt; 소액결제 차단/해제 &gt; 차단 해제설정 (LGU+ 고객센터는 '101'번 또는 휴대폰에서 '114'입니다.)</li>
+                  </ul>
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>휴대폰 자동충전 설정 금액과 다른 금액이 충전 됐어요.</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  <ul class="list-disc pl-5 space-y-2">
+                    <li>휴대폰 결제 한도 초과로 인한 충전 가능금액<br>
+                      <span class="text-gray-500">설정한 자동충전 금액보다 실제 충전시점의 결제 한도가 낮을 경우, 충전 가능한 금액만큼만 충전이 진행됩니다.</span><br>
+                      <span class="text-xs">예) 휴대폰 현재 한도 40만원 / 자동충전 50만원 설정 → 결제 취소가 아닌 40만원 충전 진행</span>
+                    </li>
+                    <li>모빌리언스카드 보유한도 초과로 인한 충전 가능금액<br>
+                      <span class="text-gray-500">설정한 자동충전 금액이 실제 충전시점의 최대 보유한도를 초과할 경우, 최대 보유한도를 넘지 않는 금액만큼 충전이 진행됩니다.</span><br>
+                      <span class="text-xs">예) 카드 최대 보유한도 200만원 / 자동충전 40만원 설정 → 카드잔액 180만원일 경우, 40만원 충전이 아닌 20만원 충전 진행</span>
+                    </li>
+                  </ul>
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>신용카드 충전이 되지 않아요.</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  모빌카드 신용카드 충전 금액은 카드사에 ‘상품권류’ 금액으로 인정되어, 각 카드사마다 월 100만원까지 충전 가능합니다.<br>
+                  결제 시도한 카드로 당월 모빌카드 충전 결제한 금액과 타 ‘상품권류’ 결제한 금액을 제외한 한도 내에서만 충전이 가능합니다.
+                  <div class="text-blue-700 text-xs mt-2">
+                    * 결제 시도한 신용카드로 ‘상품권류’ 금액을 이미 100만원 결제하셨다면, 익월에 모빌카드 충전 부탁드립니다.
+                  </div>
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-limit" class="tab-content hidden space-y-3">
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>모빌리언스카드 충전한도가 있나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  카드 잔액은 최대 <span class="font-semibold">성인 200만원 / 청소년 50만원</span> 보유할 수 있습니다.<br>
+                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                    <li>휴대폰 : 통신사 월 결제 한도 내 충전</li>
+                    <li>계좌이체/가상계좌 : 한도 없음</li>
+                    <li>북앤라이프/컬쳐랜드/문화상품권 : 일 460~600만원, 월 600~1,000만원 (상품권 종류 및 정책에 따라 변동 가능)</li>
+                    <li>신용카드 : 일/월 100만원 (타 상품권류 포함)</li>
+                  </ul>
+                  <div class="text-blue-700 text-xs mt-2">※ 실명확인 및 KYC 미완료 시 한도 50만원 제한<br>※ 한도 상향은 고객확인, 계좌점유인증, 실물카드 등록 필요</div>
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>모빌카드 충전이 안됩니다. (카드보유한도)</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  카드보유한도가 50만원으로 하향된 경우, 카드 잔액은 최대 50만원까지만 충전 가능합니다.<br>카드보유한도가 50만원일 경우 <span class="font-semibold">1일 2,000만원/1회 50만원</span>까지 사용 가능하며, 50만원 한도 내에서 카드 사용/충전은 반복적으로 가능합니다.
+                  <div class="text-blue-700 text-xs mt-2">
+                    ※ 한도 상향은 마이페이지 &gt; [한도 상향 신청] 메뉴에서 3가지 인증을 모두 완료해야 합니다.
+                  </div>
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>휴대폰 결제 충전한도는 어디서 확인할 수 있나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  [모빌리언스카드APP &gt; 메인화면 &gt; 일반/자동충전] 화면 우측 상단에 있는 <span class="font-semibold">"내 충전한도 확인하기"</span> 버튼을 클릭하면 확인하실 수 있습니다.<br>예상되는 충전한도이며, 통신사 또는 당사 정책에 따라 충전 제한이 있을 수 있습니다.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>신용카드 충전 한도는 어떻게 되나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  모빌카드 신용카드 충전 금액은 카드사에 <span class="font-semibold">‘상품권류’</span> 금액으로 인정되어, 각 카드사마다 <span class="font-semibold">월 100만원</span>까지 충전 가능합니다.<br>
+                  이미 해당 카드로 다른 ‘상품권류’ 결제 이력이 있다면, 그 금액을 제외한 한도 내에서만 충전이 가능합니다.
+                  <div class="text-blue-700 text-xs mt-2">
+                    ※ 결제 시도한 신용카드로 ‘상품권류’ 금액을 이미 100만원 결제하셨다면, 익월에 모빌카드 충전 부탁드립니다.
+                  </div>
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>카드보유한도 상향은 어떻게 하나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  마이페이지 &gt; <span class="font-semibold">'한도 상향 신청'</span> 메뉴에서 3가지 인증을 모두 완료하시면 한도가 상향됩니다.<br>
+                  3가지 인증은 「금융실명법」, 「전자금융감독규정」, 「특정 금융정보의 보고 및 이용등에 관한 법」에 따른 법적요구사항을 준수하고 고객님의 신원을 확인하기 위해 꼭 필요한 절차입니다.<br>
+                  인증 미완료 시 카드보유한도가 50만원으로 제한됩니다.
+                  <ul class="list-decimal pl-5 mt-2 space-y-1">
+                    <li>고객확인(KYC) 인증</li>
+                    <li>계좌점유인증(1원 인증)</li>
+                    <li>실물카드 수령 및 등록</li>
+                  </ul>
+                  <div class="text-blue-700 text-xs mt-2">
+                    ※ 외국인 및 EDD고객은 실명확인 불가 시 한도 50만원 제한, OCR 인증 도입 시 재안내 예정
+                  </div>
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-payment" class="tab-content hidden space-y-3">
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>모빌리언스카드는 어디에서 이용할 수 있나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  모빌리언스카드는 <span class="font-semibold">BC카드를 사용하는 모든 가맹점</span>에서 사용 가능합니다.
+                  <ul class="list-disc pl-5 mt-2 space-y-1">
+                    <li>오프라인 결제 : 일반 신용/체크카드와 동일하게 사용</li>
+                    <li>온라인 결제 : 카드사 "비씨카드(페이북)" 선택</li>
+                  </ul>
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>모빌리언스카드 사용이 불가능한 가맹점이 있나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>해외결제</li>
+                    <li>통신 요금 관련 가맹점</li>
+                    <li>후불 교통카드 기능</li>
+                    <li>KT스카이라이프</li>
+                    <li class="text-xs text-gray-500">※ 청소년: 주점, 유흥주점, 숙박업, 단란주점, 안마/스포츠마사지, 칵테일바, 렌터카, 콘도, 주류판매점, 성인용품점, 호텔, P2P송금, 조세서비스 등 이용 불가</li>
+                  </ul>
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>50만원을 초과한 금액 결제가 안됩니다. (카드보유한도)</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  결제가 불가한 사유는 카드 잔액이 부족하거나 카드보유한도가 50만원으로 하향되어 불가할 수 있습니다.<br>
+                  카드보유한도가 50만원일 경우, <span class="font-semibold">1일 2,000만원/1회 50만원</span>까지 결제 가능합니다.<br>
+                  마이페이지 &gt; [한도 상향 신청] 메뉴에서 현재 보유한도를 확인 후 3가지 인증을 모두 완료해 주세요.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>모빌리언스카드 잔액을 ATM 기기에서 출금할 수 있나요?</span>
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  모빌리언스카드는 ATM 기기에서 <span class="text-red-600 font-semibold">현금으로 인출 불가</span>합니다.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>모빌카드 결제시 충전 잔액 차감 순서는 어떻게 되나요?</span>
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  모빌카드 결제시 충전금 차감순서는 <span class="font-semibold">(포인트) &gt; 신용카드 &gt; 휴대폰 &gt; 상품권 &gt; 가상계좌 &gt; 계좌이체</span> 순으로 차감됩니다.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>모빌리언스카드로 할부결제가 가능한가요?</span>
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  모빌리언스카드는 <span class="text-red-600 font-semibold">할부결제가 불가</span>합니다.
+                </div>
+            </details>
+             <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>신용카드 충전시 결제 금액은 할부 결제가 되나요?</span>
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  신용카드 충전시 결제 금액은 <span class="font-semibold">‘상품권류’</span> 금액으로 인정되어 <span class="text-red-600 font-semibold">할부 결제가 불가</span>합니다.
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-cancel" class="tab-content hidden space-y-3">
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>휴대폰 결제 충전 금액 취소가 가능한가요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  충전일 포함 7일 이내 사용이력이 없는 경우, 수수료를 포함한 전체 금액 취소가 가능합니다.<br>[모빌리언스카드APP &gt; 메인페이지 &gt; 이용내역] 메뉴에서 충전내역을 선택하여 충전 취소할 수 있습니다.
+                  <div class="text-blue-700 text-xs mt-2">
+                    * KT 이외 통신사 고객님께서는 7일 이내이더라도 익월 취소인 경우는 고객센터(1800-0678)로 문의 부탁드립니다.
+                  </div>
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>신용카드 충전 금액 취소가 가능한가요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  충전일 포함 7일 이내 사용이력이 없는 경우, 수수료를 포함한 전체 금액 취소가 가능합니다.<br>
+                  [모빌리언스카드APP &gt; 메인페이지 &gt; 이용내역] 메뉴에서 충전내역을 선택하여 충전 취소할 수 있습니다.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>충전 금액의 취소/환불은 어떻게 진행되나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  ※ 취소/환불 메뉴 경로<br>
+                  - 휴대폰/상품권 충전취소 : [모빌리언스카드APP &gt; 마이페이지 &gt; 이용내역 &gt; 해당 충전건 클릭 &gt; 충전취소]<br>
+                  - 결제수단별 환불 : [모빌리언스카드APP &gt; 마이페이지 &gt; 카드 환불신청/조회]
+                  <ul class="list-decimal pl-5 mt-2 space-y-1">
+                    <li>휴대폰 충전취소: 충전일 포함 7일 이내 미사용 시 전체 금액 취소 가능 (KT 이외 통신사는 익월 취소 시 고객센터 문의)</li>
+                    <li>휴대폰 환불: 7일 이후 또는 사용 시, 마지막 충전금액 기준 60% 이상 사용 후 환불 가능</li>
+                    <li>계좌이체 환불: 등록된 주계좌로 실시간 환불</li>
+                    <li>가상계좌 환불: 은행 이체 수수료 300원 차감 후 72시간 이후 환불 (300원 미만시 환불 불가)</li>
+                    <li>상품권 환불: 등록된 주계좌로 실시간 환불</li>
+                    <li>신용카드 충전취소: 7일 이내 미사용 시 전체 금액 취소 가능</li>
+                    <li>신용카드 환불: 7일 이후 또는 사용 시, 마지막 충전금액 기준 30% 이상 사용 후 환불 가능</li>
+                    <li>모빌 포인트: 환불 불가</li>
+                  </ul>
+                  <div class="text-blue-700 text-xs mt-2">
+                    - 휴대폰 환불: 통신요금 납부 확인 후 익주 수요일 계좌로 환불 지급<br>
+                    - 신용카드 환불: 등록된 주계좌로 실시간 환불
+                  </div>
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>신용카드 충전 잔액을 환불 받고 싶어요.</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  신용카드 충전 금액은 충전 기준 금액의 <span class="font-semibold">30%</span>를 사용하신 후 남은 잔액에 대해 등록된 주계좌로 환불 받으실 수 있습니다.<br>
+                  충전 기준 금액은 [모빌카드APP &gt; 마이페이지 &gt; 카드 환불신청/조회 &gt; 신용카드 충전금액]에서 확인 가능합니다.
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-etc" class="tab-content hidden space-y-3">
+             <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>모빌리언스카드 이용한 내역을 SMS로 받을 수 있나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  모빌리언스카드 충전 및 이용내역은 APP Push로 제공되며, [모빌리언스카드 APP &gt; 마이 페이지 &gt; 카드 이용내역]에서 확인하실 수 있습니다.
+                </div>
+            </details>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const tabsContainer = document.getElementById('faq-tabs-container');
+      const tabButtons = tabsContainer.querySelectorAll('.tab-item');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      // 현재 활성화된 탭 ID를 저장할 변수
+      let currentVisibleTabId = null;
+
+      function showTab(tabIdToShow) {
+        // 모든 탭 콘텐츠 숨기기
+        tabContents.forEach(content => {
+          content.classList.add('hidden');
+        });
+
+        // 요청된 탭 콘텐츠 보이기
+        const selectedContent = document.getElementById(tabIdToShow);
+        if (selectedContent) {
+          selectedContent.classList.remove('hidden');
+          currentVisibleTabId = tabIdToShow; // 현재 보이는 탭 ID 업데이트
+        }
+
+        // 모든 탭 버튼 비활성화
+        tabButtons.forEach(button => {
+          button.classList.remove('active-tab');
+          button.classList.add('text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-800'); // 기본 스타일
+        });
+
+        // 클릭된 탭 버튼 활성화
+        const activeButton = tabsContainer.querySelector(`[data-tab="${tabIdToShow}"]`);
+        if (activeButton) {
+          activeButton.classList.add('active-tab');
+          activeButton.classList.remove('text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-800');
+        }
+      }
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+          event.preventDefault();
+          const targetTabId = this.getAttribute('data-tab');
+          // 현재 보이는 탭과 다른 탭을 클릭했을 때만 내용 변경
+          if (targetTabId !== currentVisibleTabId) {
+            showTab(targetTabId);
+          }
+        });
+      });
+
+      // 페이지 로드 시 첫 번째 탭을 기본으로 보여줍니다.
+      if (tabButtons.length > 0) {
+        const initialTabId = tabButtons[0].getAttribute('data-tab');
+        showTab(initialTabId);
+      }
+
+      // details 요소가 열릴 때 다른 열린 details 닫기 (선택적 기능)
+      const allDetails = document.querySelectorAll('details');
+      allDetails.forEach(details => {
+        details.addEventListener('toggle', event => {
+          if (event.target.open) {
+            // 현재 열린 details가 속한 탭 ID 확인
+            let parentTabContent = event.target.closest('.tab-content');
+            if (parentTabContent && parentTabContent.id === currentVisibleTabId) {
+              allDetails.forEach(otherDetails => {
+                if (otherDetails !== event.target && otherDetails.closest('.tab-content').id === currentVisibleTabId) {
+                  otherDetails.open = false;
+                }
+              });
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

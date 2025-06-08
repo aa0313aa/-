@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자 | 기프트샵 커뮤니티</title>
+  <meta name="description" content="기프트샵 커뮤니티 관리자 페이지. 게시글 및 회원 관리.">
+  <meta name="keywords" content="기프트샵, 관리자, 게시판, 회원관리, 커뮤니티">
+  <link rel="canonical" href="http://localhost:4000/admin.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="관리자 | 기프트샵 커뮤니티">
+  <meta property="og:description" content="기프트샵 커뮤니티 관리자 페이지. 게시글 및 회원 관리.">
+  <meta property="og:url" content="http://localhost:4000/admin.html">
+  <meta property="og:image" content="http://localhost:4000/img/Starbucks.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="관리자 | 기프트샵 커뮤니티">
+  <meta name="twitter:description" content="기프트샵 커뮤니티 관리자 페이지. 게시글 및 회원 관리.">
+  <meta name="twitter:image" content="http://localhost:4000/img/Starbucks.png">
+  <link rel="icon" href="/img/cu.png" type="image/png">
+  <link rel="apple-touch-icon" href="/img/cu.png">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#2563eb">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "기프트샵 커뮤니티 관리자",
+    "url": "http://localhost:4000/admin.html",
+    "description": "기프트샵 커뮤니티 관리자 페이지. 게시글 및 회원 관리.",
+    "inLanguage": "ko-KR"
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', 'Noto Sans KR', sans-serif; }
+    .admin-table th, .admin-table td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom-width: 1px;
+      border-color: #e5e7eb; /* gray-200 */
+    }
+    .admin-table th {
+      background-color: #f9fafb; /* gray-50 */
+      font-weight: 600; /* semibold */
+    }
+    .modal-content {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <header class="bg-slate-800 text-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <a href="admin.html" class="text-2xl font-bold">기프트샵 관리자</a>
+        </div>
+        <div class="flex items-center">
+          <span id="admin-nickname-display" class="mr-4 hidden"></span>
+          <button id="admin-logout-btn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md text-sm font-medium hidden">로그아웃</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <section id="admin-login-section" class="bg-white shadow sm:rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">관리자 로그인</h2>
+      <div class="space-y-3">
+        <input type="text" id="admin-login-nickname" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2" placeholder="관리자 닉네임">
+        <input type="password" id="admin-login-password" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2" placeholder="비밀번호">
+        <button id="admin-login-submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          로그인
+        </button>
+        <div id="admin-login-error" class="text-red-500 text-sm mt-2 hidden"></div>
+      </div>
+    </section>
+
+    <div id="admin-dashboard" class="hidden">
+      <section id="post-management-section" class="bg-white shadow sm:rounded-lg p-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">게시물 관리</h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200 admin-table">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">작성자</th>
+                <th scope="col">내용 (일부)</th>
+                <th scope="col">작성일</th>
+                <th scope="col">상태</th>
+                <th scope="col">작업</th>
+              </tr>
+            </thead>
+            <tbody id="admin-post-list" class="bg-white divide-y divide-gray-200">
+              </tbody>
+          </table>
+        </div>
+        <div id="admin-post-empty" class="text-gray-500 text-center py-8 hidden">
+          <p>게시물이 없습니다.</p>
+        </div>
+      </section>
+      
+      <!--
+      <section id="user-management-section" class="bg-white shadow sm:rounded-lg p-6 mt-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">사용자 관리 (준비 중)</h2>
+        <p class="text-gray-600">사용자 목록 조회, 수정, 삭제 등의 기능을 추가할 수 있습니다.</p>
+      </section>
+      -->
+    </div>
+
+    <div id="edit-post-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100] hidden p-4">
+      <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg modal-content">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-semibold text-gray-900">게시물 수정 (ID: <span id="edit-post-id-display"></span>)</h3>
+          <button id="edit-post-modal-close" class="text-gray-400 hover:text-gray-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+        <form id="edit-post-form">
+          <input type="hidden" id="edit-post-id">
+          <div class="mb-4">
+            <label for="edit-post-writer" class="block text-sm font-medium text-gray-700">작성자</label>
+            <input type="text" id="edit-post-writer" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm sm:text-sm p-2 bg-gray-100" readonly>
+          </div>
+          <div class="mb-4">
+            <label for="edit-post-content" class="block text-sm font-medium text-gray-700">내용</label>
+            <textarea id="edit-post-content" rows="5" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm sm:text-sm p-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+          </div>
+          <div class="mb-4">
+            <label class="flex items-center">
+              <input type="checkbox" id="edit-post-private" class="form-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+              <span class="ml-2 text-sm text-gray-700">비공개</span>
+            </label>
+          </div>
+          <div id="edit-post-error" class="text-red-500 text-sm mb-3 hidden"></div>
+          <div class="flex justify-end gap-3">
+            <button type="button" id="edit-post-cancel" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300">취소</button>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">수정 완료</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const API_BASE_URL = 'http://223.130.133.185:3000/api'; 
+    const ADMIN_NICKNAME = 'admin'; // 관리자로 간주할 닉네임 (보안상 매우 취약, 실제 운영 시 변경)
+
+    // --- 관리자 인증 관련 ---
+    function isAdminLoggedIn() {
+      return localStorage.getItem('giftshop_admin_login') === 'true' && localStorage.getItem('giftshop_admin_nickname') === ADMIN_NICKNAME;
+    }
+
+    function getAdminNickname() {
+      return localStorage.getItem('giftshop_admin_nickname');
+    }
+
+    function updateAdminUI() {
+      const adminLoginSection = document.getElementById('admin-login-section');
+      const adminDashboard = document.getElementById('admin-dashboard');
+      const adminNicknameDisplay = document.getElementById('admin-nickname-display');
+      const adminLogoutBtn = document.getElementById('admin-logout-btn');
+
+      if (isAdminLoggedIn()) {
+        adminLoginSection.classList.add('hidden');
+        adminDashboard.classList.remove('hidden');
+        adminNicknameDisplay.textContent = `${getAdminNickname()}님 (관리자)`;
+        adminNicknameDisplay.classList.remove('hidden');
+        adminLogoutBtn.classList.remove('hidden');
+        loadAllPostsForAdmin();
+      } else {
+        adminLoginSection.classList.remove('hidden');
+        adminDashboard.classList.add('hidden');
+        adminNicknameDisplay.classList.add('hidden');
+        adminLogoutBtn.classList.add('hidden');
+      }
+    }
+    
+    const adminLoginSubmitBtn = document.getElementById('admin-login-submit');
+    if(adminLoginSubmitBtn) {
+        adminLoginSubmitBtn.onclick = async function() {
+            const nickname = document.getElementById('admin-login-nickname').value.trim();
+            const password = document.getElementById('admin-login-password').value;
+            const errorDiv = document.getElementById('admin-login-error');
+            errorDiv.classList.add('hidden');
+
+            if (!nickname || !password) {
+                errorDiv.textContent = '닉네임과 비밀번호를 입력하세요.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            // 🚨 중요: 실제 관리자 인증은 반드시 서버에서 안전하게 처리해야 합니다.
+            // 이 코드는 클라이언트 사이드에서 ADMIN_NICKNAME과 일치하는지만 확인하는 매우 간단한 방식입니다.
+            // 실제로는 서버에 로그인 요청을 보내고, 서버가 관리자 여부를 판별 후 토큰 등을 반환해야 합니다.
+            try {
+                const res = await fetch(`${API_BASE_URL}/login`, { // 일반 로그인 API 사용 (데모용)
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nickname, password })
+                });
+                const data = await res.json();
+
+                if (data.success && nickname === ADMIN_NICKNAME) {
+                    localStorage.setItem('giftshop_admin_login', 'true');
+                    localStorage.setItem('giftshop_admin_nickname', nickname);
+                    // 일반 사용자 localStorage와 구분하기 위해 admin_ 접두사 사용
+                    // localStorage.setItem('giftshop_admin_token', data.token || '');
+                    updateAdminUI();
+                } else if (data.success && nickname !== ADMIN_NICKNAME) {
+                    errorDiv.textContent = '관리자 계정이 아닙니다.';
+                    errorDiv.classList.remove('hidden');
+                } else {
+                    errorDiv.textContent = data.error || '로그인 실패. 닉네임 또는 비밀번호를 확인하세요.';
+                    errorDiv.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Admin login error:', error);
+                errorDiv.textContent = `로그인 요청 중 오류 발생: ${error.message}. API 서버(${API_BASE_URL}) 연결 상태를 확인하세요.`;
+                errorDiv.classList.remove('hidden');
+            }
+        };
+    }
+
+    const adminLogoutBtn = document.getElementById('admin-logout-btn');
+    if(adminLogoutBtn) {
+        adminLogoutBtn.onclick = function() {
+            if (confirm('관리자 페이지에서 로그아웃 하시겠습니까?')) {
+                localStorage.removeItem('giftshop_admin_login');
+                localStorage.removeItem('giftshop_admin_nickname');
+                // localStorage.removeItem('giftshop_admin_token');
+                updateAdminUI();
+            }
+        };
+    }
+
+
+    // --- 게시물 관리 로직 ---
+    async function fetchAllPostsForAdmin() {
+        // 🚨 중요: 관리자가 모든 글(비공개 포함)을 보려면,
+        //    백엔드 API(/api/posts)가 요청자가 관리자임을 인지하고 모든 데이터를 반환하도록 수정되거나,
+        //    관리자 전용 API 엔드포인트(예: /api/admin/all-posts)가 필요합니다.
+        //    현재는 일반 사용자와 동일한 API를 호출하므로, 비공개 글은 해당 관리자 닉네임으로 작성된 것만 보일 수 있습니다.
+        //    또는 my_id 없이 호출 시 모든 공개글 + my_id가 admin인 비공개 글을 반환하도록 서버가 구현되어야 합니다.
+        //    여기서는 my_id를 ADMIN_NICKNAME으로 보내서 해당 관리자의 비공개글은 볼 수 있도록 시도합니다.
+        const adminUser = getAdminNickname(); // 관리자 식별 (예: 'admin')
+        try {
+            const res = await fetch(`${API_BASE_URL}/posts?my_id=${encodeURIComponent(adminUser)}&show_all_for_admin=true`); // show_all_for_admin은 서버에서 처리해야 하는 파라미터 예시
+            if (!res.ok) {
+                console.error('Failed to fetch all posts. Status:', res.status, res.statusText);
+                alert(`전체 게시글 목록을 불러오는데 실패했습니다. 서버 응답: ${res.status}. API 서버(${API_BASE_URL})를 확인해주세요.`);
+                return [];
+            }
+            return await res.json();
+        } catch (error) {
+            console.error('Error fetching all posts:', error);
+            alert(`전체 게시글 목록을 불러올 수 없습니다.\n오류: ${error.message}\nAPI 서버(${API_BASE_URL}) 연결 및 관리자용 API 지원 여부를 확인해주세요.`);
+            return [];
+        }
+    }
+
+    function formatDate(dateString) {
+        if (!dateString) return '-';
+        try {
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return '유효하지 않은 날짜';
+            return date.toLocaleString('ko-KR');
+        } catch (e) { return '날짜 변환 오류'; }
+    }
+
+    function renderAdminPostList(posts) {
+        const listEl = document.getElementById('admin-post-list');
+        const emptyEl = document.getElementById('admin-post-empty');
+        if (!listEl || !emptyEl) return;
+
+        listEl.innerHTML = '';
+        if (!posts || posts.length === 0) {
+            emptyEl.classList.remove('hidden');
+            return;
+        }
+        emptyEl.classList.add('hidden');
+
+        posts.sort((a, b) => b.id - a.id); // 최신글부터 보이도록 ID 기준 내림차순 정렬
+
+        posts.forEach(post => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${post.id}</td>
+                <td>${post.writer || 'N/A'}</td>
+                <td class="max-w-xs truncate" title="${post.content || ''}">${(post.content || '').substring(0, 30)}${(post.content || '').length > 30 ? '...' : ''}</td>
+                <td>${formatDate(post.date)}</td>
+                <td>${post.is_private ? '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-pink-100 text-pink-800">비공개</span>' : '<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">공개</span>'}</td>
+                <td class="space-x-2 whitespace-nowrap">
+                    <button class="text-indigo-600 hover:text-indigo-900 text-sm admin-edit-post-btn" data-id="${post.id}">수정</button>
+                    <button class="text-red-600 hover:text-red-900 text-sm admin-delete-post-btn" data-id="${post.id}">삭제</button>
+                </td>
+            `;
+            listEl.appendChild(tr);
+        });
+
+        // 수정 버튼 이벤트 리스너
+        document.querySelectorAll('.admin-edit-post-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const postId = this.dataset.id;
+                const postToEdit = posts.find(p => p.id.toString() === postId);
+                if (postToEdit) {
+                    openEditPostModal(postToEdit);
+                }
+            });
+        });
+
+        // 삭제 버튼 이벤트 리스너
+        document.querySelectorAll('.admin-delete-post-btn').forEach(button => {
+            button.addEventListener('click', async function() {
+                const postId = this.dataset.id;
+                if (confirm(`정말 ID ${postId} 게시물을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.`)) {
+                    // 🚨 중요: 관리자 삭제는 my_id 없이, 또는 관리자 권한으로 삭제하는 API가 필요합니다.
+                    // 현재는 일반 사용자 삭제 API를 호출하므로, 관리자 닉네임으로 my_id를 전달합니다.
+                    const adminUser = getAdminNickname();
+                    try {
+                        const res = await fetch(`${API_BASE_URL}/posts/${postId}?my_id=${encodeURIComponent(adminUser)}&is_admin_delete=true`, { // is_admin_delete는 서버에서 처리해야 하는 파라미터 예시
+                            method: 'DELETE'
+                        });
+                        const result = await res.json();
+                        if (result.success) {
+                            alert('게시물이 삭제되었습니다.');
+                            loadAllPostsForAdmin();
+                        } else {
+                            alert(result.error || '게시물 삭제에 실패했습니다.');
+                        }
+                    } catch (error) {
+                        console.error('Error deleting post by admin:', error);
+                        alert(`게시물 삭제 중 오류 발생: ${error.message}. API 서버(${API_BASE_URL}) 연결을 확인하세요.`);
+                    }
+                }
+            });
+        });
+    }
+
+    async function loadAllPostsForAdmin() {
+        const posts = await fetchAllPostsForAdmin();
+        renderAdminPostList(posts);
+    }
+
+    // --- 게시물 수정 모달 관련 ---
+    const editPostModal = document.getElementById('edit-post-modal');
+    const editPostModalCloseBtn = document.getElementById('edit-post-modal-close');
+    const editPostCancelBtn = document.getElementById('edit-post-cancel');
+    const editPostForm = document.getElementById('edit-post-form');
+
+    function openEditPostModal(post) {
+        document.getElementById('edit-post-id').value = post.id;
+        document.getElementById('edit-post-id-display').textContent = post.id;
+        document.getElementById('edit-post-writer').value = post.writer || '';
+        document.getElementById('edit-post-content').value = post.content || '';
+        document.getElementById('edit-post-private').checked = !!post.is_private;
+        document.getElementById('edit-post-error').classList.add('hidden');
+        editPostModal.classList.remove('hidden');
+    }
+
+    function closeEditPostModal() {
+        editPostModal.classList.add('hidden');
+    }
+
+    if(editPostModalCloseBtn) editPostModalCloseBtn.onclick = closeEditPostModal;
+    if(editPostCancelBtn) editPostCancelBtn.onclick = closeEditPostModal;
+
+    if(editPostForm) {
+        editPostForm.onsubmit = async function(e) {
+            e.preventDefault();
+            const id = document.getElementById('edit-post-id').value;
+            const content = document.getElementById('edit-post-content').value.trim();
+            const is_private = document.getElementById('edit-post-private').checked;
+            const errorDiv = document.getElementById('edit-post-error');
+            errorDiv.classList.add('hidden');
+
+            if (!content) {
+                errorDiv.textContent = '내용을 입력하세요.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            
+            // 🚨 중요: 관리자 수정은 my_id 없이, 또는 관리자 권한으로 수정하는 API가 필요합니다.
+            // 현재는 일반 사용자 수정 API를 호출하므로, 관리자 닉네임으로 my_id를 전달합니다.
+            const adminUser = getAdminNickname();
+            try {
+                const res = await fetch(`${API_BASE_URL}/posts/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content, is_private, my_id: adminUser, is_admin_edit: true }) // is_admin_edit는 서버에서 처리해야 하는 파라미터 예시
+                });
+                const result = await res.json();
+                if (result.success) {
+                    alert('게시물이 수정되었습니다.');
+                    closeEditPostModal();
+                    loadAllPostsForAdmin();
+                } else {
+                    errorDiv.textContent = result.error || '게시물 수정에 실패했습니다.';
+                    errorDiv.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Error editing post by admin:', error);
+                errorDiv.textContent = `게시물 수정 중 오류 발생: ${error.message}. API 서버(${API_BASE_URL}) 연결을 확인하세요.`;
+                errorDiv.classList.remove('hidden');
+            }
+        };
+    }
+
+
+    // 페이지 로드 시 실행
+    document.addEventListener('DOMContentLoaded', function() {
+      updateAdminUI();
+    });
+  </script>
+</body>
+</html>

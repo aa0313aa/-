@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>네이버 상품권 | 기프트샵 커뮤니티</title>
+  <meta name="description" content="네이버 상품권 정보, 구매 방법, 사용법 안내. 기프트샵 커뮤니티에서 확인하세요.">
+  <meta name="keywords" content="네이버, 상품권, 기프트샵, 구매, 사용법, 정보">
+  <link rel="canonical" href="http://localhost:4000/네이버.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="네이버 상품권 | 기프트샵 커뮤니티">
+  <meta property="og:description" content="네이버 상품권 정보, 구매 방법, 사용법 안내. 기프트샵 커뮤니티에서 확인하세요.">
+  <meta property="og:url" content="http://localhost:4000/네이버.html">
+  <meta property="og:image" content="http://localhost:4000/img/Starbucks.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="네이버 상품권 | 기프트샵 커뮤니티">
+  <meta name="twitter:description" content="네이버 상품권 정보, 구매 방법, 사용법 안내. 기프트샵 커뮤니티에서 확인하세요.">
+  <meta name="twitter:image" content="http://localhost:4000/img/Starbucks.png">
+  <link rel="icon" href="/img/cu.png" type="image/png">
+  <link rel="apple-touch-icon" href="/img/cu.png">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "기프트샵 커뮤니티",
+    "url": "http://localhost:4000/네이버.html",
+    "description": "네이버 상품권 정보, 구매 방법, 사용법 안내. 기프트샵 커뮤니티에서 확인하세요.",
+    "inLanguage": "ko-KR"
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 사용자 정의 스타일 */
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    }
+    .active-tab {
+      background-color: #03C75A; /* Naver Green */
+      color: white;
+      font-weight: 600;
+    }
+    .tab-item {
+      display: block;
+      width: 100%;
+      padding: 0.75rem 1rem; /* py-3 px-4 */
+      border-radius: 0.375rem; /* rounded-md */
+      text-align: left;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+      font-size: 0.9rem;
+    }
+    .tab-item:hover:not(.active-tab) {
+      background-color: #E6F9F0; /* Light Naver Green */
+      color: #00A74D; /* Darker Naver Green */
+    }
+    /* details summary 기본 화살표 제거 */
+    details > summary {
+      list-style: none;
+    }
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+    .naver-green-text {
+      color: #03C75A;
+    }
+    .naver-green-bg {
+      background-color: #E6F9F0;
+    }
+    .naver-green-border:hover {
+        border-color: #03C75A;
+    }
+    .group-open\:text-naver-green summary span { /* Ensure specificity or direct targeting */
+        color: inherit; /* Default color */
+    }
+    details[open] > summary span {
+        color: #03C75A; /* Naver green when open */
+    }
+    details[open] > summary svg {
+        color: #03C75A;
+    }
+
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <div class="container mx-auto px-4 py-8 md:py-12">
+    <header class="mb-10 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800">네이버페이 <span class="naver-green-text">후불결제</span></h1>
+      <p class="mt-2 text-gray-600">자주 묻는 질문을 확인해보세요.</p>
+    </header>
+
+    <main class="md:w-3/4 lg:w-4/5">
+        <!-- 안내 버튼 영역을 nav/ul/li 구조로 시맨틱하게 변경 -->
+        <nav class="flex justify-center mb-8" aria-label="안내 버튼">
+          <ul class="flex gap-3">
+            <li><a href="index.html" class="bg-blue-50 text-blue-700 font-semibold px-4 py-2 rounded hover:bg-blue-100 border border-blue-200 transition">기프트샵 홈</a></li>
+            <li><a href="모빌.html" class="bg-cyan-50 text-cyan-700 font-semibold px-4 py-2 rounded hover:bg-cyan-100 border border-cyan-200 transition">모빌카드 안내</a></li>
+            <li><a href="네이버.html" class="bg-green-50 text-green-700 font-semibold px-4 py-2 rounded hover:bg-green-100 border border-green-200 transition" aria-current="page">네이버페이 안내</a></li>
+            <li><a href="토스.html" class="bg-indigo-50 text-indigo-700 font-semibold px-4 py-2 rounded hover:bg-indigo-100 border border-indigo-200 transition">토스후불결제 안내</a></li>
+            <li><a href="머니트리.html" class="bg-orange-50 text-orange-700 font-semibold px-4 py-2 rounded hover:bg-orange-100 border border-orange-200 transition">머니트리 안내</a></li>
+          </ul>
+        </nav>
+        <div class="bg-white p-6 md:p-8 rounded-lg shadow">
+          <div id="tab-guide-signup" class="tab-content space-y-3">
+            <div class="naver-green-bg p-6 rounded-lg mb-6">
+                <h3 class="text-xl font-semibold text-green-700 mb-3">네이버페이 후불결제란?</h3>
+                <p class="text-gray-700 text-sm leading-relaxed">
+                  네이버페이 후불결제는 당장 현금이 없거나 카드 한도가 부족해도 먼저 주문하고 나중에 결제할 수 있는 서비스입니다. 네이버페이와 제휴된 다양한 온라인 가맹점에서 이용할 수 있습니다.
+                </p>
+            </div>
+            <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>누가 신청할 수 있나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  만 19세 이상 네이버페이 회원 중, 네이버페이 내부 심사 기준을 통과한 경우 신청하여 이용할 수 있습니다. 심사 결과에 따라 이용 가능 여부 및 한도가 결정됩니다.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>어떻게 신청하나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  네이버페이 홈 또는 앱 내 <span class="font-semibold">[후불결제]</span> 메뉴에서 신청 안내를 확인할 수 있습니다. 신청 시 약관 동의 및 본인 인증 절차가 필요합니다.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>신청 시 신용점수에 영향이 있나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  네이버페이 후불결제 서비스 가입 신청 시 신용정보 조회가 이루어질 수 있으나, 단순 조회는 일반적으로 신용점수에 큰 영향을 주지 않습니다. 다만, 연체 발생 시에는 신용점수에 부정적인 영향이 있을 수 있습니다.
+                </div>
+            </details>
+             <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>어떤 상품 구매 시 사용할 수 없나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                 상품권, 순금, 환금성 카테고리 상품 등 일부 상품에는 후불결제 사용이 제한될 수 있습니다. 결제 시점에 사용 가능 여부를 확인할 수 있습니다.
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-payment-repayment" class="tab-content hidden space-y-3">
+            <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>후불결제 이용금액은 어떻게 납부하나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  지정된 납부일에 네이버페이에 등록된 본인 명의 계좌에서 자동으로 출금됩니다. 납부일 전에 네이버페이 알림을 통해 안내해 드립니다.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>납부일을 변경할 수 있나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  네이버페이 후불결제는 지정된 납부일(예: 매월 15일)에 자동 출금되며, 현재 납부일 변경 기능은 제공되지 않을 수 있습니다. 자세한 사항은 네이버페이 앱 내 후불결제 관리 페이지를 확인해주세요.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>이용금액을 미리 납부할 수 있나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  네, 네이버페이 홈 또는 앱의 후불결제 내역에서 <span class="font-semibold">[미리납부]</span> 기능을 통해 납부일 전이라도 이용금액의 일부 또는 전체를 미리 납부할 수 있습니다. 미리 납부하면 사용 가능한 한도가 즉시 복원됩니다.
+                </div>
+            </details>
+             <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>납부 계좌는 어떻게 설정/변경하나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                 네이버페이 설정 메뉴에서 출금 계좌를 등록하거나 변경할 수 있습니다. 후불결제 이용대금은 이 등록된 계좌에서 출금됩니다.
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-limit-management" class="tab-content hidden space-y-3">
+            <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>후불결제 이용 한도는 어떻게 되나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  이용한도는 개인의 네이버페이 이용 이력 및 신용도 등을 종합적으로 고려하여 네이버페이 내부 정책에 따라 결정됩니다. 일반적으로 월 최대 30만원까지 부여될 수 있으며, 네이버페이 앱 내 후불결제 메뉴에서 현재 한도를 확인할 수 있습니다.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>이용 한도는 변경될 수 있나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  네, 이용 한도는 정기적 또는 비정기적으로 심사를 통해 변동될 수 있습니다. 꾸준한 서비스 이용 및 성실한 납부 이력은 한도 상향에 긍정적인 영향을 줄 수 있습니다. 반대로 연체 이력 등이 발생하면 한도가 하향되거나 이용이 정지될 수 있습니다.
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-cancel-overdue" class="tab-content hidden space-y-3">
+            <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>후불결제로 주문한 상품을 취소하면 어떻게 되나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  판매처에서 정상적으로 주문 취소가 완료되면, 해당 금액만큼 후불결제 이용내역에서 차감되거나 한도가 복원됩니다.<br>
+                  <strong class="block mt-1 mb-1">납부일 이전 취소:</strong> 납부 예정 금액에서 해당 금액이 제외됩니다.<br>
+                  <strong class="block mt-1 mb-1">납부일 이후 취소 (이미 납부한 경우):</strong> 판매처의 환불 절차에 따라 네이버페이 포인트 또는 연결된 계좌로 환불될 수 있습니다. 환불 방식은 판매처 및 네이버페이 정책에 따라 다를 수 있습니다.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>이용대금을 연체하면 어떻게 되나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  납부일에 정상적으로 출금되지 않으면 연체로 처리됩니다. 연체 시에는 다음과 같은 불이익이 발생할 수 있습니다:
+                  <ul class="list-disc pl-5 mt-1">
+                    <li>후불결제 서비스 이용이 즉시 정지됩니다.</li>
+                    <li>연체료(수수료)가 부과될 수 있습니다. (예: 연 12%)</li>
+                    <li>연체 정보가 신용정보회사에 제공되어 신용점수에 부정적인 영향을 줄 수 있습니다.</li>
+                    <li>장기 연체 시 채권추심 절차가 진행될 수 있습니다.</li>
+                  </ul>
+                  자세한 연체 정책은 네이버페이 후불결제 약관을 참고해주세요.
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-others" class="tab-content hidden space-y-3">
+            <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>후불결제 이용내역은 연말정산 시 어떻게 처리되나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  네이버페이 후불결제 이용금액은 납부 완료 시점에 따라 현금영수증 발급 대상이 될 수 있습니다. 네이버페이 설정에서 현금영수증 발급 정보를 확인하고 등록해주세요.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200 naver-green-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-green-600 group-open:text-naver-green">
+                  <span>후불결제 서비스를 해지하고 싶어요.</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-naver-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  네이버페이 앱 내 후불결제 관리 메뉴에서 해지 신청을 할 수 있습니다. 단, 미납된 이용금액이 있거나 진행 중인 거래가 있는 경우에는 해지가 제한될 수 있습니다. 해지 후 재가입 시에는 다시 심사를 거쳐야 하며, 이전과 동일한 조건으로 이용이 어려울 수 있습니다.
+                </div>
+            </details>
+          </div>
+
+        </div>
+      </main>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const tabsContainer = document.getElementById('faq-tabs-container');
+      const tabButtons = tabsContainer.querySelectorAll('.tab-item');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      let currentVisibleTabId = null;
+
+      function showTab(tabIdToShow) {
+        tabContents.forEach(content => {
+          content.classList.add('hidden');
+        });
+
+        const selectedContent = document.getElementById(tabIdToShow);
+        if (selectedContent) {
+          selectedContent.classList.remove('hidden');
+          currentVisibleTabId = tabIdToShow;
+        }
+
+        tabButtons.forEach(button => {
+          button.classList.remove('active-tab');
+          // 기본 스타일로 되돌리기 (네이버 색상 반영 전의 스타일)
+          button.classList.add('text-gray-700');
+          button.style.backgroundColor = ''; // 명시적으로 배경색 제거
+          button.style.color = ''; // 명시적으로 글자색 제거
+          button.style.fontWeight = ''; // 명시적으로 굵기 제거
+        });
+
+        const activeButton = tabsContainer.querySelector(`[data-tab="${tabIdToShow}"]`);
+        if (activeButton) {
+          activeButton.classList.add('active-tab');
+          activeButton.classList.remove('text-gray-700');
+        }
+      }
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+          event.preventDefault();
+          const targetTabId = this.getAttribute('data-tab');
+          if (targetTabId !== currentVisibleTabId) {
+            showTab(targetTabId);
+          }
+        });
+      });
+
+      if (tabButtons.length > 0) {
+        const initialTabId = tabButtons[0].getAttribute('data-tab');
+        showTab(initialTabId);
+      }
+
+      const allDetails = document.querySelectorAll('main .tab-content details');
+      allDetails.forEach(details => {
+        details.addEventListener('toggle', event => {
+          if (event.target.open) {
+            let parentTabContent = event.target.closest('.tab-content');
+            if (parentTabContent && parentTabContent.id === currentVisibleTabId) {
+              allDetails.forEach(otherDetails => {
+                if (otherDetails !== event.target && otherDetails.closest('.tab-content').id === currentVisibleTabId) {
+                  otherDetails.open = false;
+                }
+              });
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>토스 상품권 | 기프트샵 커뮤니티</title>
+  <meta name="description" content="토스 상품권 정보, 구매 방법, 사용법 안내. 기프트샵 커뮤니티에서 확인하세요.">
+  <meta name="keywords" content="토스, 상품권, 기프트샵, 구매, 사용법, 정보">
+  <link rel="canonical" href="http://localhost:4000/토스.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="토스 상품권 | 기프트샵 커뮤니티">
+  <meta property="og:description" content="토스 상품권 정보, 구매 방법, 사용법 안내. 기프트샵 커뮤니티에서 확인하세요.">
+  <meta property="og:url" content="http://localhost:4000/토스.html">
+  <meta property="og:image" content="http://localhost:4000/img/Starbucks.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="토스 상품권 | 기프트샵 커뮤니티">
+  <meta name="twitter:description" content="토스 상품권 정보, 구매 방법, 사용법 안내. 기프트샵 커뮤니티에서 확인하세요.">
+  <meta name="twitter:image" content="http://localhost:4000/img/Starbucks.png">
+  <link rel="icon" href="/img/cu.png" type="image/png">
+  <link rel="apple-touch-icon" href="/img/cu.png">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "기프트샵 커뮤니티",
+    "url": "http://localhost:4000/토스.html",
+    "description": "토스 상품권 정보, 구매 방법, 사용법 안내. 기프트샵 커뮤니티에서 확인하세요.",
+    "inLanguage": "ko-KR"
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 사용자 정의 스타일 */
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    }
+    .active-tab {
+      background-color: #1D4ED8; /* blue-700 */
+      color: white;
+      font-weight: 600;
+    }
+    .tab-item {
+      display: block;
+      width: 100%;
+      padding: 0.75rem 1rem; /* py-3 px-4 */
+      border-radius: 0.375rem; /* rounded-md */
+      text-align: left;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+      font-size: 0.9rem;
+    }
+    .tab-item:hover:not(.active-tab) {
+      background-color: #DBEAFE; /* blue-100 */
+      color: #1E40AF; /* blue-800 */
+    }
+    /* details summary 기본 화살표 제거 */
+    details > summary {
+      list-style: none;
+    }
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <div class="container mx-auto px-4 py-8 md:py-12">
+    <header class="mb-10 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800">토스페이 후불결제</h1>
+      <p class="mt-2 text-gray-600">자주 묻는 질문을 확인해보세요.</p>
+    </header>
+
+    <div class="flex flex-col md:flex-row gap-8">
+      <aside class="md:w-1/4 lg:w-1/5">
+        <div class="bg-white p-4 rounded-lg shadow">
+          <h2 class="text-lg font-semibold text-gray-700 mb-4 px-2">자주 묻는 질문</h2>
+          <nav id="faq-tabs-container" class="space-y-1">
+            <button class="tab-item active-tab" data-tab="tab-guide-signup">이용안내 및 가입</button>
+            <button class="tab-item" data-tab="tab-payment-repayment">결제 및 납부</button>
+            <button class="tab-item" data-tab="tab-cancel-refund">취소 및 환불</button>
+            <button class="tab-item" data-tab="tab-limit-overdue">한도 및 연체</button>
+            <button class="tab-item" data-tab="tab-termination-others">해지 및 기타</button>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="md:w-3/4 lg:w-4/5">
+        <!-- 안내 버튼 영역을 가운데 정렬: 카드 바깥(main 바로 아래)으로 이동 -->
+        <div class="flex justify-center mb-8">
+          <div class="flex gap-3">
+            <a href="index.html" class="bg-blue-50 text-blue-700 font-semibold px-4 py-2 rounded hover:bg-blue-100 border border-blue-200 transition">기프트샵 홈</a>
+            <a href="모빌.html" class="bg-cyan-50 text-cyan-700 font-semibold px-4 py-2 rounded hover:bg-cyan-100 border border-cyan-200 transition">모빌카드 안내</a>
+            <a href="네이버.html" class="bg-green-50 text-green-700 font-semibold px-4 py-2 rounded hover:bg-green-100 border border-green-200 transition">네이버페이 안내</a>
+            <a href="토스.html" class="bg-indigo-50 text-indigo-700 font-semibold px-4 py-2 rounded hover:bg-indigo-100 border border-indigo-200 transition">토스후불결제 안내</a>
+            <a href="머니트리.html" class="bg-orange-50 text-orange-700 font-semibold px-4 py-2 rounded hover:bg-orange-100 border border-orange-200 transition">머니트리 안내</a>
+          </div>
+        </div>
+        <div class="bg-white p-6 md:p-8 rounded-lg shadow">
+          <div id="tab-guide-signup" class="tab-content space-y-3">
+            <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                <h3 class="text-xl font-semibold text-blue-700 mb-3">후불결제란?</h3>
+                <p class="text-gray-700 text-sm leading-relaxed">
+                  후불결제는 토스페이와 제휴된 가맹점 중에서 후불 결제 이용이 가능한 가맹점을 통한 결제 시, 계좌 잔액이나 신용카드 없이도 토스페이 후불결제를 통해 먼저 결제하고 나중에 이용하신 금액을 지불하는 서비스예요.
+                </p>
+            </div>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>후불결제 가입할 때 비바리퍼블리카(토스)에서 신용정보를 확인했다는 알림을 받았어요</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  토스페이 후불결제 서비스 가입을 위한 일회성 단순 조회에요. 신용점수에는 영향이 없어요.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>제가 쓰는 쇼핑몰에서 후불결제가 되지 않아요</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  토스페이 후불결제는 아직 일부 브랜드에서만 쓸 수 있어요. 후불결제를 쓸 수 있는 브랜드는 점차 늘려갈 예정이에요.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>후불결제 가맹점에서 어떤 상품을 구매할 땐 후불결제가 적용되지 않아요</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  e쿠폰(예시:모바일 커피 교환권, 백화점 상품권) 등 환금성 상품을 구매할 경우 후불결제를 사용할 수 없어요. 일반 상품과 고환금성 상품을 함께 판매하는 일부 쇼핑몰의 경우, 고환금성 상품은 후불결제를 할 수 없어요.
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-payment-repayment" class="tab-content hidden space-y-3">
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>후불결제 이용금액 납부는 어떻게 진행되나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  선택한 납부일에 납부 계좌에서 자동으로 출금돼요. 계좌 잔액이 부족한 경우 납부 금액 전액이 연체 되기 때문에 계좌 잔액을 미리 확인해주세요.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>후불결제 이용금액을 미리 내고 싶어요</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  <span class="font-semibold">[전체] &rarr; [토스페이] &rarr; [후불결제] &rarr; [납부 예정 금액] &rarr; [미리내기]</span> 메뉴를 통해 지금까지 이용한 금액을 미리 낼 수 있어요.<br>
+                  미리 내면 한도가 채워져서 다시 후불결제를 사용할 수 있어요. 미리 내기를 한 이후에도 결제한 쇼핑몰을 통한 결제 취소/환불은 가능하지만, 미리내기를 통해 납부한 금액을 취소하는 건 어려워요.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>후불결제 이용금액을 분할해서 내고 싶어요</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  후불결제 이용 금액은 납부일 전까지 분할해서 미리 낼 수 있어요.<br>
+                  원하는 금액을 직접 입력해서 내거나, 월별 이용금액을 각각 낼 수 있어요.<br>
+                  하루 세 번까지 가능해요.<br>
+                  최소 납부 금액은 1,000원이에요.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>납부일을 바꾸고 싶어요</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  <span class="font-semibold">[전체] &rarr; [토스페이] &rarr; [후불결제] &rarr; [납부 정보] &rarr; 납부일 옆 [바꾸기]</span> 메뉴를 통해 납부일을 바꿀 수 있어요.<br>
+                  납부일은 5, 10, 15, 20, 25일 중 하루를 선택할 수 있어요. 단, 변경한 납부일이 공휴일인 경우에는 다음 영업일에 출금돼요.<br>
+                  아래의 경우, 납부일 변경이 어려워요.
+                  <ul class="list-disc pl-5 mt-1">
+                    <li>납부일 당일 혹은 납부 금액을 연체 중인 경우</li>
+                    <li>납부일을 변경한 다음날 기준 60일이 지나지 않았을 경우</li>
+                  </ul>
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>납부일이 공휴일에도 돈이 빠져나가나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  납부일이 공휴일인 경우, 다음 영업일에 출금돼요.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>납부 계좌를 바꾸고 싶어요</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  <span class="font-semibold">[전체] &rarr; [토스페이] &rarr; [후불결제] &rarr; [납부 정보] &rarr; 납부 계좌 옆 [바꾸기]</span> 메뉴를 통해 납부 계좌를 바꿀 수 있어요.<br>
+                  토스 앱에 새로운 계좌를 등록하는 경우 출금이체 동의가 필요해요. 연체 중인 경우 납부 계좌를 바꿀 수는 있지만, 삭제할 수는 없어요.<br>
+                  기존에 등록한 납부 계좌를 삭제하려면, 납부 계좌를 다른 계좌로 변경 후 삭제할 수 있어요.<br>
+                  토스를 통해 납부 불가한 경우 납부 가능한 가상 계좌를 받아볼 수 있어요. 24시간 운영되는 토스 고객센터로 문의 부탁드려요.
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-cancel-refund" class="tab-content hidden space-y-3">
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>결제 취소했는데 언제, 어디로 돈이 들어오나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  결제 취소는 보통 주말 제외하고 2~3일 정도 걸러요. 쇼핑몰에서 취소 처리가 되지 않았다면 시간이 더 걸릴 수 있어요. 이 경우엔 쇼핑몰에 문의해야해요.<br>
+                  <strong class="block mt-2 mb-1">이용금액을 납부하기 전에 취소했다면 :</strong>
+                  취소한 금액만큼 납부 예정금액이 차감되고, 후불결제 한도가 채워져요.<br>
+                  <strong class="block mt-2 mb-1">이용금액을 납부한 후에 취소했다면 :</strong>
+                  결제한 쇼핑몰에서 취소 처리가 완료된 후에 납부 계좌로 환불돼요.<br>
+                  <strong class="block mt-2 mb-1">후불결제와 계좌결제로 나눠서 결제했다면 :</strong>
+                  계좌 결제 금액은 결제한 계좌로 다시 환불돼요.
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-limit-overdue" class="tab-content hidden space-y-3">
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>후불결제 한도가 바뀔 수 있나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  후불결제 한도는 이용내역과 내부 정책에 따라 달라질 수 있어요. 후불결제의 꾸준한 이용 등 다양한 기준에 의해 한도가 상향될 수 있어요. 후불결제 납부 금액 연체 및 장기 미사용, 타 서비스의 연체 이력 등으로 인해 한도가 하향 조정될 수 있어요.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>연체하면 어떻게 되나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  연체 중에는 후불결제를 이용할 수 없으며, 납부일로부터 7일이 경과되는 경우 연체 원금에 대하여 <span class="font-semibold">연 9%(일 0.0246%)</span> 로 계산된 연체 수수료가 부과돼요.
+                </div>
+            </details>
+          </div>
+
+          <div id="tab-termination-others" class="tab-content hidden space-y-3">
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>연말정산에서 후불결제는 어느 항목에 포함되나요?</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  후불결제 내역은 선불 결제내역처럼 현금영수증이 발급이 가능해요.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>후불결제를 해지하고 싶어요</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  <span class="font-semibold">'전체' &rarr; '후불결제' &rarr; 아래의 '후불결제 소개' &rarr; 맨 아래의 '후불결제 해지하기'</span> 메뉴를 통해 해지할 수 있어요. 단, 가입 후 재가입 시도 시 다시 심사를 거치기 때문에 내부 기준에 따라 재이용이 거절되거나 이전보다 낮은 한도를 받을 수 있어요.
+                </div>
+            </details>
+            <details class="group border-b border-gray-200">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                  <span>후불결제 해지가 안돼요</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-open:rotate-180 text-gray-500 group-open:text-blue-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </summary>
+                <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                  아래의 경우 후불결제 서비스를 해지할 수 없어요.
+                  <ul class="list-decimal list-inside mt-1">
+                    <li>환불 받을 금액이 있는 경우</li>
+                    <li>납부해야 할 금액이 남아있는 경우</li>
+                    <li>연체 중인 경우</li>
+                    <li>기타 민원, 분쟁 등의 해소가 필요한 경우</li>
+                  </ul>
+                </div>
+            </details>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const tabsContainer = document.getElementById('faq-tabs-container');
+      const tabButtons = tabsContainer.querySelectorAll('.tab-item');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      let currentVisibleTabId = null;
+
+      function showTab(tabIdToShow) {
+        tabContents.forEach(content => {
+          content.classList.add('hidden');
+        });
+
+        const selectedContent = document.getElementById(tabIdToShow);
+        if (selectedContent) {
+          selectedContent.classList.remove('hidden');
+          currentVisibleTabId = tabIdToShow;
+        }
+
+        tabButtons.forEach(button => {
+          button.classList.remove('active-tab');
+          button.classList.add('text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-800');
+        });
+
+        const activeButton = tabsContainer.querySelector(`[data-tab="${tabIdToShow}"]`);
+        if (activeButton) {
+          activeButton.classList.add('active-tab');
+          activeButton.classList.remove('text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-800');
+        }
+      }
+
+      tabButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+          event.preventDefault();
+          const targetTabId = this.getAttribute('data-tab');
+          if (targetTabId !== currentVisibleTabId) {
+            showTab(targetTabId);
+          }
+        });
+      });
+
+      if (tabButtons.length > 0) {
+        const initialTabId = tabButtons[0].getAttribute('data-tab');
+        showTab(initialTabId);
+      }
+
+      const allDetails = document.querySelectorAll('main .tab-content details'); // 메인 콘텐츠 영역 내의 details만 선택
+      allDetails.forEach(details => {
+        details.addEventListener('toggle', event => {
+          if (event.target.open) {
+            let parentTabContent = event.target.closest('.tab-content');
+            // 현재 활성화된 탭 내의 details 요소들만 닫도록 수정
+            if (parentTabContent && parentTabContent.id === currentVisibleTabId) {
+              allDetails.forEach(otherDetails => {
+                // 같은 탭 내에 있고, 현재 열린 details가 아닌 다른 details들을 닫음
+                if (otherDetails !== event.target && otherDetails.closest('.tab-content').id === currentVisibleTabId) {
+                  otherDetails.open = false;
+                }
+              });
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
