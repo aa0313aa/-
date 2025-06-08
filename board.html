@@ -496,6 +496,15 @@
         posts.forEach((post, index) => {
             const tr = document.createElement('tr');
             const displayId = totalPosts - ((currentPage - 1) * POSTS_PER_PAGE) - index;
+            let contentHtml = '';
+            // 게시글 내용에서 URL 자동 링크 변환
+            if (post.content) {
+                contentHtml = post.content.replace(/(https?:\/\/[^\s]+)/g, function(url) {
+                    // XSS 방지: URL에 작은 따옴표, 큰 따옴표 등 필터링
+                    const safeUrl = url.replace(/['"<>]/g, '');
+                    return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline break-all">${safeUrl}</a>`;
+                });
+            }
             let titleHtml = `
                 <a href="#" class="text-gray-800 hover:text-blue-600 hover:underline font-medium break-all post-title-link" data-post-id="${post.id}">
                 ${post.title || (post.content ? post.content.substring(0,20) + (post.content.length > 20 ? '...' : '') : '제목 없음')}
@@ -511,7 +520,7 @@
             }
             tr.innerHTML = `
                 <td class="px-4 py-3 text-gray-500">${post.id}</td>
-                <td class="px-4 py-3 flex items-center">${titleHtml} ${deleteBtnHtml}</td>
+                <td class="px-4 py-3 flex flex-col items-start">${titleHtml} <div class="mt-1 text-gray-700 break-all">${contentHtml}</div> ${deleteBtnHtml}</td>
                 <td class="px-4 py-3 text-gray-700">${post.writer || '익명'}</td>
                 <td class="px-4 py-3 text-gray-500">${formatDate(post.date)}</td>
                 <td class="px-4 py-3 text-gray-500">${post.view_count || 0}</td>
