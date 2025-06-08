@@ -64,6 +64,7 @@
       </nav>
       <div class="flex items-center space-x-4">
         <button id="login-btn" class="text-gray-700 hover:text-blue-700">로그인</button>
+        <button id="signup-btn-nav" class="text-gray-700 hover:text-blue-700">회원가입</button>
         <button id="logout-btn" class="text-gray-700 hover:text-blue-700 hidden">로그아웃</button>
       </div>
     </div>
@@ -263,30 +264,32 @@
       if (authNicknameInput) authNicknameInput.value = '';
       if (authPasswordInput) authPasswordInput.value = '';
       // 회원가입 모드일 때만 추가 입력란 보이기, 로그인 모드일 때는 숨기기
-      const contactInput = document.getElementById('auth-contact');
-      const emailInput = document.getElementById('auth-email');
-      const nameInput = document.getElementById('auth-name');
-      const birthInput = document.getElementById('auth-birth');
-      if (contactInput) {
-        contactInput.value = '';
-        if (isSignup) contactInput.classList.remove('hidden');
-        else contactInput.classList.add('hidden');
-      }
-      if (emailInput) {
-        emailInput.value = '';
-        if (isSignup) emailInput.classList.remove('hidden');
-        else emailInput.classList.add('hidden');
-      }
-      if (nameInput) {
-        nameInput.value = '';
-        if (isSignup) nameInput.classList.remove('hidden');
-        else nameInput.classList.add('hidden');
-      }
-      if (birthInput) {
-        birthInput.value = '';
-        if (isSignup) birthInput.classList.remove('hidden');
-        else birthInput.classList.add('hidden');
-      }
+      setTimeout(() => {
+        const contactInput = document.getElementById('auth-contact');
+        const emailInput = document.getElementById('auth-email');
+        const nameInput = document.getElementById('auth-name');
+        const birthInput = document.getElementById('auth-birth');
+        if (contactInput) {
+          contactInput.value = '';
+          if (isSignup) contactInput.classList.remove('hidden');
+          else contactInput.classList.add('hidden');
+        }
+        if (emailInput) {
+          emailInput.value = '';
+          if (isSignup) emailInput.classList.remove('hidden');
+          else emailInput.classList.add('hidden');
+        }
+        if (nameInput) {
+          nameInput.value = '';
+          if (isSignup) nameInput.classList.remove('hidden');
+          else nameInput.classList.add('hidden');
+        }
+        if (birthInput) {
+          birthInput.value = '';
+          if (isSignup) birthInput.classList.remove('hidden');
+          else birthInput.classList.add('hidden');
+        }
+      }, 0);
       if (authErrorDiv) authErrorDiv.classList.add('hidden');
       if (authModal) authModal.classList.remove('hidden');
       if (authNicknameInput) authNicknameInput.focus();
