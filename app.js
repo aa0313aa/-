@@ -251,6 +251,51 @@ app.get('/api/posts/:id', (req, res) => {
   });
 });
 
+// [관리자] 회원 전체 목록 조회
+app.get('/api/admin/users', (req, res) => {
+  const adminId = req.query.admin_id || '';
+  if (adminId !== 'admin') return res.status(403).json({ error: '관리자 권한 필요' });
+  db.all('SELECT id, nickname, realname, birth, contact, email FROM users ORDER BY id DESC', [], (err, rows) => {
+    if (err) return res.status(500).json({ error: 'DB error' });
+    res.json({ success: true, users: rows });
+  });
+});
+
+// [관리자] 회원 상세 조회
+app.get('/api/admin/users/:id', (req, res) => {
+  const adminId = req.query.admin_id || '';
+  if (adminId !== 'admin') return res.status(403).json({ error: '관리자 권한 필요' });
+  db.get('SELECT id, nickname, realname, birth, contact, email FROM users WHERE id = ?', [req.params.id], (err, row) => {
+    if (err) return res.status(500).json({ error: 'DB error' });
+    if (!row) return res.status(404).json({ error: '존재하지 않는 사용자' });
+    res.json({ success: true, user: row });
+  });
+});
+
+// [관리자] 회원 정보 수정
+app.put('/api/admin/users/:id', (req, res) => {
+  const adminId = req.body.admin_id || '';
+  if (adminId !== 'admin') return res.status(403).json({ error: '관리자 권한 필요' });
+  const { realname, birth, contact, email } = req.body;
+  db.run('UPDATE users SET realname = ?, birth = ?, contact = ?, email = ? WHERE id = ?',
+    [realname, birth, contact, email, req.params.id],
+    function(err) {
+      if (err) return res.status(500).json({ error: 'DB error' });
+      res.json({ success: true });
+    }
+  );
+});
+
+// [관리자] 회원 삭제
+app.delete('/api/admin/users/:id', (req, res) => {
+  const adminId = req.query.admin_id || '';
+  if (adminId !== 'admin') return res.status(403).json({ error: '관리자 권한 필요' });
+  db.run('DELETE FROM users WHERE id = ?', [req.params.id], function(err) {
+    if (err) return res.status(500).json({ error: 'DB error' });
+    res.json({ success: true });
+  });
+});
+
 const PORT = 4000;
 app.listen(PORT, () => {
   console.log(`서버가 ${PORT} 포트에서 실행 중입니다.`);

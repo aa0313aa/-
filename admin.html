@@ -103,12 +103,28 @@
         </div>
       </section>
       
-      <!--
       <section id="user-management-section" class="bg-white shadow sm:rounded-lg p-6 mt-6">
-        <h2 class="text-xl font-semibold text-gray-900 mb-4">사용자 관리 (준비 중)</h2>
-        <p class="text-gray-600">사용자 목록 조회, 수정, 삭제 등의 기능을 추가할 수 있습니다.</p>
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">회원 관리</h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200 admin-table">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">닉네임</th>
+                <th scope="col">이름</th>
+                <th scope="col">생년월일</th>
+                <th scope="col">연락처</th>
+                <th scope="col">이메일</th>
+                <th scope="col">작업</th>
+              </tr>
+            </thead>
+            <tbody id="admin-user-list" class="bg-white divide-y divide-gray-200"></tbody>
+          </table>
+        </div>
+        <div id="admin-user-empty" class="text-gray-500 text-center py-8 hidden">
+          <p>회원이 없습니다.</p>
+        </div>
       </section>
-      -->
     </div>
 
     <div id="edit-post-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100] hidden p-4">
@@ -144,6 +160,47 @@
       </div>
     </div>
 
+    <!-- 회원 상세/수정 모달 -->
+    <div id="edit-user-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100] hidden p-4">
+      <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-lg modal-content">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-semibold text-gray-900">회원 정보 (ID: <span id="edit-user-id-display"></span>)</h3>
+          <button id="edit-user-modal-close" class="text-gray-400 hover:text-gray-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+        <form id="edit-user-form">
+          <input type="hidden" id="edit-user-id">
+          <div class="mb-4">
+            <label for="edit-user-nickname" class="block text-sm font-medium text-gray-700">닉네임</label>
+            <input type="text" id="edit-user-nickname" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm sm:text-sm p-2 bg-gray-100" readonly>
+          </div>
+          <div class="mb-4">
+            <label for="edit-user-realname" class="block text-sm font-medium text-gray-700">이름</label>
+            <input type="text" id="edit-user-realname" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm sm:text-sm p-2">
+          </div>
+          <div class="mb-4">
+            <label for="edit-user-birth" class="block text-sm font-medium text-gray-700">생년월일</label>
+            <input type="text" id="edit-user-birth" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm sm:text-sm p-2">
+          </div>
+          <div class="mb-4">
+            <label for="edit-user-contact" class="block text-sm font-medium text-gray-700">연락처</label>
+            <input type="text" id="edit-user-contact" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm sm:text-sm p-2">
+          </div>
+          <div class="mb-4">
+            <label for="edit-user-email" class="block text-sm font-medium text-gray-700">이메일</label>
+            <input type="email" id="edit-user-email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm sm:text-sm p-2">
+          </div>
+          <div id="edit-user-error" class="text-red-500 text-sm mb-3 hidden"></div>
+          <div class="flex justify-end gap-3">
+            <button type="button" id="edit-user-cancel" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300">취소</button>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">수정 완료</button>
+            <button type="button" id="delete-user-btn" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">회원 삭제</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
   </main>
 
   <script>
@@ -172,6 +229,7 @@
         adminNicknameDisplay.classList.remove('hidden');
         adminLogoutBtn.classList.remove('hidden');
         loadAllPostsForAdmin();
+        loadAllUsersForAdmin();
       } else {
         adminLoginSection.classList.remove('hidden');
         adminDashboard.classList.add('hidden');
@@ -410,6 +468,129 @@
         };
     }
 
+
+    // --- 회원 관리 로직 ---
+    async function fetchAllUsersForAdmin() {
+      try {
+        const res = await fetch(`${API_BASE_URL}/admin/users?admin_id=${encodeURIComponent(ADMIN_NICKNAME)}`);
+        if (!res.ok) return [];
+        const data = await res.json();
+        return data.users || [];
+      } catch (e) { return []; }
+    }
+
+    function renderAdminUserList(users) {
+      const listEl = document.getElementById('admin-user-list');
+      const emptyEl = document.getElementById('admin-user-empty');
+      if (!listEl || !emptyEl) return;
+      listEl.innerHTML = '';
+      if (!users || users.length === 0) {
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+      emptyEl.classList.add('hidden');
+      users.forEach(user => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${user.id}</td>
+          <td>${user.nickname}</td>
+          <td>${user.realname || ''}</td>
+          <td>${user.birth || ''}</td>
+          <td>${user.contact || ''}</td>
+          <td>${user.email || ''}</td>
+          <td><button class="text-indigo-600 hover:text-indigo-900 text-sm admin-edit-user-btn" data-id="${user.id}">상세/수정</button></td>
+        `;
+        listEl.appendChild(tr);
+      });
+      document.querySelectorAll('.admin-edit-user-btn').forEach(btn => {
+        btn.addEventListener('click', async function() {
+          const userId = this.dataset.id;
+          const res = await fetch(`${API_BASE_URL}/admin/users/${userId}?admin_id=${encodeURIComponent(ADMIN_NICKNAME)}`);
+          const data = await res.json();
+          if (data.success && data.user) openEditUserModal(data.user);
+          else alert('회원 정보를 불러올 수 없습니다.');
+        });
+      });
+    }
+
+    async function loadAllUsersForAdmin() {
+      const users = await fetchAllUsersForAdmin();
+      renderAdminUserList(users);
+    }
+
+    // --- 회원 상세/수정/삭제 모달 ---
+    const editUserModal = document.getElementById('edit-user-modal');
+    const editUserModalCloseBtn = document.getElementById('edit-user-modal-close');
+    const editUserCancelBtn = document.getElementById('edit-user-cancel');
+    const editUserForm = document.getElementById('edit-user-form');
+    const deleteUserBtn = document.getElementById('delete-user-btn');
+
+    function openEditUserModal(user) {
+      document.getElementById('edit-user-id').value = user.id;
+      document.getElementById('edit-user-id-display').textContent = user.id;
+      document.getElementById('edit-user-nickname').value = user.nickname || '';
+      document.getElementById('edit-user-realname').value = user.realname || '';
+      document.getElementById('edit-user-birth').value = user.birth || '';
+      document.getElementById('edit-user-contact').value = user.contact || '';
+      document.getElementById('edit-user-email').value = user.email || '';
+      document.getElementById('edit-user-error').classList.add('hidden');
+      editUserModal.classList.remove('hidden');
+    }
+    function closeEditUserModal() { editUserModal.classList.add('hidden'); }
+    if(editUserModalCloseBtn) editUserModalCloseBtn.onclick = closeEditUserModal;
+    if(editUserCancelBtn) editUserCancelBtn.onclick = closeEditUserModal;
+
+    if(editUserForm) {
+      editUserForm.onsubmit = async function(e) {
+        e.preventDefault();
+        const id = document.getElementById('edit-user-id').value;
+        const realname = document.getElementById('edit-user-realname').value.trim();
+        const birth = document.getElementById('edit-user-birth').value.trim();
+        const contact = document.getElementById('edit-user-contact').value.trim();
+        const email = document.getElementById('edit-user-email').value.trim();
+        const errorDiv = document.getElementById('edit-user-error');
+        errorDiv.classList.add('hidden');
+        try {
+          const res = await fetch(`${API_BASE_URL}/admin/users/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ admin_id: ADMIN_NICKNAME, realname, birth, contact, email })
+          });
+          const result = await res.json();
+          if (result.success) {
+            alert('회원 정보가 수정되었습니다.');
+            closeEditUserModal();
+            loadAllUsersForAdmin();
+          } else {
+            errorDiv.textContent = result.error || '회원 정보 수정에 실패했습니다.';
+            errorDiv.classList.remove('hidden');
+          }
+        } catch (error) {
+          errorDiv.textContent = `회원 정보 수정 중 오류 발생: ${error.message}`;
+          errorDiv.classList.remove('hidden');
+        }
+      };
+    }
+    if(deleteUserBtn) {
+      deleteUserBtn.onclick = async function() {
+        const id = document.getElementById('edit-user-id').value;
+        if (confirm('정말 이 회원을 삭제하시겠습니까?')) {
+          try {
+            const res = await fetch(`${API_BASE_URL}/admin/users/${id}?admin_id=${encodeURIComponent(ADMIN_NICKNAME)}`, { method: 'DELETE' });
+            const result = await res.json();
+            if (result.success) {
+              alert('회원이 삭제되었습니다.');
+              closeEditUserModal();
+              loadAllUsersForAdmin();
+            } else {
+              alert(result.error || '회원 삭제에 실패했습니다.');
+            }
+          } catch (error) {
+            alert(`회원 삭제 중 오류 발생: ${error.message}`);
+          }
+        }
+      };
+    }
 
     // 페이지 로드 시 실행
     document.addEventListener('DOMContentLoaded', function() {
