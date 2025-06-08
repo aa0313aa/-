@@ -490,16 +490,28 @@
         }
         postListEmpty.classList.add('hidden');
 
+        const myNickname = getLoggedInNickname();
+        const isAdmin = myNickname === 'admin';
+
         posts.forEach((post, index) => {
             const tr = document.createElement('tr');
             const displayId = totalPosts - ((currentPage - 1) * POSTS_PER_PAGE) - index;
+            let titleHtml = `
+                <a href="#" class="text-gray-800 hover:text-blue-600 hover:underline font-medium break-all post-title-link" data-post-id="${post.id}">
+                ${post.title || (post.content ? post.content.substring(0,20) + (post.content.length > 20 ? '...' : '') : '제목 없음')}
+                </a>`;
+            // 비공개 표시
+            if (post.is_private) {
+                titleHtml += '<span class="ml-2 px-2 py-0.5 text-xs rounded bg-pink-100 text-pink-700">비공개(관리자만 보기)</span>';
+            }
+            // 삭제 버튼 노출 조건: 본인 또는 관리자
+            let deleteBtnHtml = '';
+            if ((myNickname && post.writer === myNickname) || isAdmin) {
+                deleteBtnHtml = `<button class="ml-2 text-xs text-red-500 hover:underline delete-post-btn" data-post-id="${post.id}">삭제</button>`;
+            }
             tr.innerHTML = `
                 <td class="px-4 py-3 text-gray-500">${post.id}</td>
-                <td class="px-4 py-3">
-                    <a href="#" class="text-gray-800 hover:text-blue-600 hover:underline font-medium break-all post-title-link" data-post-id="${post.id}">
-                        ${post.title || (post.content ? post.content.substring(0,20) + (post.content.length > 20 ? '...' : '') : '제목 없음')}
-                    </a>
-                </td>
+                <td class="px-4 py-3 flex items-center">${titleHtml} ${deleteBtnHtml}</td>
                 <td class="px-4 py-3 text-gray-700">${post.writer || '익명'}</td>
                 <td class="px-4 py-3 text-gray-500">${formatDate(post.date)}</td>
                 <td class="px-4 py-3 text-gray-500">${post.view_count || 0}</td>
@@ -520,6 +532,34 @@
                 openReadOnlyPostModal(data);
               } catch (err) {
                 alert('글을 불러올 수 없습니다.');
+              }
+            });
+          });
+          // 삭제 버튼 이벤트
+          document.querySelectorAll('.delete-post-btn').forEach(btn => {
+            btn.addEventListener('click', async function(e) {
+              e.preventDefault();
+              const postId = this.getAttribute('data-post-id');
+              if (!postId) return;
+              if (!confirm('정말 삭제하시겠습니까?')) return;
+              try {
+                let url = `${API_BASE_URL}/posts/${postId}`;
+                let my_id = getLoggedInNickname();
+                if (isAdmin) {
+                  url += `?my_id=${encodeURIComponent(my_id)}&is_admin_delete=true`;
+                } else {
+                  url += `?my_id=${encodeURIComponent(my_id)}`;
+                }
+                const res = await fetch(url, { method: 'DELETE' });
+                const result = await res.json();
+                if (result.success) {
+                  alert('게시글이 삭제되었습니다.');
+                  fetchPosts(currentPage, currentSearchKeyword);
+                } else {
+                  alert(result.error || '삭제에 실패했습니다.');
+                }
+              } catch (err) {
+                alert('삭제 중 오류가 발생했습니다.');
               }
             });
           });
