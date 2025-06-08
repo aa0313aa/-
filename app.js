@@ -36,14 +36,15 @@ db.serialize(() => {
   db.run(`ALTER TABLE users ADD COLUMN email TEXT`, () => {});
 });
 
-// 글 목록 (비공개글은 본인만 볼 수 있도록)
+// 글 목록 (비공개글은 본인 또는 관리자만 볼 수 있도록)
 app.get('/api/posts', (req, res) => {
   // writer_id(닉네임) 쿼리 파라미터로 받음
   const myId = req.query.my_id || '';
+  const isAdmin = myId === 'admin';
   db.all('SELECT * FROM posts ORDER BY id DESC', [], (err, rows) => {
     if (err) return res.status(500).json({error: 'DB error'});
-    // 비공개글은 본인만 볼 수 있음
-    const filtered = rows.filter(row => !row.is_private || (myId && row.writer_id === myId));
+    // 비공개글: 본인 또는 관리자만 볼 수 있음
+    const filtered = rows.filter(row => !row.is_private || (myId && row.writer_id === myId) || (isAdmin && row.is_private));
     res.json(filtered.map(row => ({
       id: row.id,
       writer: row.writer,
