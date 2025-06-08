@@ -125,7 +125,8 @@ app.post('/api/login', (req, res) => {
     if (!row) return res.json({ success: false, error: '존재하지 않는 사용자' });
     // 비밀번호 확인 (해시 비교는 생략, 평문 그대로 비교)
     if (row.password !== password) return res.json({ success: false, error: '비밀번호 불일치' });
-    res.json({ success: true, id: row.id, nickname: row.nickname });
+    // 로그인 성공 시 token 필드 추가
+    res.json({ success: true, id: row.id, nickname: row.nickname, token: `token_${row.nickname}` });
   });
 });
 
