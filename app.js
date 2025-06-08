@@ -87,8 +87,18 @@ app.put('/api/posts/:id', (req, res) => {
 // 글 삭제
 app.delete('/api/posts/:id', (req, res) => {
   const my_id = req.query.my_id || '';
+  const is_admin_delete = req.query.is_admin_delete === 'true' || req.query.is_admin_delete === true;
   db.get('SELECT * FROM posts WHERE id = ?', [req.params.id], (err, row) => {
     if (err || !row) return res.status(404).json({error: '글을 찾을 수 없음'});
+    // 관리자(admin)는 모든 글 삭제 가능
+    if (is_admin_delete && my_id === 'admin') {
+      db.run('DELETE FROM posts WHERE id = ?', [req.params.id], function(err2) {
+        if (err2) return res.status(500).json({error: 'DB error'});
+        return res.json({ success: true });
+      });
+      return;
+    }
+    // 일반 사용자는 본인 글만 삭제 가능
     if (!my_id || row.writer_id !== my_id) return res.status(403).json({error: '본인만 삭제 가능'});
     db.run('DELETE FROM posts WHERE id = ?', [req.params.id], function(err2) {
       if (err2) return res.status(500).json({error: 'DB error'});
