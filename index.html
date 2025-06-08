@@ -424,7 +424,8 @@
         </div>
       </div>
     </section>
-    <!-- 게시판(방명록/문의/자유게시판) 섹션 추가 -->
+    <!-- 게시판(방명록/문의/자유게시판) 섹션 비활성화 -->
+    <!--
     <section id="board-section" class="page-section hidden">
       <h2 class="text-2xl font-bold text-gray-800 mb-4">게시판(방명록/문의)</h2>
       <form id="board-form" class="bg-white rounded-lg shadow p-4 mb-6 flex flex-col gap-2">
@@ -487,9 +488,20 @@
       let editPostId = null; // 수정 중인 글 id
       async function fetchBoardList() {
         const my_id = getLoginNickname();
-        const res = await fetch('http://localhost:4000/api/posts?my_id=' + encodeURIComponent(my_id));
-        if (!res.ok) return [];
-        return await res.json();
+        try {
+          const res = await fetch('http://localhost:4000/api/posts?my_id=' + encodeURIComponent(my_id));
+          if (!res.ok) {
+            const text = await res.text();
+            alert('글 목록을 불러올 수 없습니다. 서버 응답: ' + res.status + '\n' + text);
+            console.error('API 오류:', res.status, text);
+            return [];
+          }
+          return await res.json();
+        } catch (e) {
+          alert('글 목록을 불러올 수 없습니다. 네트워크 오류: ' + e.message);
+          console.error('fetchBoardList 네트워크 오류:', e);
+          return [];
+        }
       }
       async function fetchBoardWrite({writer, content, is_private}) {
         const token = getLoginToken();
