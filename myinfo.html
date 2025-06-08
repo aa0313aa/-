@@ -8,67 +8,82 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
+    .glass {
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+      backdrop-filter: blur(8px);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .input-label {
+      font-weight: 500;
+      color: #2563eb;
+    }
+    .form-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px #2563eb33;
+    }
   </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
-  <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-    <div class="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
+<body class="bg-gradient-to-br from-blue-100 via-white to-pink-100 min-h-screen flex flex-col">
+  <header class="bg-white/80 border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-2xl mx-auto px-4 py-4 flex justify-between items-center">
       <a href="index.html" class="text-2xl font-extrabold text-blue-700 tracking-tight">기프트샵 커뮤니티</a>
-      <button id="logout-btn" class="text-gray-700 hover:text-blue-700">로그아웃</button>
+      <button id="logout-btn" class="text-gray-700 hover:text-blue-700 transition">로그아웃</button>
     </div>
   </header>
-  <main class="flex-1 max-w-3xl mx-auto w-full px-4 py-8">
-    <div class="bg-white shadow-lg rounded-lg p-6">
-      <h1 class="text-2xl font-bold mb-6">내 정보</h1>
-      <form id="myinfo-form" class="space-y-4">
+  <main class="flex-1 flex items-center justify-center px-2 py-8">
+    <div class="glass w-full max-w-lg p-8">
+      <h1 class="text-3xl font-extrabold text-blue-700 mb-8 text-center">내 정보</h1>
+      <form id="myinfo-form" class="space-y-5">
         <div>
-          <label class="block text-sm font-medium text-gray-700">닉네임</label>
-          <input id="nickname" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100" readonly>
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">이름</label>
-          <input id="realname" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" required>
+          <label class="input-label block text-sm mb-1">닉네임</label>
+          <input id="nickname" class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100" readonly>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">생년월일</label>
-          <input id="birth" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" maxlength="8" required>
+          <label class="input-label block text-sm mb-1">이름</label>
+          <input id="realname" class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg" required>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">연락처</label>
-          <input id="contact" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" required>
+          <label class="input-label block text-sm mb-1">생년월일</label>
+          <input id="birth" class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg" maxlength="8" required placeholder="YYYYMMDD">
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">이메일</label>
-          <input id="email" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" required>
+          <label class="input-label block text-sm mb-1">연락처</label>
+          <input id="contact" class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg" required placeholder="010-0000-0000">
         </div>
-        <div class="flex gap-2">
-          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">정보 수정</button>
-          <button type="button" id="change-password-btn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300">비밀번호 변경</button>
+        <div>
+          <label class="input-label block text-sm mb-1">이메일</label>
+          <input id="email" class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg" required placeholder="example@email.com">
         </div>
-        <div id="myinfo-error" class="text-red-500 text-sm mt-2 hidden"></div>
-        <div id="myinfo-success" class="text-green-600 text-sm mt-2 hidden"></div>
+        <div class="flex gap-2 justify-center mt-6">
+          <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold shadow hover:bg-blue-700 transition">정보 수정</button>
+          <button type="button" id="change-password-btn" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-semibold hover:bg-gray-300 transition">비밀번호 변경</button>
+        </div>
+        <div id="myinfo-error" class="text-red-500 text-sm mt-2 hidden text-center"></div>
+        <div id="myinfo-success" class="text-green-600 text-sm mt-2 hidden text-center"></div>
       </form>
       <form id="password-form" class="space-y-4 mt-8 hidden">
-        <h2 class="text-lg font-semibold">비밀번호 변경</h2>
+        <h2 class="text-lg font-bold text-blue-700 text-center">비밀번호 변경</h2>
         <div>
-          <label class="block text-sm font-medium text-gray-700">현재 비밀번호</label>
-          <input id="old-password" type="password" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" required>
+          <label class="input-label block text-sm mb-1">현재 비밀번호</label>
+          <input id="old-password" type="password" class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg" required>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700">새 비밀번호</label>
-          <input id="new-password" type="password" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md" required>
+          <label class="input-label block text-sm mb-1">새 비밀번호</label>
+          <input id="new-password" type="password" class="form-input w-full px-3 py-2 border border-gray-300 rounded-lg" required>
         </div>
-        <div class="flex gap-2">
-          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">비밀번호 변경</button>
-          <button type="button" id="cancel-password-btn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300">취소</button>
+        <div class="flex gap-2 justify-center mt-4">
+          <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold shadow hover:bg-blue-700 transition">비밀번호 변경</button>
+          <button type="button" id="cancel-password-btn" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-semibold hover:bg-gray-300 transition">취소</button>
         </div>
-        <div id="password-error" class="text-red-500 text-sm mt-2 hidden"></div>
-        <div id="password-success" class="text-green-600 text-sm mt-2 hidden"></div>
+        <div id="password-error" class="text-red-500 text-sm mt-2 hidden text-center"></div>
+        <div id="password-success" class="text-green-600 text-sm mt-2 hidden text-center"></div>
       </form>
     </div>
   </main>
   <script>
-    const API_BASE_URL = 'http://localhost:4000/api';
+    const API_BASE_URL = 'https://hallowed-hulking-scooter.glitch.me/api';
     const nickname = localStorage.getItem('giftshop_community_nickname');
     if (!nickname) {
       alert('로그인이 필요합니다.');
