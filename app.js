@@ -47,6 +47,46 @@ db.serialize(() => {
   )`);
 });
 
+// 서버 시작 시 기본 상품 자동 등록 (products 테이블이 비어 있을 때만)
+db.serialize(() => {
+  db.get('SELECT COUNT(*) AS cnt FROM products', (err, row) => {
+    if (!err && row && row.cnt === 0) {
+      const defaultProducts = [
+        { name: '스타벅스 카드 5만원권', image: 'img/Starbucks.png', price: '50,000원', link: 'https://smartstore.naver.com/sk6070' },
+        { name: '롯데상품권 5만원권', image: 'img/롯데5만원.JPG', price: '50,000원', link: 'https://mkt.shopping.naver.com/link/6812c23662fffc0a4a49fd08' },
+        { name: '신세계상품권 5만원권', image: 'img/신세계상품.png', price: '50,000원', link: 'https://현금화.store' },
+        { name: '틴캐시 5만원권', image: 'img/card__teen.png', price: '50,000원', link: 'https://smartstore.naver.com/4989z/products/11594192295' },
+        { name: '도서문화상품권 1만원권', image: 'img/dosupng.png', price: '10,000원', link: '' },
+        { name: '컬쳐랜드상품권 1만원권', image: 'img/cu.png', price: '10,000원', link: 'https://mkt.shopping.naver.com/link/683d9d1ad20fbf73c9d596bc' },
+        { name: '컬쳐랜드상품권 2만원권', image: 'img/cu.png', price: '20,000원', link: 'https://mkt.shopping.naver.com/link/683d9d1ae625370ec15afd4b' }
+      ];
+      const stmt = db.prepare('INSERT INTO products (name, image, price, link) VALUES (?, ?, ?, ?)');
+      defaultProducts.forEach(p => stmt.run(p.name, p.image, p.price, p.link));
+      stmt.finalize();
+      console.log('기본 상품 자동 등록 완료');
+    }
+  });
+});
+
+// --- 상품 복구 임시 코드 삭제(또는 주석 처리) 완료 ---
+// db.serialize(() => {
+//   db.run('DELETE FROM products', [], (err) => {
+//     if (!err) {
+//       const products = [
+//         { name: '스타벅스 5만원권', image: 'img/Starbucks.png', price: '50,000원', link: 'https://smartstore.naver.com/sk6070/products/1234567890' },
+//         { name: 'CU 모바일상품권 1만원', image: 'img/cu.png', price: '10,000원', link: 'https://smartstore.naver.com/sk6070/products/2345678901' },
+//         { name: '신세계상품권 5만원', image: 'img/신세계상품.png', price: '50,000원', link: 'https://smartstore.naver.com/sk6070/products/3456789012' },
+//         { name: '롯데상품권 5만원', image: 'img/롯데5만원.JPG', price: '50,000원', link: 'https://smartstore.naver.com/sk6070/products/4567890123' },
+//         { name: '틴캐시 1만원', image: 'img/card__teen.png', price: '10,000원', link: 'https://smartstore.naver.com/sk6070/products/5678901234' }
+//       ];
+//       const stmt = db.prepare('INSERT INTO products (name, image, price, link) VALUES (?, ?, ?, ?)');
+//       products.forEach(p => stmt.run(p.name, p.image, p.price, p.link));
+//       stmt.finalize();
+//       console.log('요청 상품 데이터로 복구 완료');
+//     }
+//   });
+// });
+
 // 글 목록 (비공개글은 본인 또는 관리자만 볼 수 있도록)
 app.get('/api/posts', (req, res) => {
   // writer_id(닉네임) 쿼리 파라미터로 받음
