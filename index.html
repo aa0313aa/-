@@ -12,21 +12,13 @@
   <meta property="og:description" content="기프트샵 상품권 정보, 휴대폰결제, 자유게시판, 다양한 정보와 소통의 공간.">
   <meta property="og:url" content="http://localhost:4000/index.html">
   <meta property="og:image" content="http://localhost:4000/img/Starbucks.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="기프트샵 커뮤니티">
-  <meta name="twitter:description" content="기프트샵 상품권 정보, 휴대폰결제, 자유게시판, 다양한 정보와 소통의 공간.">
-  <meta name="twitter:image" content="http://localhost:4000/img/Starbucks.png">
-  <link rel="icon" href="/img/cu.png" type="image/png">
-  <link rel="apple-touch-icon" href="/img/cu.png">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#2563eb">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "기프트샵 커뮤니티",
     "url": "http://localhost:4000/index.html",
-    "description": "기프트샵 상품권 정보, 휴대폰결제, 자유게시판, 다양한 정보와 소통의 공간.",
+    "description": "기프트샵 커뮤니티 상품권 정보, 휴대폰결제, 자유게시판 등 다양한 정보와 소통의 공간.",
     "inLanguage": "ko-KR"
   }
   </script>
@@ -396,7 +388,7 @@
       if (page === 'products') loadProducts();
     }
     // 상품 목록 동적 로딩
-    const API_BASE_URL = 'https://hallowed-hulking-scooter.glitch.me/api';
+    const API_BASE_URL = 'http://localhost:4000/api';
     async function loadProducts() {
       const grid = document.getElementById('products-grid');
       if (!grid) return;
