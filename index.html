@@ -152,51 +152,7 @@
     <!-- 상품 리스트 -->
     <section id="products-section" class="page-section hidden">
       <h2 class="text-2xl font-bold text-gray-800 mb-6">전체 상품</h2>
-      <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <!-- 데모용 인기 상품 -->
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/Starbucks.png" alt="스타벅스 카드" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">스타벅스 카드 5만원권</h3>
-          <p class="text-blue-700 font-bold mb-2">50,000원</p>
-          <a href="https://smartstore.naver.com/sk6070" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/롯데5만원.JPG" alt="롯데상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">롯데상품권 5만원권</h3>
-          <p class="text-blue-700 font-bold mb-2">50,000원</p>
-          <a href="https://mkt.shopping.naver.com/link/6812c23662fffc0a4a49fd08" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/신세계상품.png" alt="신세계상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">신세계상품권 5만원권</h3>
-          <p class="text-blue-700 font-bold mb-2">50,000원</p>
-          <a href="https://현금화.store" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/card__teen.png" alt="틴캐시" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">틴캐시 5만원권</h3>
-          <p class="text-blue-700 font-bold mb-2">50,000원</p>
-          <a href="https://smartstore.naver.com/4989z/products/11594192295" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/dosupng.png" alt="도서문화상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">도서문화상품권 1만원권</h3>
-          <p class="text-blue-700 font-bold mb-2">10,000원</p>
-          <!-- 구매하기 버튼 제거됨 -->
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/cu.png" alt="컬쳐랜드상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드상품권 1만원권</h3>
-          <p class="text-blue-700 font-bold mb-2">10,000원</p>
-          <a href="https://mkt.shopping.naver.com/link/683d9d1ad20fbf73c9d596bc" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/cu.png" alt="컬쳐랜드상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드상품권 2만원권</h3>
-          <p class="text-blue-700 font-bold mb-2">20,000원</p>
-          <a href="https://mkt.shopping.naver.com/link/683d9d1ae625370ec15afd4b" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
-        </div>
-      </div>
+      <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
     </section>
     <!-- 장바구니 -->
     <section id="cart-section" class="page-section hidden">
@@ -436,6 +392,37 @@
       // 모바일 메뉴 닫기(모바일 UX)
       var mobileMenu = document.getElementById('mobile-menu');
       if (mobileMenu) mobileMenu.classList.add('hidden');
+      // 상품 섹션 진입 시 상품 목록 로드
+      if (page === 'products') loadProducts();
+    }
+    // 상품 목록 동적 로딩
+    const API_BASE_URL = 'https://hallowed-hulking-scooter.glitch.me/api';
+    async function loadProducts() {
+      const grid = document.getElementById('products-grid');
+      if (!grid) return;
+      grid.innerHTML = '<div class="col-span-full text-center text-gray-400">상품을 불러오는 중...</div>';
+      try {
+        const res = await fetch(`${API_BASE_URL}/products`);
+        const products = await res.json();
+        if (!Array.isArray(products) || products.length === 0) {
+          grid.innerHTML = '<div class="col-span-full text-center text-gray-400">등록된 상품이 없습니다.</div>';
+          return;
+        }
+        grid.innerHTML = '';
+        products.forEach(product => {
+          const card = document.createElement('div');
+          card.className = 'product-card bg-white rounded-lg shadow p-4 flex flex-col items-center';
+          card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" class="w-24 h-24 object-contain mb-3" loading="lazy">
+            <h3 class="text-lg font-semibold text-gray-800 mb-1">${product.name}</h3>
+            <p class="text-blue-700 font-bold mb-2">${product.price}</p>
+            ${product.link ? `<a href="${product.link}" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>` : ''}
+          `;
+          grid.appendChild(card);
+        });
+      } catch (e) {
+        grid.innerHTML = '<div class="col-span-full text-center text-red-400">상품 목록을 불러올 수 없습니다.</div>';
+      }
     }
     // --- 모바일 메뉴(햄버거) 토글 및 메뉴 클릭 시 닫힘 ---
     document.addEventListener('DOMContentLoaded', function() {

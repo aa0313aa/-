@@ -34,6 +34,17 @@ db.serialize(() => {
   db.run(`ALTER TABLE users ADD COLUMN birth TEXT`, () => {});
   db.run(`ALTER TABLE users ADD COLUMN contact TEXT`, () => {});
   db.run(`ALTER TABLE users ADD COLUMN email TEXT`, () => {});
+  // [기프트샵 상품 관리] products 테이블 생성
+  // id, name, image, price, link
+  // 최초 1회만 생성됨
+  // (이미 있으면 무시)
+  db.run(`CREATE TABLE IF NOT EXISTS products (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    image TEXT,
+    price TEXT,
+    link TEXT
+  )`);
 });
 
 // 글 목록 (비공개글은 본인 또는 관리자만 볼 수 있도록)
@@ -291,6 +302,47 @@ app.delete('/api/admin/users/:id', (req, res) => {
   const adminId = req.query.admin_id || '';
   if (adminId !== 'admin') return res.status(403).json({ error: '관리자 권한 필요' });
   db.run('DELETE FROM users WHERE id = ?', [req.params.id], function(err) {
+    if (err) return res.status(500).json({ error: 'DB error' });
+    res.json({ success: true });
+  });
+});
+
+// 상품 목록 조회
+app.get('/api/products', (req, res) => {
+  db.all('SELECT * FROM products ORDER BY id DESC', [], (err, rows) => {
+    if (err) return res.status(500).json({ error: 'DB error' });
+    res.json(rows);
+  });
+});
+
+// 상품 추가
+app.post('/api/products', (req, res) => {
+  const { name, image, price, link } = req.body;
+  if (!name || !image || !price) return res.status(400).json({ error: '필수 항목 누락' });
+  db.run('INSERT INTO products (name, image, price, link) VALUES (?, ?, ?, ?)',
+    [name, image, price, link],
+    function(err) {
+      if (err) return res.status(500).json({ error: 'DB error' });
+      res.json({ id: this.lastID });
+    }
+  );
+});
+
+// 상품 수정
+app.put('/api/products/:id', (req, res) => {
+  const { name, image, price, link } = req.body;
+  db.run('UPDATE products SET name = ?, image = ?, price = ?, link = ? WHERE id = ?',
+    [name, image, price, link, req.params.id],
+    function(err) {
+      if (err) return res.status(500).json({ error: 'DB error' });
+      res.json({ success: true });
+    }
+  );
+});
+
+// 상품 삭제
+app.delete('/api/products/:id', (req, res) => {
+  db.run('DELETE FROM products WHERE id = ?', [req.params.id], function(err) {
     if (err) return res.status(500).json({ error: 'DB error' });
     res.json({ success: true });
   });

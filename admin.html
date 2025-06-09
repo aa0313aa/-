@@ -125,6 +125,29 @@
           <p>회원이 없습니다.</p>
         </div>
       </section>
+
+      <section id="product-management-section" class="bg-white shadow sm:rounded-lg p-6 mt-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">상품 관리</h2>
+        <form id="add-product-form" class="flex flex-wrap gap-2 mb-4">
+          <input type="text" id="product-name" placeholder="상품명" class="border rounded p-2 flex-1 min-w-[120px]">
+          <input type="text" id="product-image" placeholder="이미지 경로 (예: img/Starbucks.png)" class="border rounded p-2 flex-1 min-w-[180px]">
+          <input type="text" id="product-price" placeholder="가격 (예: 50,000원)" class="border rounded p-2 flex-1 min-w-[100px]">
+          <input type="text" id="product-link" placeholder="구매링크(선택)" class="border rounded p-2 flex-1 min-w-[180px]">
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">상품 추가</button>
+        </form>
+        <div id="product-add-error" class="text-red-500 text-sm mb-2 hidden"></div>
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200 admin-table">
+            <thead class="bg-gray-50">
+              <tr>
+                <th>ID</th><th>상품명</th><th>이미지</th><th>가격</th><th>구매링크</th><th>작업</th>
+              </tr>
+            </thead>
+            <tbody id="admin-product-list" class="bg-white divide-y divide-gray-200"></tbody>
+          </table>
+        </div>
+        <div id="admin-product-empty" class="text-gray-500 text-center py-8 hidden"><p>등록된 상품이 없습니다.</p></div>
+      </section>
     </div>
 
     <div id="edit-post-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100] hidden p-4">
@@ -231,6 +254,7 @@
         adminLogoutBtn.classList.remove('hidden');
         loadAllPostsForAdmin();
         loadAllUsersForAdmin(); // 회원 목록도 함께 불러오기
+        loadAllProducts(); // 상품 목록도 불러오기
       } else {
         adminLoginSection.classList.remove('hidden');
         adminDashboard.classList.add('hidden');
@@ -593,9 +617,114 @@
       };
     }
 
-    // 페이지 로드 시 실행
-    document.addEventListener('DOMContentLoaded', function() {
+    // --- 상품 관리 로직 ---
+    async function fetchAllProducts() {
+      try {
+        const res = await fetch(`${API_BASE_URL}/products`);
+        if (!res.ok) return [];
+        return await res.json();
+      } catch (e) { return []; }
+    }
+    function renderAdminProductList(products) {
+      const listEl = document.getElementById('admin-product-list');
+      const emptyEl = document.getElementById('admin-product-empty');
+      if (!listEl || !emptyEl) return;
+      listEl.innerHTML = '';
+      if (!products || products.length === 0) {
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+      emptyEl.classList.add('hidden');
+      products.forEach(product => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${product.id}</td>
+          <td><input type="text" value="${product.name}" class="border rounded p-1 w-32 admin-edit-product-name"></td>
+          <td><input type="text" value="${product.image}" class="border rounded p-1 w-40 admin-edit-product-image"></td>
+          <td><input type="text" value="${product.price}" class="border rounded p-1 w-20 admin-edit-product-price"></td>
+          <td><input type="text" value="${product.link || ''}" class="border rounded p-1 w-40 admin-edit-product-link"></td>
+          <td class="space-x-2">
+            <button class="text-blue-600 hover:text-blue-900 text-sm admin-save-product-btn" data-id="${product.id}">저장</button>
+            <button class="text-red-600 hover:text-red-900 text-sm admin-delete-product-btn" data-id="${product.id}">삭제</button>
+          </td>
+        `;
+        listEl.appendChild(tr);
+      });
+      // 저장 버튼 이벤트
+      document.querySelectorAll('.admin-save-product-btn').forEach(btn => {
+        btn.addEventListener('click', async function() {
+          const id = this.dataset.id;
+          const tr = this.closest('tr');
+          const name = tr.querySelector('.admin-edit-product-name').value.trim();
+          const image = tr.querySelector('.admin-edit-product-image').value.trim();
+          const price = tr.querySelector('.admin-edit-product-price').value.trim();
+          const link = tr.querySelector('.admin-edit-product-link').value.trim();
+          if (!name || !image || !price) { alert('필수 항목 누락'); return; }
+          const res = await fetch(`${API_BASE_URL}/products/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, image, price, link })
+          });
+          const result = await res.json();
+          if (result.success) { alert('저장됨'); loadAllProducts(); }
+          else alert(result.error || '저장 실패');
+        });
+      });
+      // 삭제 버튼 이벤트
+      document.querySelectorAll('.admin-delete-product-btn').forEach(btn => {
+        btn.addEventListener('click', async function() {
+          const id = this.dataset.id;
+          if (!confirm('정말 삭제하시겠습니까?')) return;
+          const res = await fetch(`${API_BASE_URL}/products/${id}`, { method: 'DELETE' });
+          const result = await res.json();
+          if (result.success) { alert('삭제됨'); loadAllProducts(); }
+          else alert(result.error || '삭제 실패');
+        });
+      });
+    }
+    async function loadAllProducts() {
+      const products = await fetchAllProducts();
+      renderAdminProductList(products);
+    }
+    // 상품 추가 폼 이벤트
+    const addProductForm = document.getElementById('add-product-form');
+    if (addProductForm) {
+      addProductForm.onsubmit = async function(e) {
+        e.preventDefault();
+        const name = document.getElementById('product-name').value.trim();
+        const image = document.getElementById('product-image').value.trim();
+        const price = document.getElementById('product-price').value.trim();
+        const link = document.getElementById('product-link').value.trim();
+        const errorDiv = document.getElementById('product-add-error');
+        errorDiv.classList.add('hidden');
+        if (!name || !image || !price) {
+          errorDiv.textContent = '상품명, 이미지, 가격은 필수입니다.';
+          errorDiv.classList.remove('hidden');
+          return;
+        }
+        const res = await fetch(`${API_BASE_URL}/products`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, image, price, link })
+        });
+        const result = await res.json();
+        if (result.id) {
+          addProductForm.reset();
+          loadAllProducts();
+        } else {
+          errorDiv.textContent = result.error || '상품 추가 실패';
+          errorDiv.classList.remove('hidden');
+        }
+      };
+    }
+    // 관리자 로그인 시 상품 목록도 불러오기
+    function updateAdminUIWithProducts() {
       updateAdminUI();
+      if (isAdminLoggedIn()) loadAllProducts();
+    }
+    // 페이지 로드 시 실행 (상품도)
+    document.addEventListener('DOMContentLoaded', function() {
+      updateAdminUIWithProducts();
     });
   </script>
 </body>
