@@ -6,6 +6,19 @@
   <title>내 정보 | 기프트샵 커뮤니티</title>
   <link rel="stylesheet" href="https://cdn.tailwindcss.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="canonical" href="http://localhost:4000/myinfo.html">
+  <meta property="og:url" content="http://localhost:4000/myinfo.html">
+  <meta property="og:image" content="http://localhost:4000/img/Starbucks.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "기프트샵 커뮤니티 마이페이지",
+    "url": "http://localhost:4000/myinfo.html",
+    "description": "기프트샵 커뮤니티 마이페이지입니다.",
+    "inLanguage": "ko-KR"
+  }
+  </script>
   <style>
     body { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
     .glass {
@@ -83,7 +96,7 @@
     </div>
   </main>
   <script>
-    const API_BASE_URL = 'https://hallowed-hulking-scooter.glitch.me/api';
+    const API_BASE_URL = 'http://localhost:4000/api';
     const nickname = localStorage.getItem('giftshop_community_nickname');
     if (!nickname) {
       alert('로그인이 필요합니다.');

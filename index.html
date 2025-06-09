@@ -61,101 +61,56 @@
     </div>
   </nav>
   <main id="main-content" class="flex-1 max-w-5xl mx-auto w-full px-4 py-8" role="main">
-    <!-- 안내 버튼 영역 -->
     <!-- 안내 버튼 영역 (모바일 가로 스크롤 개선) -->
     <div class="overflow-x-auto -mx-4 px-4 mb-8">
       <ul class="flex flex-nowrap gap-3 w-max min-w-full whitespace-nowrap">
-        <li class="inline-block min-w-[120px]"><a href="index.html" class="bg-blue-50 text-blue-700 font-semibold px-4 py-2 rounded hover:bg-blue-100 border border-blue-200 transition" aria-current="page" onclick="showPage('products'); return false;">기프트샵 홈</a></li>
-        <li class="inline-block min-w-[120px]"><a href="모빌.html" class="bg-cyan-50 text-cyan-700 font-semibold px-4 py-2 rounded hover:bg-cyan-100 border border-cyan-200 transition" onclick="window.open('모빌.html','_blank'); return false;">모빌카드 안내</a></li>
-        <li class="inline-block min-w-[120px]"><a href="네이버.html" class="bg-green-50 text-green-700 font-semibold px-4 py-2 rounded hover:bg-green-100 border border-green-200 transition" onclick="window.open('네이버.html','_blank'); return false;">네이버페이 안내</a></li>
-        <li class="inline-block min-w-[120px]"><a href="토스.html" class="bg-indigo-50 text-indigo-700 font-semibold px-4 py-2 rounded hover:bg-indigo-100 border border-indigo-200 transition" onclick="window.open('토스.html','_blank'); return false;">토스후불결제 안내</a></li>
-        <li class="inline-block min-w-[120px]"><a href="머니트리.html" class="bg-orange-50 text-orange-700 font-semibold px-4 py-2 rounded hover:bg-orange-100 border border-orange-200 transition" onclick="window.open('머니트리.html','_blank'); return false;">머니트리 안내</a></li>
+        <li class="inline-block min-w-[120px]"><a href="#products-section" class="bg-blue-50 text-blue-700 font-semibold px-4 py-2 rounded hover:bg-blue-100 border border-blue-200 transition" aria-current="page" onclick="showPage('products'); return false;">기프트샵 홈</a></li>
+        <li class="inline-block min-w-[120px]"><a href="모빌.html" class="bg-cyan-50 text-cyan-700 font-semibold px-4 py-2 rounded hover:bg-cyan-100 border border-cyan-200 transition" target="_blank">모빌카드 안내</a></li>
+        <li class="inline-block min-w-[120px]"><a href="네이버.html" class="bg-green-50 text-green-700 font-semibold px-4 py-2 rounded hover:bg-green-100 border border-green-200 transition" target="_blank">네이버페이 안내</a></li>
+        <li class="inline-block min-w-[120px]"><a href="토스.html" class="bg-indigo-50 text-indigo-700 font-semibold px-4 py-2 rounded hover:bg-indigo-100 border border-indigo-200 transition" target="_blank">토스후불결제 안내</a></li>
+        <li class="inline-block min-w-[120px]"><a href="머니트리.html" class="bg-orange-50 text-orange-700 font-semibold px-4 py-2 rounded hover:bg-orange-100 border border-orange-200 transition" target="_blank">머니트리 안내</a></li>
       </ul>
     </div>
-    <!-- 광고 배너 (좌/우) -->
-    <!--
-    <div class="hidden lg:block fixed left-0 top-32 z-40 space-y-4">
-      <a href="https://smartstore.naver.com/sk6070" target="_blank">
-        <img src="img/ad_left.png" alt="광고배너1" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://현금화.store" target="_blank">
-        <img src="img/ad_left2.png" alt="현금화.store" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://pay24.store/" target="_blank">
-        <img src="img/ad_left3.png" alt="pay24.store" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://sites.google.com/view/k090912k/" target="_blank">
-        <img src="img/ad_left4.png" alt="구글사이트" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://aa0313.github.io/-/" target="_blank">
-        <img src="img/ad_left5.png" alt="깃허브1" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://aa0313.github.io/-/21.html" target="_blank">
-        <img src="img/ad_left6.png" alt="깃허브2" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://cardcashing.kr" target="_blank">
-        <img src="img/ad_left7.png" alt="cardcashing.kr" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://cardcashing.shop" target="_blank">
-        <img src="img/ad_left8.png" alt="cardcashing.shop" class="w-40 rounded-xl shadow-lg">
-      </a>
-    </div>
-    <div class="hidden lg:block fixed right-0 top-32 z-40 space-y-4">
-      <a href="https://smartstore.naver.com/sk6070" target="_blank">
-        <img src="img/ad_right.png" alt="광고배너1" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://현금화.store" target="_blank">
-        <img src="img/ad_right2.png" alt="현금화.store" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://pay24.store/" target="_blank">
-        <img src="img/ad_right3.png" alt="pay24.store" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://sites.google.com/view/k090912k/" target="_blank">
-        <img src="img/ad_right4.png" alt="구글사이트" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://aa0313.github.io/-/" target="_blank">
-        <img src="img/ad_right5.png" alt="깃허브1" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://aa0313.github.io/-/21.html" target="_blank">
-        <img src="img/ad_right6.png" alt="깃허브2" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://cardcashing.kr" target="_blank">
-        <img src="img/ad_right7.png" alt="cardcashing.kr" class="w-40 rounded-xl shadow-lg">
-      </a>
-      <a href="https://cardcashing.shop" target="_blank">
-        <img src="img/ad_right8.png" alt="cardcashing.shop" class="w-40 rounded-xl shadow-lg">
-      </a>
-    </div>
-    -->
-    <!-- 홈 -->
-    <section id="home-section" class="page-section">
-      <div class="text-center mb-10">
-        <h1 class="text-4xl font-extrabold text-blue-700 mb-2">휴대폰결제로 상품권 구매정보사이트</h1>
-        <p class="text-gray-600 text-lg mb-6">휴대폰결제로 상품권 구매정보사이트</p>
-        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 inline-block mb-4">
-          <p class="text-base text-gray-700 font-bold">휴대폰결제 네이버포인트 카드결제 상품권</p>
-          <p class="text-base text-gray-700 font-bold">휴대폰소액결제로 상품권 구매방법</p>
-          <p class="text-base text-gray-700 font-bold">휴대폰결제로 소액환전방법</p>
-          <p class="text-base text-gray-700 font-bold">휴대폰소액결제 충전후 계좌출금</p>
-          <p class="text-base text-gray-700 font-bold">모빌카드 휴대폰소액결제 충전후 상품권 구매</p>
-        </div>
-      </div>
-    </section>
     <!-- 상품 리스트 -->
     <section id="products-section" class="page-section">
       <h2 class="text-2xl font-bold text-gray-800 mb-6">전체 상품</h2>
       <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- 상품 카드: 필요 없는 상품/중복/테스트 상품 제거, 최신 정보만 유지 -->
         <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
           <img src="img/Starbucks.png" alt="스타벅스 5만원권" class="w-24 h-24 object-contain mb-3" loading="lazy">
           <h3 class="text-lg font-semibold text-gray-800 mb-1">스타벅스 5만원권</h3>
           <p class="text-blue-700 font-bold mb-2">50,000원</p>
-          <a href="https://smartstore.naver.com/sk6070/products/1234567890" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+          <a href="https://mkt.shopping.naver.com/link/683d9d1a881c5b310ec4af6c" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
         </div>
         <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/cu.png" alt="CU 모바일상품권 1만원" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">CU 모바일상품권 1만원</h3>
+          <img src="img/Starbucks.png" alt="스타벅스 10만원권" class="w-24 h-24 object-contain mb-3" loading="lazy">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">스타벅스 10만원권</h3>
+          <p class="text-blue-700 font-bold mb-2">100,000원</p>
+          <a href="https://mkt.shopping.naver.com/link/6846fb228dd273404b732515" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/cu.png" alt="컬쳐랜드 1만원" class="w-24 h-24 object-contain mb-3" loading="lazy">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드 1만원</h3>
           <p class="text-blue-700 font-bold mb-2">10,000원</p>
-          <a href="https://smartstore.naver.com/sk6070/products/2345678901" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+          <a href="https://mkt.shopping.naver.com/link/683d9d1ad20fbf73c9d596bc" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/cu.png" alt="컬쳐랜드 2만원" class="w-24 h-24 object-contain mb-3" loading="lazy">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드 2만원</h3>
+          <p class="text-blue-700 font-bold mb-2">20,000원</p>
+          <a href="https://mkt.shopping.naver.com/link/683d9d1ae625370ec15afd4b" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/cu.png" alt="컬쳐랜드 5만원" class="w-24 h-24 object-contain mb-3" loading="lazy">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드 5만원</h3>
+          <p class="text-blue-700 font-bold mb-2">50,000원</p>
+          <a href="https://mkt.shopping.naver.com/link/6846fb22b7c8c573b306041d" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/신세계상품.png" alt="신세계상품권 3만원" class="w-24 h-24 object-contain mb-3" loading="lazy">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">신세계상품권 3만원</h3>
+          <p class="text-blue-700 font-bold mb-2">30,000원</p>
+          <a href="https://mkt.shopping.naver.com/link/6846fb22d20fbf73c9d5e745" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
         </div>
         <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
           <img src="img/신세계상품.png" alt="신세계상품권 5만원" class="w-24 h-24 object-contain mb-3" loading="lazy">
@@ -167,13 +122,25 @@
           <img src="img/롯데5만원.JPG" alt="롯데상품권 5만원" class="w-24 h-24 object-contain mb-3" loading="lazy">
           <h3 class="text-lg font-semibold text-gray-800 mb-1">롯데상품권 5만원</h3>
           <p class="text-blue-700 font-bold mb-2">50,000원</p>
-          <a href="https://smartstore.naver.com/sk6070/products/4567890123" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+          <a href="https://mkt.shopping.naver.com/link/6846fb226e038273ac2dce2a" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/card__teen.png" alt="틴캐시 5만원" class="w-24 h-24 object-contain mb-3" loading="lazy">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">틴캐시 5만원</h3>
+          <p class="text-blue-700 font-bold mb-2">50,000원</p>
+          <a href="https://mkt.shopping.naver.com/link/6846fb229afe25432201380d" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
         </div>
         <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
           <img src="img/card__teen.png" alt="틴캐시 1만원" class="w-24 h-24 object-contain mb-3" loading="lazy">
           <h3 class="text-lg font-semibold text-gray-800 mb-1">틴캐시 1만원</h3>
           <p class="text-blue-700 font-bold mb-2">10,000원</p>
           <a href="https://smartstore.naver.com/sk6070/products/5678901234" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+        </div>
+        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+          <img src="img/cu.png" alt="구글플레이 1만원" class="w-24 h-24 object-contain mb-3" loading="lazy">
+          <h3 class="text-lg font-semibold text-gray-800 mb-1">구글플레이 1만원</h3>
+          <p class="text-blue-700 font-bold mb-2">10,000원</p>
+          <a href="https://mkt.shopping.naver.com/link/6846fb22b7c8c573b306041e" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
         </div>
       </div>
     </section>
@@ -340,41 +307,7 @@
           </div>
         </div>
       </section>
-      <script>
-        // FAQ 탭+아코디언 동작 (index.html 내 중복 방지용)
-        document.addEventListener('DOMContentLoaded', function () {
-          const tabsContainer = document.getElementById('faq-tabs-container-index');
-          if (!tabsContainer) return;
-          const tabButtons = tabsContainer.querySelectorAll('.tab-item-faq');
-          const tabContents = document.querySelectorAll('.tab-content-faq');
-          let currentVisibleTabId = null;
-          function showTab(tabIdToShow) {
-            tabContents.forEach(function(content){ content.classList.add('hidden'); });
-            var selectedContent = document.getElementById(tabIdToShow);
-            if (selectedContent) {
-              selectedContent.classList.remove('hidden');
-              currentVisibleTabId = tabIdToShow;
-            }
-            tabButtons.forEach(function(button){
-              button.classList.remove('active-tab-faq');
-              button.classList.add('text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-800');
-            });
-            var activeButton = tabsContainer.querySelector('[data-tab="'+tabIdToShow+'"]');
-            if (activeButton) {
-              activeButton.classList.add('active-tab-faq');
-              activeButton.classList.remove('text-gray-700', 'hover:bg-blue-100', 'hover:text-blue-800');
-            }
-          }
-          tabsContainer.addEventListener('click', function(e) {
-            if (!e.target.classList.contains('tab-item-faq')) return;
-            var tabId = e.target.getAttribute('data-tab');
-            showTab(tabId);
-          });
-          showTab('tab-guide-index');
-        });
-    </script>
     </section>
-    <!-- 후불결제방법 안내 섹션 추가 -->
     <section id="postpay-section" class="page-section hidden">
       <h2 class="text-2xl font-bold text-gray-800 mb-6">후불결제방법 안내</h2>
       <div class="bg-white rounded-lg shadow p-6 text-gray-800 text-lg leading-relaxed">
@@ -402,63 +335,26 @@
     </div>
   </footer>
   <script>
-    // --- 네비게이션(상단바) section 전환 함수 ---
+    // section 전환 함수 (불필요한 동적 상품 JS 완전 제거)
     function showPage(page) {
-      // 모든 section 숨김
       document.querySelectorAll('.page-section').forEach(function(sec){
         sec.classList.add('hidden');
       });
-      // 해당 section만 표시
       var id = page + '-section';
       var el = document.getElementById(id);
       if (el) el.classList.remove('hidden');
-      // 모바일 메뉴 닫기(모바일 UX)
       var mobileMenu = document.getElementById('mobile-menu');
       if (mobileMenu) mobileMenu.classList.add('hidden');
-      // 상품 섹션 진입 시 상품 목록 로드
-      if (page === 'products') loadProducts();
     }
-    // 상품 목록 동적 로딩
-    const API_BASE_URL = 'http://localhost:4000/api';
-    async function loadProducts() {
-      const grid = document.getElementById('products-grid');
-      if (!grid) return;
-      grid.innerHTML = '<div class="col-span-full text-center text-gray-400">상품을 불러오는 중...</div>';
-      try {
-        const res = await fetch(`${API_BASE_URL}/products`);
-        const products = await res.json();
-        if (!Array.isArray(products) || products.length === 0) {
-          grid.innerHTML = '<div class="col-span-full text-center text-gray-400">등록된 상품이 없습니다.</div>';
-          return;
-        }
-        grid.innerHTML = '';
-        products.forEach(product => {
-          const card = document.createElement('div');
-          card.className = 'product-card bg-white rounded-lg shadow p-4 flex flex-col items-center';
-          card.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" class="w-24 h-24 object-contain mb-3" loading="lazy">
-            <h3 class="text-lg font-semibold text-gray-800 mb-1">${product.name}</h3>
-            <p class="text-blue-700 font-bold mb-2">${product.price}</p>
-            ${product.link ? `<a href="${product.link}" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>` : ''}
-          `;
-          grid.appendChild(card);
-        });
-      } catch (e) {
-        grid.innerHTML = '<div class="col-span-full text-center text-red-400">상품 목록을 불러올 수 없습니다.</div>';
-      }
-    }
-    // --- 모바일 메뉴(햄버거) 토글 및 메뉴 클릭 시 닫힘 ---
+    // 모바일 메뉴 토글 및 닫힘
     document.addEventListener('DOMContentLoaded', function() {
-      // 첫 진입 시 홈만 보이기
       showPage('home');
-      // 모바일 메뉴 토글
       var mobileMenuBtn = document.getElementById('mobile-menu-button');
       var mobileMenu = document.getElementById('mobile-menu');
       if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener('click', function() {
           mobileMenu.classList.toggle('hidden');
         });
-        // 모바일 메뉴 내 항목 클릭 시 닫기
         mobileMenu.querySelectorAll('a').forEach(function(el) {
           el.addEventListener('click', function() {
             mobileMenu.classList.add('hidden');
