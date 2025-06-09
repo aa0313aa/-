@@ -48,12 +48,7 @@
         <a href="#products-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('products'); return false;">기프트샵</a>
         <a href="#cart-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('cart'); return false;">휴대폰결제 구매방법</a>
         <a href="#postpay-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('postpay'); return false;">후불결제방법</a>
-        <a href="board.html" class="text-gray-700 hover:text-blue-700">자유게시판</a>
       </nav>
-      <div class="flex items-center space-x-4">
-        <button id="login-btn" class="text-gray-700 hover:text-blue-700" onclick="handleLogin(); return false;">로그인</button>
-        <button id="logout-btn" class="text-gray-700 hover:text-blue-700 hidden" onclick="handleLogout(); return false;">로그아웃</button>
-      </div>
     </div>
   </header>
   <!-- 모바일 내비게이션 -->
@@ -71,9 +66,6 @@
       <a href="#products-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('products'); return false;">기프트샵</a>
       <a href="#cart-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('cart'); return false;">휴대폰결제 구매방법</a>
       <a href="#postpay-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('postpay'); return false;">후불결제방법</a>
-      <a href="board.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">자유게시판</a>
-      <button id="mobile-login-btn" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="handleLogin(); return false;">로그인</button>
-      <button id="mobile-logout-btn" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hidden" onclick="handleLogout(); return false;">로그아웃</button>
     </div>
   </nav>
   <main id="main-content" class="flex-1 max-w-5xl mx-auto w-full px-4 py-8" role="main">
@@ -86,7 +78,6 @@
         <li class="inline-block min-w-[120px]"><a href="네이버.html" class="bg-green-50 text-green-700 font-semibold px-4 py-2 rounded hover:bg-green-100 border border-green-200 transition" onclick="window.open('네이버.html','_blank'); return false;">네이버페이 안내</a></li>
         <li class="inline-block min-w-[120px]"><a href="토스.html" class="bg-indigo-50 text-indigo-700 font-semibold px-4 py-2 rounded hover:bg-indigo-100 border border-indigo-200 transition" onclick="window.open('토스.html','_blank'); return false;">토스후불결제 안내</a></li>
         <li class="inline-block min-w-[120px]"><a href="머니트리.html" class="bg-orange-50 text-orange-700 font-semibold px-4 py-2 rounded hover:bg-orange-100 border border-orange-200 transition" onclick="window.open('머니트리.html','_blank'); return false;">머니트리 안내</a></li>
-        <li class="inline-block min-w-[120px]"><a href="board.html" class="bg-pink-50 text-pink-700 font-semibold px-4 py-2 rounded hover:bg-pink-100 border border-pink-200 transition" onclick="showPage('board'); return false;">자유게시판</a></li>
       </ul>
     </div>
     <!-- 광고 배너 (좌/우) -->
@@ -164,64 +155,43 @@
       <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <!-- 데모용 인기 상품 -->
         <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <picture>
-            <source srcset="img/Starbucks.webp" type="image/webp">
-            <img src="img/Starbucks.png" alt="스타벅스 카드" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          </picture>
+          <img src="img/Starbucks.png" alt="스타벅스 카드" class="w-24 h-24 object-contain mb-3" loading="lazy">
           <h3 class="text-lg font-semibold text-gray-800 mb-1">스타벅스 카드 5만원권</h3>
           <p class="text-blue-700 font-bold mb-2">50,000원</p>
           <a href="https://smartstore.naver.com/sk6070" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
         </div>
         <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <picture>
-            <source srcset="img/롯데5만원.webp" type="image/webp">
-            <img src="img/롯데5만원.JPG" alt="롯데상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          </picture>
+          <img src="img/롯데5만원.JPG" alt="롯데상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
           <h3 class="text-lg font-semibold text-gray-800 mb-1">롯데상품권 5만원권</h3>
           <p class="text-blue-700 font-bold mb-2">50,000원</p>
           <a href="https://mkt.shopping.naver.com/link/6812c23662fffc0a4a49fd08" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
         </div>
         <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <picture>
-            <source srcset="img/신세계상품.webp" type="image/webp">
-            <img src="img/신세계상품.png" alt="신세계상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          </picture>
+          <img src="img/신세계상품.png" alt="신세계상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
           <h3 class="text-lg font-semibold text-gray-800 mb-1">신세계상품권 5만원권</h3>
           <p class="text-blue-700 font-bold mb-2">50,000원</p>
           <a href="https://현금화.store" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
         </div>
         <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <picture>
-            <source srcset="img/card__teen.webp" type="image/webp">
-            <img src="img/card__teen.png" alt="틴캐시" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          </picture>
+          <img src="img/card__teen.png" alt="틴캐시" class="w-24 h-24 object-contain mb-3" loading="lazy">
           <h3 class="text-lg font-semibold text-gray-800 mb-1">틴캐시 5만원권</h3>
           <p class="text-blue-700 font-bold mb-2">50,000원</p>
           <a href="https://smartstore.naver.com/4989z/products/11594192295" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
         </div>
         <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <picture>
-            <source srcset="img/dosupng.webp" type="image/webp">
-            <img src="img/dosupng.png" alt="도서문화상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          </picture>
+          <img src="img/dosupng.png" alt="도서문화상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
           <h3 class="text-lg font-semibold text-gray-800 mb-1">도서문화상품권 1만원권</h3>
           <p class="text-blue-700 font-bold mb-2">10,000원</p>
-          <a href="https://cardcashing.shop" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+          <!-- 구매하기 버튼 제거됨 -->
         </div>
         <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <picture>
-            <source srcset="img/cu.webp" type="image/webp">
-            <img src="img/cu.png" alt="컬쳐랜드상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          </picture>
+          <img src="img/cu.png" alt="컬쳐랜드상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
           <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드상품권 1만원권</h3>
           <p class="text-blue-700 font-bold mb-2">10,000원</p>
           <a href="https://mkt.shopping.naver.com/link/683d9d1ad20fbf73c9d596bc" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
         </div>
         <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <picture>
-            <source srcset="img/cu.webp" type="image/webp">
-            <img src="img/cu.png" alt="컬쳐랜드상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
-          </picture>
+          <img src="img/cu.png" alt="컬쳐랜드상품권" class="w-24 h-24 object-contain mb-3" loading="lazy">
           <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드상품권 2만원권</h3>
           <p class="text-blue-700 font-bold mb-2">20,000원</p>
           <a href="https://mkt.shopping.naver.com/link/683d9d1ae625370ec15afd4b" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
@@ -445,187 +415,6 @@
         </div>
       </div>
     </section>
-    <!-- 게시판(방명록/문의/자유게시판) 섹션 활성화 -->
-    <section id="board-section" class="page-section hidden">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">게시판(방명록/문의)</h2>
-      <form id="board-form" class="bg-white rounded-lg shadow p-4 mb-6 flex flex-col gap-2">
-        <input type="text" id="board-writer" class="border rounded px-3 py-2" placeholder="이름(닉네임)" maxlength="20" required>
-        <textarea id="board-content" class="border rounded px-3 py-2 resize-none" rows="3" placeholder="내용을 입력하세요" maxlength="300" required></textarea>
-        <label class="flex items-center gap-2 text-sm">
-          <input type="checkbox" id="board-private" class="form-checkbox"> 비공개(관리자만 보기)
-        </label>
-        <div class="flex gap-2 self-end">
-          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">글 등록</button>
-          <button type="button" id="board-cancel-edit" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 hidden">취소</button>
-        </div>
-      </form>
-      <div id="board-login-alert" class="text-center text-red-500 mb-4 hidden">로그인 후 글쓰기가 가능합니다.</div>
-      <ul id="board-list" class="space-y-4"></ul>
-      <div id="board-empty" class="text-gray-400 text-center mt-6">아직 등록된 글이 없습니다.</div>
-    </section>
-    <script>
-      // 인증 상태 관련 함수 추가 (board.html과 동일하게)
-      function isLoggedIn() {
-        return !!localStorage.getItem('giftshop_community_token') && !!localStorage.getItem('giftshop_community_nickname');
-      }
-      function getLoginNickname() {
-        return localStorage.getItem('giftshop_community_nickname') || '';
-      }
-      function getLoginToken() {
-        return localStorage.getItem('giftshop_community_token') || '';
-      }
-      // 간이 로그인/로그아웃 함수 (board.html과 연동)
-      function handleLogin() {
-        const nickname = prompt('닉네임을 입력하세요');
-        if (!nickname) return;
-        const password = prompt('비밀번호를 입력하세요');
-        if (!password) return;
-        fetch('https://hallowed-hulking-scooter.glitch.me/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nickname, password })
-        })
-          .then(res => res.json())
-          .then(data => {
-            if (data.success && data.token) {
-              localStorage.setItem('giftshop_community_token', data.token);
-              localStorage.setItem('giftshop_community_nickname', data.nickname);
-              alert('로그인 성공!');
-              updateBoardFeatures();
-            } else {
-              alert(data.error || '로그인 실패');
-            }
-          });
-      }
-      function handleLogout() {
-        if (confirm('로그아웃 하시겠습니까?')) {
-          localStorage.removeItem('giftshop_community_token');
-          localStorage.removeItem('giftshop_community_nickname');
-          updateBoardFeatures();
-        }
-      }
-      // 게시판 서버 연동 구현
-      let editPostId = null; // 수정 중인 글 id
-      async function fetchBoardList() {
-        const my_id = getLoginNickname();
-        try {
-          const res = await fetch('https://hallowed-hulking-scooter.glitch.me/api/posts?my_id=' + encodeURIComponent(my_id));
-          if (!res.ok) {
-            const text = await res.text();
-            alert('글 목록을 불러올 수 없습니다. 서버 응답: ' + res.status + '\n' + text);
-            console.error('API 오류:', res.status, text);
-            return [];
-          }
-          return await res.json();
-        } catch (e) {
-          alert('글 목록을 불러올 수 없습니다. 네트워크 오류: ' + e.message + '\n\nAPI 서버(https://hallowed-hulking-scooter.glitch.me/api) 상태 및 네트워크 연결을 확인해주세요.');
-          console.error('fetchBoardList 네트워크 오류:', e);
-          return [];
-        }
-      }
-      async function fetchBoardWrite({writer, content, is_private}) {
-        const token = getLoginToken();
-        const res = await fetch('https://hallowed-hulking-scooter.glitch.me/api/posts', {
-          method: 'POST',
-          headers:{
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-          },
-          body: JSON.stringify({writer, content, is_private})
-        });
-        return res.ok;
-      }
-      async function fetchBoardDelete(postId) {
-        const token = getLoginToken();
-        const res = await fetch('https://hallowed-hulking-scooter.glitch.me/api/posts/' + postId, {
-          method: 'DELETE',
-          headers:{
-            'Authorization': 'Bearer ' + token
-          }
-        });
-        return res.ok;
-      }
-      // 게시판 렌더링
-      function renderBoard() {
-        const list = document.getElementById('board-list');
-        const empty = document.getElementById('board-empty');
-        fetchBoardList().then(data => {
-          const myNickname = getLoginNickname();
-          list.innerHTML = '';
-          if (!data || data.length === 0) {
-            empty.style.display = '';
-            return;
-          }
-          empty.style.display = 'none';
-          data.slice().reverse().forEach(item => {
-            // 비공개 글: 로그인 안 했거나, 내 닉네임이 없거나, 관리자가 아니면 숨김
-            if (item.is_private) {
-              if (!isLoggedIn() || getLoginNickname() !== 'admin') return;
-            }
-            const li = document.createElement('li');
-            li.className = 'bg-gray-50 border rounded-lg p-4 flex flex-col gap-1 relative';
-            let html = `<div class="flex justify-between items-center mb-1"><span class="font-semibold text-blue-700">${item.writer}</span><span class="text-xs text-gray-400">${item.date}</span></div>`;
-            if (item.is_private) html += '<div class="text-xs text-pink-500">비공개(관리자만 보기)</div>';
-            html += `<div class="text-gray-800 whitespace-pre-line">${item.content}</div>`;
-            // 본인 글 또는 관리자(admin)일 때 삭제 버튼 노출
-            if (
-              (isLoggedIn() && myNickname && item.writer === myNickname) ||
-              (isLoggedIn() && myNickname === 'admin')
-            ) {
-              html += '<div class="absolute top-2 right-2 flex gap-2">'
-                + '<button class="text-xs text-red-500 hover:underline delete-btn">삭제</button>'
-                + '</div>';
-            }
-            li.innerHTML = html;
-            // 삭제 버튼
-            const delBtn = li.querySelector('.delete-btn');
-            if (delBtn) {
-              delBtn.onclick = async function() {
-                if (confirm('정말 삭제하시겠습니까?')) {
-                  await fetchBoardDelete(item.id);
-                  renderBoard();
-                }
-              };
-            }
-            list.appendChild(li);
-          });
-        });
-      }
-      // 페이지 로드 시 게시판 렌더링
-      document.addEventListener('DOMContentLoaded', function() {
-        renderBoard();
-      });
-      // 로그인 상태에 따른 게시판 기능 제어
-      function updateBoardFeatures() {
-        const isLoggedIn = !!getLoginToken();
-        const loginBtn = document.getElementById('login-btn');
-        const logoutBtn = document.getElementById('logout-btn');
-        const mobileLoginBtn = document.getElementById('mobile-login-btn');
-        const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
-        const boardForm = document.getElementById('board-form');
-        const boardLoginAlert = document.getElementById('board-login-alert');
-        if (isLoggedIn) {
-          loginBtn.classList.add('hidden');
-          logoutBtn.classList.remove('hidden');
-          mobileLoginBtn.classList.add('hidden');
-          mobileLogoutBtn.classList.remove('hidden');
-          boardForm.classList.remove('hidden');
-          boardLoginAlert.classList.add('hidden');
-          renderBoard();
-        } else {
-          loginBtn.classList.remove('hidden');
-          logoutBtn.classList.add('hidden');
-          mobileLoginBtn.classList.remove('hidden');
-          mobileLogoutBtn.classList.add('hidden');
-          boardForm.classList.add('hidden');
-          boardLoginAlert.classList.remove('hidden');
-          document.getElementById('board-list').innerHTML = '';
-          document.getElementById('board-empty').style.display = '';
-        }
-      }
-      // 초기화
-      updateBoardFeatures();
-    </script>
   </main>
   <!-- 푸터 -->
   <footer class="bg-white border-t border-gray-200 py-4">
@@ -660,7 +449,7 @@
           mobileMenu.classList.toggle('hidden');
         });
         // 모바일 메뉴 내 항목 클릭 시 닫기
-        mobileMenu.querySelectorAll('a,button').forEach(function(el) {
+        mobileMenu.querySelectorAll('a').forEach(function(el) {
           el.addEventListener('click', function() {
             mobileMenu.classList.add('hidden');
           });

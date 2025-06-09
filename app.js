@@ -296,7 +296,7 @@ app.delete('/api/admin/users/:id', (req, res) => {
   });
 });
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`서버가 ${PORT} 포트에서 실행 중입니다.`);
+  console.log('Server started on port', PORT);
 });
