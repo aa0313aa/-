@@ -57,6 +57,19 @@
       <a href="index.html#postpay-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">후불결제방법</a>
     </div>
   </nav>
+  <!-- 좌우 고정 광고 배너 (데스크톱만, 모바일 숨김) -->
+  <div aria-label="광고 배너" class="hidden lg:block">
+    <div style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:1000;height:1400px;width:340px;display:flex;align-items:center;justify-content:center;" class="hidden xl:flex pointer-events-none">
+      <a href="https://pf.kakao.com/_SBFexb/chat" target="_blank" rel="noopener" style="display:block;pointer-events:auto;">
+        <img src="배너/배너.webp" alt="기프트샵 광고 배너" width="340" height="1400" style="max-width:100%;max-height:100%;" />
+      </a>
+    </div>
+    <div style="position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:1000;height:1400px;width:340px;display:flex;align-items:center;justify-content:center;" class="hidden xl:flex pointer-events-none">
+      <a href="https://pf.kakao.com/_SBFexb/chat" target="_blank" rel="noopener" style="display:block;pointer-events:auto;">
+        <img src="배너/배너.webp" alt="기프트샵 광고 배너" width="340" height="1400" style="max-width:100%;max-height:100%;" />
+      </a>
+    </div>
+  </div>
   <main class="flex-1 max-w-5xl mx-auto w-full px-4 py-8" role="main">
     <h1 class="text-2xl font-bold text-blue-700 mb-8">기프트샵 상품권 리스트</h1>
     <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -119,4 +132,41 @@
         <img src="img/card__teen.webp" alt="틴캐시 1만원" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
         <h3 class="text-lg font-semibold text-gray-800 mb-1">틴캐시 1만원</h3>
         <p class="text-blue-700 font-bold mb-2">10,000원</p>
-        <a href="https://smartstore.naver.com/sk6070/products/5678901234" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w
+        <a href="https://smartstore.naver.com/sk6070/products/5678901234" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-white border-t border-gray-200 py-4">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+        <div class="mb-4 md:mb-0">
+          <a href="index.html#home-section" class="text-2xl font-extrabold text-blue-700 tracking-tight" aria-label="기프트샵 홈">기프트샵 커뮤니티</a>
+        </div>
+        <div class="flex space-x-4 text-sm">
+          <a href="index.html#home-section" class="text-gray-700 hover:text-blue-700">홈</a>
+          <a href="giftshop.html" class="text-blue-700 font-bold underline">기프트샵</a>
+          <a href="index.html#cart-section" class="text-gray-700 hover:text-blue-700">휴대폰결제 구매방법</a>
+          <a href="index.html#postpay-section" class="text-gray-700 hover:text-blue-700">후불결제방법</a>
+        </div>
+      </div>
+      <div class="mt-4 border-t border-gray-200 pt-4 text-center text-xs text-gray-500">
+        <p>© 2023 기프트샵 커뮤니티. 모든 권리 보유.</p>
+        <p>본 사이트는 기프트샵 커뮤니티의 공식 사이트가 아닙니다. 상품권 구매 시 유의하시기 바랍니다.</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // 모바일 메뉴 토글
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+      var menu = document.getElementById('mobile-menu');
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        menu.classList.add('block');
+      } else {
+        menu.classList.remove('block');
+        menu.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
