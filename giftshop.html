@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기프트샵 상품권 리스트 | 기프트샵 커뮤니티</title>
+  <meta name="description" content="기프트샵 커뮤니티의 최신 상품권 리스트. 휴대폰결제, 카드결제로 스타벅스, 컬쳐랜드, 신세계, 롯데, 틴캐시, 구글플레이 상품권을 간편하게 구매하세요.">
+  <meta name="keywords" content="기프트샵, 상품권, 휴대폰결제, 소액결제, 카드결제, 스타벅스, 컬쳐랜드, 신세계, 롯데, 틴캐시, 구글플레이">
+  <link rel="canonical" href="https://현금화.site/giftshop.html">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+  <meta property="og:title" content="기프트샵 상품권 리스트 | 기프트샵 커뮤니티">
+  <meta property="og:description" content="기프트샵 커뮤니티의 최신 상품권 리스트. 휴대폰결제, 카드결제로 다양한 상품권을 간편하게 구매하세요.">
+  <meta property="og:url" content="https://현금화.site/giftshop.html">
+  <meta property="og:image" content="https://현금화.site/img/starbucks-50000-won.webp">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="기프트샵 커뮤니티">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', 'Noto Sans KR', sans-serif; }
+    .product-card { transition: box-shadow 0.2s, transform 0.2s; }
+    .product-card:hover { box-shadow: 0 8px 32px 0 rgba(37,99,235,0.13); transform: translateY(-4px) scale(1.03); border-color: #3b82f6; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- 상단 배너 및 내비게이션 (index.html과 동일) -->
+  <div id="top-banner" class="w-full bg-blue-600 text-white text-center py-3 px-2 flex items-center justify-center relative">
+    <svg class="w-5 h-5 mr-2 inline-block text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z"/></svg>
+    <span class="font-semibold">추가결제: 휴대폰결제매입 카드결제매입! <a href="https://pf.kakao.com/_SBFexb/chat" target="_blank" rel="noopener" class="underline hover:text-yellow-200 ml-1">즉시상담</a></span>
+    <button onclick="document.getElementById('top-banner').style.display='none'" class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-yellow-200 text-xl font-bold">&times;</button>
+  </div>
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50" role="banner">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html#home-section" class="text-2xl font-extrabold text-blue-700 tracking-tight" aria-label="기프트샵 홈">휴대폰결제로 상품권 구매정보사이트</a>
+      <nav class="hidden md:flex space-x-8 text-base font-medium" aria-label="주요 메뉴">
+        <a href="index.html#home-section" class="text-gray-700 hover:text-blue-700">홈</a>
+        <a href="giftshop.html" class="text-blue-700 font-bold underline">기프트샵</a>
+        <a href="index.html#cart-section" class="text-gray-700 hover:text-blue-700">휴대폰결제 구매방법</a>
+        <a href="index.html#postpay-section" class="text-gray-700 hover:text-blue-700">후불결제방법</a>
+      </nav>
+    </div>
+  </header>
+  <nav class="md:hidden bg-white border-b border-gray-200 py-2 px-4" aria-label="모바일 메뉴">
+    <div class="flex justify-between items-center">
+      <a href="index.html#home-section" class="text-xl font-bold text-blue-700">기프트샵</a>
+      <button id="mobile-menu-button" class="text-gray-700 focus:outline-none" aria-label="모바일 메뉴 열기">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden">
+      <a href="index.html#home-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">홈</a>
+      <a href="giftshop.html" class="block px-4 py-2 text-blue-700 font-bold underline">기프트샵</a>
+      <a href="index.html#cart-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">휴대폰결제 구매방법</a>
+      <a href="index.html#postpay-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">후불결제방법</a>
+    </div>
+  </nav>
+  <main class="flex-1 max-w-5xl mx-auto w-full px-4 py-8" role="main">
+    <h1 class="text-2xl font-bold text-blue-700 mb-8">기프트샵 상품권 리스트</h1>
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <!-- 상품 카드: index.html 상품 리스트 복사 -->
+      <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <img src="img/Starbucks.webp" alt="스타벅스 5만원권" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">스타벅스 5만원권</h3>
+        <p class="text-blue-700 font-bold mb-2">50,000원</p>
+        <a href="https://mkt.shopping.naver.com/link/683d9d1a881c5b310ec4af6c" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+      </div>
+      <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <img src="img/Starbucks.webp" alt="스타벅스 10만원권" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">스타벅스 10만원권</h3>
+        <p class="text-blue-700 font-bold mb-2">100,000원</p>
+        <a href="https://mkt.shopping.naver.com/link/6846fb228dd273404b732515" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+      </div>
+      <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <img src="img/cu.webp" alt="컬쳐랜드 1만원" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드 1만원</h3>
+        <p class="text-blue-700 font-bold mb-2">10,000원</p>
+        <a href="https://mkt.shopping.naver.com/link/683d9d1ad20fbf73c9d596bc" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+      </div>
+      <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <img src="img/cu1.webp" alt="컬쳐랜드 2만원" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드 2만원</h3>
+        <p class="text-blue-700 font-bold mb-2">20,000원</p>
+        <a href="https://mkt.shopping.naver.com/link/683d9d1ae625370ec15afd4b" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+      </div>
+      <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <img src="img/cu.webp" alt="컬쳐랜드 5만원" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드 5만원</h3>
+        <p class="text-blue-700 font-bold mb-2">50,000원</p>
+        <a href="https://mkt.shopping.naver.com/link/6846fb22b7c8c573b306041d" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+      </div>
+      <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <img src="img/신세계상품.webp" alt="신세계상품권 3만원" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">신세계상품권 3만원</h3>
+        <p class="text-blue-700 font-bold mb-2">30,000원</p>
+        <a href="https://mkt.shopping.naver.com/link/6846fb22d20fbf73c9d5e745" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+      </div>
+      <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <img src="img/신세계상품.webp" alt="신세계상품권 5만원" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">신세계상품권 5만원</h3>
+        <p class="text-blue-700 font-bold mb-2">50,000원</p>
+        <a href="https://smartstore.naver.com/sk6070/products/3456789012" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+      </div>
+      <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <img src="img/롯데5만원.webp" alt="롯데상품권 5만원" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">롯데상품권 5만원</h3>
+        <p class="text-blue-700 font-bold mb-2">50,000원</p>
+        <a href="https://mkt.shopping.naver.com/link/6846fb226e038273ac2dce2a" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+      </div>
+      <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <img src="img/card__teen.webp" alt="틴캐시 5만원" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">틴캐시 5만원</h3>
+        <p class="text-blue-700 font-bold mb-2">50,000원</p>
+        <a href="https://mkt.shopping.naver.com/link/6846fb229afe25432201380d" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구매하기</a>
+      </div>
+      <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
+        <img src="img/card__teen.webp" alt="틴캐시 1만원" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">틴캐시 1만원</h3>
+        <p class="text-blue-700 font-bold mb-2">10,000원</p>
+        <a href="https://smartstore.naver.com/sk6070/products/5678901234" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w
