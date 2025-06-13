@@ -51,25 +51,26 @@
     body { font-family: 'Inter', 'Noto Sans KR', sans-serif; }
     .product-card { transition: box-shadow 0.2s, transform 0.2s; }
     .product-card:hover { box-shadow: 0 8px 32px 0 rgba(37,99,235,0.13); transform: translateY(-4px) scale(1.03); border-color: #3b82f6; }
+    .page-section-visible { display: block !important; }
   </style>
   <meta name="naver-site-verification" content="5054a2160f6f27ba2549b21e0c71fd20a5096b8e" />
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
   <!-- 상단 배너(이벤트/공지/알림) -->
-  <div id="top-banner" class="w-full bg-blue-600 text-white text-center py-3 px-2 flex items-center justify-center relative">
+  <div id="top-banner" class="w-full bg-blue-600 text-white text-center py-3 px-2 flex items-center justify-center relative" style="position:static !important;">
     <svg class="w-5 h-5 mr-2 inline-block text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z"/></svg>
     <span class="font-semibold">추가결제: 휴대폰결제매입 카드결제매입! <a href="https://pf.kakao.com/_SBFexb/chat" target="_blank" rel="noopener" class="underline hover:text-yellow-200 ml-1">즉시상담</a></span>
     <button onclick="document.getElementById('top-banner').style.display='none'" class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-yellow-200 text-xl font-bold p-2 min-w-[40px] min-h-[40px]">&times;</button>
   </div>
   <!-- 상단 내비게이션 -->
-  <header class="bg-white border-b border-gray-200 sticky top-0 z-50" role="banner">
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50" role="banner" style="position:static !important;">
     <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
       <a href="#home-section" class="text-2xl font-extrabold text-blue-700 tracking-tight" aria-label="기프트샵 홈" onclick="showPage('home'); return false;">휴대폰결제로 상품권 구매정보사이트</a>
       <nav class="hidden md:flex space-x-8 text-base font-medium" aria-label="주요 메뉴">
         <a href="#home-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('home'); return false;">홈</a>
         <a href="giftshop.html" class="text-gray-700 hover:text-blue-700">기프트샵</a>
-        <a href="#cart-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('cart'); return false;">휴대폰결제 구매방법</a>
-        <a href="#postpay-section" class="text-gray-700 hover:text-blue-700" onclick="showPage('postpay'); return false;">후불결제방법</a>
+        <a href="cart.html" class="text-gray-700 hover:text-blue-700">휴대폰결제 구매방법</a>
+        <a href="postpay.html" class="text-gray-700 hover:text-blue-700">후불결제방법</a>
         <a href="customer.html" class="text-gray-700 hover:text-blue-700">고객센터</a>
       </nav>
     </div>
@@ -87,28 +88,16 @@
     <div id="mobile-menu" class="hidden">
       <a href="#home-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('home'); return false;">홈</a>
       <a href="giftshop.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">기프트샵</a>
-      <a href="#cart-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('cart'); return false;">휴대폰결제 구매방법</a>
-      <a href="#postpay-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" onclick="showPage('postpay'); return false;">후불결제방법</a>
+      <a href="cart.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">휴대폰결제 구매방법</a>
+      <a href="postpay.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">후불결제방법</a>
       <a href="customer.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">고객센터</a>
     </div>
   </nav>
-  <!-- 좌우 고정 광고 배너 (데스크톱만, 모바일 숨김, CLS 방지용 공간 확보) -->
-  <div aria-label="광고 배너" class="hidden lg:block" style="min-width:340px; min-height:1400px; position:relative;">
-    <div style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:1000;height:1400px;width:340px;display:flex;align-items:center;justify-content:center;min-width:340px;min-height:1400px;visibility:hidden;" class="hidden xl:flex pointer-events-none banner-fixed-left">
-      <a href="https://pf.kakao.com/_SBFexb/chat" target="_blank" rel="noopener" style="display:block;pointer-events:auto;">
-        <img src="배너/배너.webp" alt="기프트샵 광고 배너" width="340" height="1400" style="max-width:100%;max-height:100%;" loading="lazy" onload="this.parentElement.parentElement.style.visibility='visible'" />
-      </a>
-    </div>
-    <div style="position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:1000;height:1400px;width:340px;display:flex;align-items:center;justify-content:center;min-width:340px;min-height:1400px;visibility:hidden;" class="hidden xl:flex pointer-events-none banner-fixed-right">
-      <a href="https://pf.kakao.com/_SBFexb/chat" target="_blank" rel="noopener" style="display:block;pointer-events:auto;">
-        <img src="배너/배너.webp" alt="기프트샵 광고 배너" width="340" height="1400" style="max-width:100%;max-height:100%;" loading="lazy" onload="this.parentElement.parentElement.style.visibility='visible'" />
-      </a>
-    </div>
-  </div>
-  <main id="main-content" class="flex-1 max-w-5xl mx-auto w-full px-4 py-8" role="main">
+  <!-- 메인 컨텐츠 영역 -->
+  <main class="flex flex-col items-center justify-center flex-1 w-full px-2 md:px-[360px] py-8 min-h-[60vh]" style="box-sizing:border-box;">
     <!-- 안내 버튼 영역 (모바일 가로 스크롤 개선, CLS 방지 min-h) -->
-    <div class="overflow-x-auto -mx-4 px-4 mb-8" style="min-height:56px;">
-      <ul class="flex flex-nowrap gap-3 w-max min-w-full whitespace-nowrap">
+    <div class="overflow-x-auto w-full flex justify-center mb-2" style="min-height:32px;">
+      <ul class="flex flex-nowrap gap-3 w-max min-w-full whitespace-nowrap justify-center">
         <li class="inline-block min-w-[120px]"><a href="giftshop.html" class="bg-blue-50 text-blue-700 font-semibold px-4 py-2 rounded hover:bg-blue-100 border border-blue-200 transition" aria-current="page">기프트샵 홈</a></li>
         <li class="inline-block min-w-[120px]"><a href="머니트리.html" class="bg-orange-50 text-orange-700 font-semibold px-4 py-2 rounded hover:bg-orange-800 border border-orange-200 transition" target="_blank">머니트리 안내</a></li>
         <li class="inline-block min-w-[120px]"><a href="모빌.html" class="bg-cyan-50 text-cyan-700 font-semibold px-4 py-2 rounded hover:bg-cyan-800 border border-cyan-200 transition" target="_blank">모빌카드 안내</a></li>
@@ -118,251 +107,180 @@
       </ul>
     </div>
     <!-- 홈 안내문구 section (휴대폰결제/상품권/소액결제 안내, CLS 방지 min-h) -->
-    <section id="home-section" class="page-section" style="min-height:180px;">
-      <div class="bg-white rounded-lg shadow p-8 mb-8 text-gray-800 text-lg leading-relaxed">
-        <h1 class="text-2xl font-bold text-blue-700 mb-4" style="min-height:32px;">휴대폰결제로 상품권 구매정보사이트</h1>
-        <ul class="list-disc pl-6 space-y-2">
+    <section id="home-section" class="page-section-visible flex flex-col items-center justify-center min-h-[320px]" style="min-height:60px; margin-bottom:8px;">
+      <div class="bg-white rounded-lg shadow p-4 mb-2 text-gray-800 text-base leading-relaxed w-full max-w-xl mx-auto text-center">
+        <h1 class="text-lg font-bold text-blue-700 mb-1" style="min-height:18px;">휴대폰결제로 상품권 구매정보사이트</h1>
+        <ul class="list-disc pl-4 space-y-0.5 text-left inline-block text-base mx-auto" style="text-align:left;">
           <li>휴대폰결제로 상품권 구매정보사이트 입니다.</li>
           <li>휴대폰결제 네이버포인트 카드결제 상품권 정보공유!</li>
           <li>휴대폰소액결제로 상품권 구매방법</li>
-          <li>휴대폰결제로 소액환전방법 <a href="머니트리.html" target="_blank" rel="noopener" class="ml-2 text-orange-600 underline hover:text-orange-800 text-base">머니트리 바로가기</a></li>
-          <li>모빌카드 휴대폰소액결제 충전후 상품권 구매 <a href="모빌.html" target="_blank" rel="noopener" class="ml-2 text-cyan-600 underline hover:text-cyan-800 text-base">모빌카드 바로가기</a></li>
+          <li>휴대폰결제로 소액환전방법 <a href="머니트리.html" target="_blank" rel="noopener" class="ml-1 text-orange-600 underline hover:text-orange-800 text-xs">머니트리 바로가기</a></li>
+          <li>모빌카드 휴대폰소액결제 충전후 상품권 구매 <a href="모빌.html" target="_blank" rel="noopener" class="ml-1 text-cyan-600 underline hover:text-cyan-800 text-xs">모빌카드 바로가기</a></li>
         </ul>
       </div>
     </section>
-    <!-- 상품 리스트 (CLS 방지 min-h) -->
-    <section id="products-section" class="page-section" style="min-height:320px;">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6" style="min-height:32px;">전체 상품</h2>
-      <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" style="min-height:320px;">
-        <!-- 상품 카드: 필요 없는 상품/중복/테스트 상품 제거, 최신 정보만 유지 -->
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/Starbucks.webp" alt="스타벅스 기프트카드 5만원권" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">스타벅스 5만원권</h3>
-          <p class="text-blue-700 font-bold mb-2">50,000원</p>
-          <a href="https://mkt.shopping.naver.com/link/683d9d1a881c5b310ec4af6c" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">스타벅스 5만원권 구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/Starbucks.webp" alt="스타벅스 기프트카드 10만원권" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">스타벅스 10만원권</h3>
-          <p class="text-blue-700 font-bold mb-2">100,000원</p>
-          <a href="https://mkt.shopping.naver.com/link/6846fb228dd273404b732515" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">스타벅스 10만원권 구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/cu.webp" alt="컬쳐랜드 문화상품권 1만원" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드 1만원</h3>
-          <p class="text-blue-700 font-bold mb-2">10,000원</p>
-          <a href="https://mkt.shopping.naver.com/link/683d9d1ad20fbf73c9d596bc" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">컬쳐랜드 1만원권 구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/cu1.webp" alt="컬쳐랜드 문화상품권 2만원" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드 2만원</h3>
-          <p class="text-blue-700 font-bold mb-2">20,000원</p>
-          <a href="https://mkt.shopping.naver.com/link/683d9d1ae625370ec15afd4b" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">컬쳐랜드 2만원권 구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/cu.webp" alt="컬쳐랜드 문화상품권 5만원" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">컬쳐랜드 5만원</h3>
-          <p class="text-blue-700 font-bold mb-2">50,000원</p>
-          <a href="https://mkt.shopping.naver.com/link/6846fb22b7c8c573b306041d" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">컬쳐랜드 5만원권 구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/신세계상품.webp" alt="신세계상품권 3만원권" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">신세계상품권 3만원</h3>
-          <p class="text-blue-700 font-bold mb-2">30,000원</p>
-          <a href="https://mkt.shopping.naver.com/link/6846fb22d20fbf73c9d5e745" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">신세계상품권 3만원권 구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/신세계상품.webp" alt="신세계상품권 5만원권" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">신세계상품권 5만원</h3>
-          <p class="text-blue-700 font-bold mb-2">50,000원</p>
-          <a href="https://smartstore.naver.com/sk6070/products/3456789012" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">신세계상품권 5만원권 구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/롯데5만원.webp" alt="롯데상품권 5만원권" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">롯데상품권 5만원</h3>
-          <p class="text-blue-700 font-bold mb-2">50,000원</p>
-          <a href="https://mkt.shopping.naver.com/link/6846fb226e038273ac2dce2a" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">롯데상품권 5만원권 구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/card__teen.webp" alt="틴캐시 5만원권" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">틴캐시 5만원</h3>
-          <p class="text-blue-700 font-bold mb-2">50,000원</p>
-          <a href="https://mkt.shopping.naver.com/link/6846fb229afe25432201380d" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">틴캐시 5만원권 구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/card__teen.webp" alt="틴캐시 1만원권" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">틴캐시 1만원</h3>
-          <p class="text-blue-700 font-bold mb-2">10,000원</p>
-          <a href="https://smartstore.naver.com/sk6070/products/5678901234" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">틴캐시 1만원권 구매하기</a>
-        </div>
-        <div class="product-card bg-white rounded-lg shadow p-4 flex flex-col items-center">
-          <img src="img/dosupng.webp" alt="구글플레이 기프트카드 1만원권" class="w-24 h-24 object-contain mb-3" loading="lazy" width="96" height="96">
-          <h3 class="text-lg font-semibold text-gray-800 mb-1">구글플레이 1만원</h3>
-          <p class="text-blue-700 font-bold mb-2">10,000원</p>
-          <a href="https://mkt.shopping.naver.com/link/6846fb22b7c8c573b306041e" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center w-full block">구글플레이 1만원권 구매하기</a>
-        </div>
+  </main>
+  <!-- 상품 리스트 (CLS 방지 min-h) -->
+  <!-- 전체 상품 section 완전히 제거 -->
+  <!-- 장바구니 -->
+  <section id="cart-section" class="page-section hidden">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">휴대폰결제 상품권 직접구매방법</h2>
+    <div class="bg-white rounded-lg shadow p-6 mb-4 text-gray-800 text-lg leading-relaxed">
+      <ol class="list-decimal pl-6 space-y-2">
+        <li>상단 또는 좌우 광고배너에서 원하는 상품권 판매 사이트를 클릭합니다.</li>
+        <li>이동한 사이트에서 회원가입 또는 비회원 구매를 선택합니다.</li>
+        <li>구매하려는 상품권을 선택하고, 결제수단에서 <span class="font-bold text-blue-700">휴대폰결제</span>를 선택합니다.</li>
+        <li>결제 안내에 따라 정보를 입력하고 결제를 완료합니다.</li>
+        <li>구매 완료 후 상품권은 사이트 내 마이페이지 또는 문자/이메일로 발송됩니다.</li>
+      </ol>
+      <div class="mt-6 text-blue-700 text-base">
+        ※ 각 사이트의 결제 및 상품권 발송 방식은 다를 수 있으니, 안내를 꼭 확인해 주세요.<br>
+        ※ 궁금한 점은 각 사이트의 고객센터를 이용해 주세요.
       </div>
-    </section>
-    <!-- 장바구니 -->
-    <section id="cart-section" class="page-section hidden">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6">휴대폰결제 상품권 직접구매방법</h2>
-      <div class="bg-white rounded-lg shadow p-6 mb-4 text-gray-800 text-lg leading-relaxed">
-        <ol class="list-decimal pl-6 space-y-2">
-          <li>상단 또는 좌우 광고배너에서 원하는 상품권 판매 사이트를 클릭합니다.</li>
-          <li>이동한 사이트에서 회원가입 또는 비회원 구매를 선택합니다.</li>
-          <li>구매하려는 상품권을 선택하고, 결제수단에서 <span class="font-bold text-blue-700">휴대폰결제</span>를 선택합니다.</li>
-          <li>결제 안내에 따라 정보를 입력하고 결제를 완료합니다.</li>
-          <li>구매 완료 후 상품권은 사이트 내 마이페이지 또는 문자/이메일로 발송됩니다.</li>
-        </ol>
-        <div class="mt-6 text-blue-700 text-base">
-          ※ 각 사이트의 결제 및 상품권 발송 방식은 다를 수 있으니, 안내를 꼭 확인해 주세요.<br>
-          ※ 궁금한 점은 각 사이트의 고객센터를 이용해 주세요.
-        </div>
-      </div>
-      <!-- FAQ/고객센터(모빌.html, 토스.html) 전체 삽입 시작 -->
-      <section id="faq-section" class="my-12">
-        <div class="container mx-auto px-0 md:px-4">
-          <!-- <header class="mb-10 text-center">
-            <div class="flex flex-col md:flex-row justify-center gap-4 items-center">
-              <div id="mobil-faq-title-box" class="bg-white rounded-lg shadow px-6 py-3 flex items-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800" id="faq-title-toggle" style="cursor:default;">모빌카드 휴대폰결제</h2>
-              </div>
+    </div>
+    <!-- FAQ/고객센터(모빌.html, 토스.html) 전체 삽입 시작 -->
+    <section id="faq-section" class="my-12">
+      <div class="container mx-auto px-0 md:px-4">
+        <!-- <header class="mb-10 text-center">
+          <div class="flex flex-col md:flex-row justify-center gap-4 items-center">
+            <div id="mobil-faq-title-box" class="bg-white rounded-lg shadow px-6 py-3 flex items-center">
+              <h2 class="text-3xl md:text-4xl font-bold text-gray-800" id="faq-title-toggle" style="cursor:default;">모빌카드 휴대폰결제</h2>
             </div>
-            <p class="mt-2 text-gray-600">모빌카드 휴대폰결제와 토스후불결제 FAQ가 아래에 모두 표시됩니다.</p>
-          </header> -->
-          <div id="faq-content-wrapper" class="flex flex-col md:flex-row gap-8">
-            <aside class="md:w-1/4 lg:w-1/5">
-              <div class="bg-white p-4 rounded-lg shadow">
-                <h3 class="text-lg font-semibold text-gray-700 mb-4 px-2">자주 묻는 질문</h3>
-                <nav id="faq-tabs-container-index" class="space-y-1">
-                  <button class="tab-item-faq active-tab-faq" data-tab="tab-guide-index">가입/이용안내</button>
-                  <button class="tab-item-faq" data-tab="tab-charge-index">충전</button>
-                  <button class="tab-item-faq" data-tab="tab-limit-index">한도</button>
-                  <button class="tab-item-faq" data-tab="tab-payment-index">결제/사용</button>
-                  <button class="tab-item-faq" data-tab="tab-cancel-index">취소/환불</button>
-                  <button class="tab-item-faq" data-tab="tab-etc-index">기타</button>
-                </nav>
+          </div>
+          <p class="mt-2 text-gray-600">모빌카드 휴대폰결제와 토스후불결제 FAQ가 아래에 모두 표시됩니다.</p>
+        </header> -->
+        <div id="faq-content-wrapper" class="flex flex-col md:flex-row gap-8">
+          <aside class="md:w-1/4 lg:w-1/5">
+            <div class="bg-white p-4 rounded-lg shadow">
+              <h3 class="text-lg font-semibold text-gray-700 mb-4 px-2">자주 묻는 질문</h3>
+              <nav id="faq-tabs-container-index" class="space-y-1">
+                <button class="tab-item-faq active-tab-faq" data-tab="tab-guide-index">가입/이용안내</button>
+                <button class="tab-item-faq" data-tab="tab-charge-index">충전</button>
+                <button class="tab-item-faq" data-tab="tab-limit-index">한도</button>
+                <button class="tab-item-faq" data-tab="tab-payment-index">결제/사용</button>
+                <button class="tab-item-faq" data-tab="tab-cancel-index">취소/환불</button>
+                <button class="tab-item-faq" data-tab="tab-etc-index">기타</button>
+              </nav>
+            </div>
+          </aside>
+          <main class="md:w-3/4 lg:w-4/5">
+            <div class="bg-white p-6 md:p-8 rounded-lg shadow overflow-x-auto">
+              <!-- FAQ 탭별 내용: 모빌.html에서 id만 -index로 변경하여 중복 방지 -->
+              <div id="tab-guide-index" class="tab-content-faq space-y-3">
+                <div class="bg-blue-50 p-6 rounded-lg mb-6">
+                  <h3 class="text-xl font-semibold text-blue-700 mb-4">모빌카드 상품권 구매 순서</h3>
+                  <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                    <li><span class="font-medium">구글 검색:</span> <span class="text-blue-600 font-semibold">모빌카드</span> &rarr; 어플 다운로드 및 회원가입</li>
+                    <li><span class="font-medium">일반충전</span>을 누르면<br><span class="text-sm text-gray-500 ml-4">(1원을 송금할게요! 비대면 실명확인을 위해 본인 계좌 확인이 꼭 필요해요)</span> 라고 뜹니다.<br><span class="ml-4">인증 시 한도 증가를 안 하시면 한도 50만 원</span></li>
+                    <li><span class="font-medium">휴대폰충전</span> &rarr; <span class="font-medium">현재충전 가능한도</span>를 누르시면 즉시 한도 확인 가능<br><span class="ml-4">한도에 따라 충전하시면 간편하게 충전 완료</span></li>
+                    <li>화면 하단 <span class="font-medium">쿠폰샵</span>에 들어가시면 충전하신 금액으로 상품권 구매 가능</li>
+                  </ol>
+                  <div class="mt-5 text-center text-blue-600 text-xs">
+                    ※ 자세한 내용은 모빌카드 앱 내 안내를 참고하세요.
+                  </div>
+                </div>
+                <details class="group border-b border-gray-200">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                    <span>카드보유한도 상향을 위해 실물카드는 왜 신청해야 하나요?</span>
+                  </summary>
+                  <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                    모빌카드는 인편 배송으로 직접 전달되며, 실물카드 수령 시 배송기사 확인 절차를 통해 본인 여부를 검증합니다.<br>
+                    카드 수령 후 앱에서 CVC 입력하여 카드 등록까지 완료해 주시면 카드보유한도 상향 신청이 가능합니다.
+                  </div>
+                </details>
+                <details class="group border-b border-gray-200">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                    <span>페이북/간편결제 카드 등록이 안돼요.</span>
+                  </summary>
+                  <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                    카드번호와 소유자 정보가 불일치하는 경우 페이북 및 간편결제 등록이 불가합니다.<br>
+                    카드 신청 시, 주민등록번호 등 개인 정보를 잘못 입력하셨을 가능성이 있으니 KG모빌리언스 고객센터(1800-0678)로 문의해 주세요.
+                  </div>
+                </details>
               </div>
-            </aside>
-            <main class="md:w-3/4 lg:w-4/5">
-              <div class="bg-white p-6 md:p-8 rounded-lg shadow overflow-x-auto">
-                <!-- FAQ 탭별 내용: 모빌.html에서 id만 -index로 변경하여 중복 방지 -->
-                <div id="tab-guide-index" class="tab-content-faq space-y-3">
-                  <div class="bg-blue-50 p-6 rounded-lg mb-6">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-4">모빌카드 상품권 구매 순서</h3>
-                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
-                      <li><span class="font-medium">구글 검색:</span> <span class="text-blue-600 font-semibold">모빌카드</span> &rarr; 어플 다운로드 및 회원가입</li>
-                      <li><span class="font-medium">일반충전</span>을 누르면<br><span class="text-sm text-gray-500 ml-4">(1원을 송금할게요! 비대면 실명확인을 위해 본인 계좌 확인이 꼭 필요해요)</span> 라고 뜹니다.<br><span class="ml-4">인증 시 한도 증가를 안 하시면 한도 50만 원</span></li>
-                      <li><span class="font-medium">휴대폰충전</span> &rarr; <span class="font-medium">현재충전 가능한도</span>를 누르시면 즉시 한도 확인 가능<br><span class="ml-4">한도에 따라 충전하시면 간편하게 충전 완료</span></li>
-                      <li>화면 하단 <span class="font-medium">쿠폰샵</span>에 들어가시면 충전하신 금액으로 상품권 구매 가능</li>
-                    </ol>
-                    <div class="mt-5 text-center text-blue-600 text-xs">
-                      ※ 자세한 내용은 모빌카드 앱 내 안내를 참고하세요.
+              <div id="tab-charge-index" class="tab-content-faq hidden space-y-3">
+                <details class="group border-b border-gray-200">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                    <span>모빌리언스카드는 어떻게 충전하나요?</span>
+                  </summary>
+                  <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                    모빌리언스카드 APP에서 <span class="font-semibold">휴대폰, 계좌이체, 가상계좌, 상품권, 신용카드</span>를 사용하여 충전할 수 있으며, 자동 충전을 설정하면 더욱 편리하게 카드를 이용하실 수 있습니다.<br>
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                      <li><span class="font-semibold text-blue-700">1) 휴대폰</span> - 자동 충전(매월 1일), 일반 충전, 수수료 3.5%</li>
+                      <li><span class="font-semibold text-blue-700">2) 계좌이체</span> - 자동/일반 충전</li>
+                      <li><span class="font-semibold text-blue-700">3) 가상계좌</span> - 일반 충전(최소 5만원)</li>
+                      <li><span class="font-semibold text-blue-700">4) 상품권</span> - 일반 충전, 전환 수수료 8.0%</li>
+                      <li><span class="font-semibold text-blue-700">5) 신용카드</span> - 일반 충전, 수수료 3.5%</li>
+                    </ul>
+                    <div class="text-blue-700 text-xs mt-2">※ 연결 계좌는 최대 3개까지 등록 가능<br>※ 자동충전 내역은 [APP &gt; 마이페이지 &gt; 자동충전 관리]에서 변경</div>
+                  </div>
+                </details>
+              </div>
+              <div id="tab-limit-index" class="tab-content-faq hidden space-y-3">
+                <details class="group border-b border-gray-200">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                    <span>모빌리언스카드 충전한도가 있나요?</span>
+                  </summary>
+                  <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                    카드 잔액은 최대 <span class="font-semibold">성인 200만원 / 청소년 50만원</span> 보유할 수 있습니다.<br>
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                      <li>휴대폰 : 통신사 월 결제 한도 내 충전</li>
+                      <li>계좌이체/가상계좌 : 한도 없음</li>
+                      <li>북앤라이프/컬쳐랜드/문화상품권 : 일 460~600만원, 월 600~1,000만원 (상품권 종류 및 정책에 따라 변동 가능)</li>
+                      <li>신용카드 : 일/월 100만원 (타 상품권류 포함)</li>
+                    </ul>
+                    <div class="text-blue-700 text-xs mt-2">※ 실명확인 및 KYC 미완료 시 한도 50만원 제한<br>※ 한도 상향은 고객확인, 계좌점유인증, 실물카드 등록 필요</div>
+                  </div>
+                </details>
+              </div>
+              <div id="tab-payment-index" class="tab-content-faq hidden space-y-3">
+                <details class="group border-b border-gray-200">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                    <span>모빌리언스카드는 어디에서 이용할 수 있나요?</span>
+                  </summary>
+                  <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                    모빌리언스카드는 <span class="font-semibold">BC카드를 사용하는 모든 가맹점</span>에서 사용 가능합니다.
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                      <li>오프라인 결제 : 일반 신용/체크카드와 동일하게 사용</li>
+                      <li>온라인 결제 : 카드사 "비씨카드(페이북)" 선택</li>
+                    </ul>
+                  </div>
+                </details>
+              </div>
+              <div id="tab-cancel-index" class="tab-content-faq hidden space-y-3">
+                <details class="group border-b border-gray-200">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                    <span>휴대폰 결제 충전 금액 취소가 가능한가요?</span>
+                  </summary>
+                  <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                    충전일 포함 7일 이내 사용이력이 없는 경우, 수수료를 포함한 전체 금액 취소가 가능합니다.<br>[모빌리언스카드APP &gt; 메인페이지 &gt; 이용내역] 메뉴에서 충전내역을 선택하여 충전 취소할 수 있습니다.
+                    <div class="text-blue-700 text-xs mt-2">
+                      * KT 이외 통신사 고객님께서는 7일 이내이더라도 익월 취소인 경우는 고객센터(1800-0678)로 문의 부탁드립니다.
                     </div>
                   </div>
-                  <details class="group border-b border-gray-200">
-                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
-                      <span>카드보유한도 상향을 위해 실물카드는 왜 신청해야 하나요?</span>
-                    </summary>
-                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
-                      모빌카드는 인편 배송으로 직접 전달되며, 실물카드 수령 시 배송기사 확인 절차를 통해 본인 여부를 검증합니다.<br>
-                      카드 수령 후 앱에서 CVC 입력하여 카드 등록까지 완료해 주시면 카드보유한도 상향 신청이 가능합니다.
-                    </div>
-                  </details>
-                  <details class="group border-b border-gray-200">
-                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
-                      <span>페이북/간편결제 카드 등록이 안돼요.</span>
-                    </summary>
-                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
-                      카드번호와 소유자 정보가 불일치하는 경우 페이북 및 간편결제 등록이 불가합니다.<br>
-                      카드 신청 시, 주민등록번호 등 개인 정보를 잘못 입력하셨을 가능성이 있으니 KG모빌리언스 고객센터(1800-0678)로 문의해 주세요.
-                    </div>
-                  </details>
-                </div>
-                <div id="tab-charge-index" class="tab-content-faq hidden space-y-3">
-                  <details class="group border-b border-gray-200">
-                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
-                      <span>모빌리언스카드는 어떻게 충전하나요?</span>
-                    </summary>
-                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
-                      모빌리언스카드 APP에서 <span class="font-semibold">휴대폰, 계좌이체, 가상계좌, 상품권, 신용카드</span>를 사용하여 충전할 수 있으며, 자동 충전을 설정하면 더욱 편리하게 카드를 이용하실 수 있습니다.<br>
-                      <ul class="list-disc pl-5 mt-2 space-y-1">
-                        <li><span class="font-semibold text-blue-700">1) 휴대폰</span> - 자동 충전(매월 1일), 일반 충전, 수수료 3.5%</li>
-                        <li><span class="font-semibold text-blue-700">2) 계좌이체</span> - 자동/일반 충전</li>
-                        <li><span class="font-semibold text-blue-700">3) 가상계좌</span> - 일반 충전(최소 5만원)</li>
-                        <li><span class="font-semibold text-blue-700">4) 상품권</span> - 일반 충전, 전환 수수료 8.0%</li>
-                        <li><span class="font-semibold text-blue-700">5) 신용카드</span> - 일반 충전, 수수료 3.5%</li>
-                      </ul>
-                      <div class="text-blue-700 text-xs mt-2">※ 연결 계좌는 최대 3개까지 등록 가능<br>※ 자동충전 내역은 [APP &gt; 마이페이지 &gt; 자동충전 관리]에서 변경</div>
-                    </div>
-                  </details>
-                </div>
-                <div id="tab-limit-index" class="tab-content-faq hidden space-y-3">
-                  <details class="group border-b border-gray-200">
-                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
-                      <span>모빌리언스카드 충전한도가 있나요?</span>
-                    </summary>
-                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
-                      카드 잔액은 최대 <span class="font-semibold">성인 200만원 / 청소년 50만원</span> 보유할 수 있습니다.<br>
-                      <ul class="list-disc pl-5 mt-2 space-y-1">
-                        <li>휴대폰 : 통신사 월 결제 한도 내 충전</li>
-                        <li>계좌이체/가상계좌 : 한도 없음</li>
-                        <li>북앤라이프/컬쳐랜드/문화상품권 : 일 460~600만원, 월 600~1,000만원 (상품권 종류 및 정책에 따라 변동 가능)</li>
-                        <li>신용카드 : 일/월 100만원 (타 상품권류 포함)</li>
-                      </ul>
-                      <div class="text-blue-700 text-xs mt-2">※ 실명확인 및 KYC 미완료 시 한도 50만원 제한<br>※ 한도 상향은 고객확인, 계좌점유인증, 실물카드 등록 필요</div>
-                    </div>
-                  </details>
-                </div>
-                <div id="tab-payment-index" class="tab-content-faq hidden space-y-3">
-                  <details class="group border-b border-gray-200">
-                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
-                      <span>모빌리언스카드는 어디에서 이용할 수 있나요?</span>
-                    </summary>
-                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
-                      모빌리언스카드는 <span class="font-semibold">BC카드를 사용하는 모든 가맹점</span>에서 사용 가능합니다.
-                      <ul class="list-disc pl-5 mt-2 space-y-1">
-                        <li>오프라인 결제 : 일반 신용/체크카드와 동일하게 사용</li>
-                        <li>온라인 결제 : 카드사 "비씨카드(페이북)" 선택</li>
-                      </ul>
-                    </div>
-                  </details>
-                </div>
-                <div id="tab-cancel-index" class="tab-content-faq hidden space-y-3">
-                  <details class="group border-b border-gray-200">
-                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
-                      <span>휴대폰 결제 충전 금액 취소가 가능한가요?</span>
-                    </summary>
-                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
-                      충전일 포함 7일 이내 사용이력이 없는 경우, 수수료를 포함한 전체 금액 취소가 가능합니다.<br>[모빌리언스카드APP &gt; 메인페이지 &gt; 이용내역] 메뉴에서 충전내역을 선택하여 충전 취소할 수 있습니다.
-                      <div class="text-blue-700 text-xs mt-2">
-                        * KT 이외 통신사 고객님께서는 7일 이내이더라도 익월 취소인 경우는 고객센터(1800-0678)로 문의 부탁드립니다.
-                      </div>
-                    </div>
-                  </details>
-                </div>
-                <div id="tab-etc-index" class="tab-content-faq hidden space-y-3">
-                  <details class="group border-b border-gray-200">
-                    <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
-                      <span>모빌리언스카드 이용한 내역을 SMS로 받을 수 있나요?</span>
-                    </summary>
-                    <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
-                      모빌리언스카드 충전 및 이용내역은 APP Push로 제공되며, [모빌리언스카드 APP &gt; 마이 페이지 &gt; 카드 이용내역]에서 확인하실 수 있습니다.
-                    </div>
-                  </details>
-                </div>
+                </details>
               </div>
-            </main>
-          </div>
-          <!-- 토스카드 FAQ: 토스.html 주요 FAQ 영역을 iframe이 아닌 직접 노출 (동시 노출) -->
-          <div id="toss-faq-wrapper" class="mt-10 hidden">
-            <div class="bg-white rounded-lg shadow p-6">
-              <div class="flex items-center gap-2 mb-4">
-                <img src="img/Starbucks.png" alt="토스카드" class="w-8 h-8 rounded">
-                <span class="text-xl font-bold text-blue-700">토스 후불교통카드 FAQ</span>
+              <div id="tab-etc-index" class="tab-content-faq hidden space-y-3">
+                <details class="group border-b border-gray-200">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-base font-medium text-gray-800 hover:text-blue-600 group-open:text-blue-600">
+                    <span>모빌리언스카드 이용한 내역을 SMS로 받을 수 있나요?</span>
+                  </summary>
+                  <div class="pb-4 pt-2 px-1 text-gray-600 text-sm">
+                    모빌리언스카드 충전 및 이용내역은 APP Push로 제공되며, [모빌리언스카드 APP &gt; 마이 페이지 &gt; 카드 이용내역]에서 확인하실 수 있습니다.
+                  </div>
+                </details>
               </div>
-              <iframe src="토스.html" title="토스카드 FAQ" class="w-full min-h-[600px] border rounded" style="min-height:600px;"></iframe>
             </div>
+          </main>
+        </div>
+        <!-- 토스카드 FAQ: 토스.html 주요 FAQ 영역을 iframe이 아닌 직접 노출 (동시 노출) -->
+        <div id="toss-faq-wrapper" class="mt-10 hidden">
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center gap-2 mb-4">
+              <img src="img/Starbucks.png" alt="토스카드" class="w-8 h-8 rounded">
+              <span class="text-xl font-bold text-blue-700">토스 후불교통카드 FAQ</span>
+            </div>
+            <iframe src="토스.html" title="토스카드 FAQ" class="w-full min-h-[600px] border rounded" style="min-height:600px;"></iframe>
           </div>
         </div>
       </section>
@@ -403,6 +321,19 @@
       </div>
     </section>
   </main>
+  <!-- 좌우 고정 광고 배너 (데스크톱만, 모바일 숨김, CLS 방지용 공간 확보) -->
+  <div aria-label="광고 배너" class="hidden lg:block" style="min-width:340px; min-height:1400px; position:relative; z-index:10;">
+    <div style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:1000;height:1400px;width:340px;display:flex;align-items:center;justify-content:center;min-width:340px;min-height:1400px;visibility:hidden;" class="hidden xl:flex pointer-events-none banner-fixed-left">
+      <a href="https://pf.kakao.com/_SBFexb/chat" target="_blank" rel="noopener" style="display:block;pointer-events:auto;">
+        <img src="배너/배너.webp" alt="기프트샵 광고 배너" width="340" height="1400" style="max-width:100%;max-height:100%;" loading="lazy" onload="this.parentElement.parentElement.style.visibility='visible'" />
+      </a>
+    </div>
+    <div style="position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:1000;height:1400px;width:340px;display:flex;align-items:center;justify-content:center;min-width:340px;min-height:1400px;visibility:hidden;" class="hidden xl:flex pointer-events-none banner-fixed-right">
+      <a href="https://pf.kakao.com/_SBFexb/chat" target="_blank" rel="noopener" style="display:block;pointer-events:auto;">
+        <img src="배너/배너.webp" alt="기프트샵 광고 배너" width="340" height="1400" style="max-width:100%;max-height:100%;" loading="lazy" onload="this.parentElement.parentElement.style.visibility='visible'" />
+      </a>
+    </div>
+  </div>
   <!-- 푸터 -->
   <footer class="bg-white border-t border-gray-200 py-4">
     <div class="max-w-5xl mx-auto px-4 text-center text-gray-600 text-sm">
@@ -412,6 +343,7 @@
   <script>
     // section 전환 함수 (불필요한 동적 상품 JS 완전 제거)
     function showPage(page) {
+      // 항상 보이는 section은 숨기지 않음
       document.querySelectorAll('.page-section').forEach(function(sec){
         sec.classList.add('hidden');
       });
@@ -421,7 +353,7 @@
       var mobileMenu = document.getElementById('mobile-menu');
       if (mobileMenu) mobileMenu.classList.add('hidden');
     }
-    // 모바일 메뉴 토글 및 닫힘
+    // DOMContentLoaded에서 항상 보이는 section은 hidden 처리하지 않음
     document.addEventListener('DOMContentLoaded', function() {
       showPage('home');
       var mobileMenuBtn = document.getElementById('mobile-menu-button');
@@ -437,6 +369,8 @@
         });
       }
     });
+    // 항상 보이는 section(page-section-visible)은 숨기지 않음
+    // CSS로 .page-section-visible { display:block !important; } 추가 필요
   </script>
 </body>
 </html>
