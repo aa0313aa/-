@@ -6,16 +6,16 @@
   <title>자유게시판 | 기프트샵 커뮤니티</title>
   <meta name="description" content="기프트샵 커뮤니티 자유게시판입니다. 다양한 정보를 나누고 소통하세요.">
   <meta name="keywords" content="커뮤니티, 게시판, 자유게시판, 정보공유, 상품권, 기프트샵">
-  <link rel="canonical" href="http://localhost:4000/board.html">
+  <link rel="canonical" href="https://현금화.site/board.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="자유게시판 | 기프트샵 커뮤니티">
   <meta property="og:description" content="기프트샵 커뮤니티 자유게시판입니다. 다양한 정보를 나누고 소통하세요.">
-  <meta property="og:url" content="http://localhost:4000/board.html">
-  <meta property="og:image" content="http://localhost:4000/img/Starbucks.png">
+  <meta property="og:url" content="https://현금화.site/board.html">
+  <meta property="og:image" content="https://현금화.site/img/Starbucks.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="자유게시판 | 기프트샵 커뮤니티">
   <meta name="twitter:description" content="기프트샵 커뮤니티 자유게시판입니다. 다양한 정보를 나누고 소통하세요.">
-  <meta name="twitter:image" content="http://localhost:4000/img/Starbucks.png">
+  <meta name="twitter:image" content="https://현금화.site/img/Starbucks.png">
   <link rel="icon" href="/img/cu.png" type="image/png">
   <link rel="apple-touch-icon" href="/img/cu.png">
   <meta name="robots" content="index, follow">
@@ -25,7 +25,7 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "기프트샵 커뮤니티",
-    "url": "http://localhost:4000/board.html",
+    "url": "https://현금화.site/board.html",
     "description": "기프트샵 커뮤니티 자유게시판입니다. 다양한 정보를 나누고 소통하세요.",
     "inLanguage": "ko-KR"
   }
@@ -34,33 +34,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
-    .table-hover tbody tr:hover { background-color: #f9fafb; /* gray-50 */ }
-    .pagination-button.active {
-      background-color: #2563eb; /* blue-600 */
-      color: white;
-      border-color: #2563eb;
-    }
-    .pagination-button {
-      transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-    }
-    /* 로그인/글쓰기 모달 스타일 (기존 admin.html, board.html 참고) */
-    .modal-content {
-        max-height: 85vh;
-        overflow-y: auto;
-    }
   </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
-
   <div id="top-banner" class="w-full bg-blue-600 text-white text-center py-3 px-2 flex items-center justify-center relative">
     <svg class="w-5 h-5 mr-2 inline-block text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z"/></svg>
     <span class="font-semibold">추가결제: 휴대폰결제매입 카드결제매입! <a href="https://pf.kakao.com/_SBFexb/chat" target="_blank" rel="noopener" class="underline hover:text-yellow-200 ml-1">즉시상담</a></span>
     <button onclick="document.getElementById('top-banner').style.display='none'" class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-yellow-200 text-xl font-bold">&times;</button>
   </div>
-
   <header class="bg-white border-b border-gray-200 sticky top-0 z-50" role="banner">
     <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="#home-section" class="text-2xl font-extrabold text-blue-700 tracking-tight" aria-label="기프트샵 홈" onclick="window.location.href='index.html'; return false;">휴대폰결제로 상품권 구매정보사이트</a>
+      <a href="index.html" class="text-2xl font-extrabold text-blue-700 tracking-tight" aria-label="기프트샵 홈">휴대폰결제로 상품권 구매정보사이트</a>
       <nav class="hidden md:flex flex-nowrap space-x-4 text-sm font-medium" aria-label="주요 메뉴">
         <a href="index.html" class="text-gray-700 hover:text-blue-700">홈</a>
         <a href="index.html#products-section" class="text-gray-700 hover:text-blue-700">기프트샵</a>
@@ -69,16 +53,13 @@
         <a href="board.html" class="text-pink-700 font-bold">자유게시판</a>
       </nav>
       <div class="flex items-center space-x-4">
-        <button id="login-btn" class="text-gray-700 hover:text-blue-700">로그인</button>
-        <button id="signup-btn-nav" class="text-gray-700 hover:text-blue-700">회원가입</button>
-        <button id="logout-btn" class="text-gray-700 hover:text-blue-700 hidden">로그아웃</button>
+        <!-- 로그인/회원가입/로그아웃 버튼은 외부 게시판에서 처리 -->
       </div>
     </div>
   </header>
-   <!-- 모바일 내비게이션 -->
-   <nav class="md:hidden bg-white border-b border-gray-200 py-2 px-4" aria-label="모바일 메뉴">
+  <nav class="md:hidden bg-white border-b border-gray-200 py-2 px-4" aria-label="모바일 메뉴">
     <div class="flex justify-between items-center">
-      <a href="#home-section" class="text-xl font-bold text-blue-700" onclick="window.location.href='index.html'; return false;">기프트샵</a>
+      <a href="index.html" class="text-xl font-bold text-blue-700">기프트샵</a>
       <button id="mobile-menu-button" class="text-gray-700 focus:outline-none" aria-label="모바일 메뉴 열기">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -91,113 +72,15 @@
       <a href="index.html#cart-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">휴대폰결제 구매방법</a>
       <a href="index.html#postpay-section" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">후불결제방법</a>
       <a href="board.html" class="block px-4 py-2 text-pink-700 font-bold">자유게시판</a>
-      <button id="mobile-login-btn" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">로그인</button>
-      <button id="mobile-logout-btn" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 hidden">로그아웃</button>
     </div>
   </nav>
-
-
   <main class="flex-1 max-w-6xl mx-auto w-full px-4 py-8 mb-16 md:mb-0">
-    <div class="bg-white shadow-lg rounded-lg p-4 sm:p-6">
-      <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-        <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">자유게시판</h1>
-        <div class="flex items-center gap-2 w-full sm:w-auto">
-          <input type="text" id="search-keyword" class="form-input w-full sm:w-64 px-3 py-1.5 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="검색어를 입력하세요">
-          <button id="search-button" class="bg-gray-700 text-white px-4 py-1.5 rounded-md hover:bg-gray-800 text-sm">검색</button>
-        </div>
-      </div>
-
-      <div class="overflow-x-auto mb-6">
-        <table class="min-w-full divide-y divide-gray-200 table-hover text-sm">
-          <thead class="bg-gray-100">
-            <tr>
-              <th scope="col" class="px-4 py-2.5 text-left font-semibold text-gray-600 w-16">번호</th>
-              <th scope="col" class="px-4 py-2.5 text-left font-semibold text-gray-600">제목</th>
-              <th scope="col" class="px-4 py-2.5 text-left font-semibold text-gray-600 w-24 sm:w-32">글쓴이</th>
-              <th scope="col" class="px-4 py-2.5 text-left font-semibold text-gray-600 w-28 sm:w-36">작성일</th>
-              <th scope="col" class="px-4 py-2.5 text-left font-semibold text-gray-600 w-16">조회</th>
-            </tr>
-          </thead>
-          <tbody id="post-list-body" class="bg-white divide-y divide-gray-200">
-            </tbody>
-        </table>
-      </div>
-      <div id="post-list-empty" class="text-center py-10 text-gray-500 hidden">
-        <svg class="mx-auto h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        <p class="mt-2">게시글이 없습니다.</p>
-      </div>
-
-      <div class="flex flex-col sm:flex-row justify-between items-center mt-6">
-        <div id="pagination-controls" class="flex items-center space-x-1 mb-4 sm:mb-0">
-          </div>
-        <button id="write-post-btn" class="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 text-sm font-medium shadow-sm w-full sm:w-auto">
-          <svg class="inline-block w-4 h-4 mr-1 -ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-          글쓰기
-        </button>
-      </div>
+    <div class="bg-white shadow-lg rounded-lg p-4 sm:p-6 mb-8">
+      <h2 class="text-xl font-bold text-blue-700 mb-2"> 자유게시판 </h2>
+      <p class="mb-4 text-gray-600 text-sm">안녕하세요.</p>
+      <iframe src="https://aa0313.pythonanywhere.com/" title="외부 자유게시판" class="w-full min-h-[700px] border rounded-lg" style="min-height:700px; background:#fff;" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
     </div>
   </main>
-
-  <div id="post-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100] hidden p-4">
-    <div class="bg-white rounded-lg shadow-xl p-5 sm:p-6 w-full max-w-2xl modal-content">
-      <div class="flex justify-between items-center mb-4">
-        <h3 id="post-modal-title" class="text-xl font-semibold text-gray-800">새 글 작성</h3>
-        <button id="post-modal-close-btn" class="text-gray-400 hover:text-gray-600">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-      </div>
-      <form id="post-form">
-        <input type="hidden" id="post-id-edit">
-        <div class="mb-4">
-          <label for="post-title" class="block text-sm font-medium text-gray-700 mb-1">제목</label>
-          <input type="text" id="post-title" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
-        </div>
-        <div class="mb-4">
-          <label for="post-content" class="block text-sm font-medium text-gray-700 mb-1">내용</label>
-          <textarea id="post-content" rows="8" class="form-textarea w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required></textarea>
-        </div>
-        <div class="mb-4">
-            <label class="flex items-center text-sm text-gray-700">
-              <input type="checkbox" id="post-is-private" class="form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-              <span class="ml-2">비공개 글로 설정</span>
-            </label>
-        </div>
-        <div class="mb-4">
-            <label for="post-attachment" class="block text-sm font-medium text-gray-700 mb-1">파일 첨부 (선택)</label>
-            <input type="file" id="post-attachment" class="form-input w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-            <p class="mt-1 text-xs text-gray-500">최대 1개 파일, 5MB 이하. (구현 시 서버 설정 필요)</p>
-        </div>
-        <div id="post-form-error" class="text-red-500 text-sm mb-3 hidden"></div>
-        <div class="flex justify-end gap-3">
-          <button type="button" id="post-modal-cancel-btn" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 text-sm">취소</button>
-          <button type="submit" id="post-modal-submit-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 text-sm">등록</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-[110] hidden p-4">
-    <div class="bg-white rounded-xl shadow-2xl p-6 sm:p-8 w-full max-w-md flex flex-col gap-4 transform transition-all modal-content">
-      <div class="flex justify-between items-center">
-        <h3 id="auth-modal-title" class="text-2xl font-bold text-gray-800">로그인</h3>
-        <button id="auth-modal-close" class="text-gray-400 hover:text-gray-600" aria-label="닫기">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-      </div>
-      <input type="text" id="auth-nickname" class="border border-gray-300 rounded-md px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" placeholder="닉네임 (2~10자)" maxlength="10">
-      <input type="password" id="auth-password" class="border border-gray-300 rounded-md px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" placeholder="비밀번호 (4자 이상)" maxlength="20">
-      <input type="text" id="auth-contact" class="border border-gray-300 rounded-md px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out hidden" placeholder="연락처 (휴대폰번호)" maxlength="20">
-      <input type="email" id="auth-email" class="border border-gray-300 rounded-md px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out hidden" placeholder="이메일" maxlength="50">
-      <input type="text" id="auth-name" class="border border-gray-300 rounded-md px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out hidden" placeholder="이름" maxlength="20">
-      <input type="text" id="auth-birth" class="border border-gray-300 rounded-md px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out hidden" placeholder="생년월일 (YYYYMMDD)" maxlength="8">
-      <div id="auth-error" class="text-red-500 text-sm text-center hidden p-2 bg-red-50 border border-red-200 rounded-md"></div>
-      <button id="auth-submit" class="w-full bg-blue-600 text-white py-2.5 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out font-semibold">확인</button>
-      <button id="auth-toggle" class="text-blue-600 hover:underline text-sm">회원가입</button>
-    </div>
-  </div>
-
-
-  <!-- 좌우 고정 광고 배너 (데스크톱만, 모바일 숨김) -->
   <div aria-label="광고 배너" class="hidden lg:block">
     <div style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:1000;height:1400px;width:340px;display:flex;align-items:center;justify-content:center;" class="hidden xl:flex pointer-events-none">
       <a href="https://pf.kakao.com/_SBFexb/chat" target="_blank" rel="noopener" style="display:block;pointer-events:auto;">
@@ -210,638 +93,14 @@
       </a>
     </div>
   </div>
-
   <footer class="bg-white border-t border-gray-200 py-8 mt-auto">
     <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
       &copy; <span id="current-year"></span> 기프트샵. All Rights Reserved.
     </div>
   </footer>
-
   <script>
-    // --- 전역 변수 및 설정 ---
-    const API_BASE_URL = 'http://localhost:4000/api';
-    const POSTS_PER_PAGE = 10; // 페이지 당 게시글 수
-    let currentPage = 1;
-    let currentSearchKeyword = '';
-    let totalPosts = 0;
-    let isEditMode = false;
-    let editingPostId = null;
-
-    // --- DOM 요소 ---
-    function getElement(id) {
-        const element = document.getElementById(id);
-        if (!element) {
-            console.warn(`DOM Element with ID '${id}' not found.`);
-        }
-        return element;
-    }
-
-    const postListBody = getElement('post-list-body');
-    const postListEmpty = getElement('post-list-empty');
-    const paginationControls = getElement('pagination-controls');
-    const searchKeywordInput = getElement('search-keyword');
-    const searchButton = getElement('search-button');
-    const writePostBtn = getElement('write-post-btn');
-
-    const postModal = getElement('post-modal');
-    const postModalTitle = getElement('post-modal-title');
-    const postModalCloseBtn = getElement('post-modal-close-btn');
-    const postModalCancelBtn = getElement('post-modal-cancel-btn');
-    const postForm = getElement('post-form');
-    const postFormError = getElement('post-form-error');
-    const postIdEditInput = getElement('post-id-edit');
-    const postTitleInput = getElement('post-title');
-    const postContentInput = getElement('post-content');
-    const postIsPrivateCheckbox = getElement('post-is-private');
-    const postAttachmentInput = getElement('post-attachment');
-    const postModalSubmitBtn = getElement('post-modal-submit-btn');
-
-    const authModal = getElement('auth-modal');
-    const authModalTitle = getElement('auth-modal-title');
-    const authModalClose = getElement('auth-modal-close');
-    const authNicknameInput = getElement('auth-nickname');
-    const authPasswordInput = getElement('auth-password');
-    const authErrorDiv = getElement('auth-error');
-    const authSubmitBtn = getElement('auth-submit');
-    const authToggleBtn = getElement('auth-toggle');
-    
-    const loginBtnNav = getElement('login-btn');
-    const logoutBtnNav = getElement('logout-btn');
-    const signupBtnNav = getElement('signup-btn-nav');
-
-    const mobileAuthBtn = getElement('mobile-auth-btn');
-    const mobileAuthText = getElement('mobile-auth-text');
-
-
-    // --- 인증 관련 로직 ---
-    let isAuthModalSignupMode = false;
-
-    function openAuthModal(isSignup = false) {
-      isAuthModalSignupMode = isSignup;
-      if (authModalTitle) authModalTitle.textContent = isSignup ? '회원가입' : '로그인';
-      if (authSubmitBtn) authSubmitBtn.textContent = isSignup ? '회원가입' : '로그인 완료';
-      if (authToggleBtn) authToggleBtn.textContent = isSignup ? '이미 계정이 있으신가요? 로그인' : '계정이 없으신가요? 회원가입';
-      if (authNicknameInput) authNicknameInput.value = '';
-      if (authPasswordInput) authPasswordInput.value = '';
-      // 회원가입 모드일 때만 추가 입력란 보이기, 로그인 모드일 때는 숨기기
-      setTimeout(() => {
-        const contactInput = document.getElementById('auth-contact');
-        const emailInput = document.getElementById('auth-email');
-        const nameInput = document.getElementById('auth-name');
-        const birthInput = document.getElementById('auth-birth');
-        if (contactInput) {
-          contactInput.value = '';
-          if (isSignup) contactInput.classList.remove('hidden');
-          else contactInput.classList.add('hidden');
-        }
-        if (emailInput) {
-          emailInput.value = '';
-          if (isSignup) emailInput.classList.remove('hidden');
-          else emailInput.classList.add('hidden');
-        }
-        if (nameInput) {
-          nameInput.value = '';
-          if (isSignup) nameInput.classList.remove('hidden');
-          else nameInput.classList.add('hidden');
-        }
-        if (birthInput) {
-          birthInput.value = '';
-          if (isSignup) birthInput.classList.remove('hidden');
-          else birthInput.classList.add('hidden');
-        }
-      }, 0);
-      if (authErrorDiv) authErrorDiv.classList.add('hidden');
-      if (authModal) authModal.classList.remove('hidden');
-      if (authNicknameInput) authNicknameInput.focus();
-    }
-
-    function closeAuthModal() {
-      if (authModal) authModal.classList.add('hidden');
-    }
-
-    function isLoggedIn() {
-      return localStorage.getItem('giftshop_community_token') && localStorage.getItem('giftshop_community_nickname');
-    }
-
-    function getLoggedInNickname() {
-      return localStorage.getItem('giftshop_community_nickname');
-    }
-    
-    function getAuthToken() {
-        return localStorage.getItem('giftshop_community_token');
-    }
-
-    function updateAuthUI() {
-      if (isLoggedIn()) {
-        if (loginBtnNav) loginBtnNav.classList.add('hidden');
-        if (signupBtnNav) signupBtnNav.classList.add('hidden');
-        if (logoutBtnNav) {
-            logoutBtnNav.classList.remove('hidden');
-            logoutBtnNav.textContent = `${getLoggedInNickname()}님 로그아웃`;
-        }
-        if(mobileAuthText) mobileAuthText.textContent = '내정보'; 
-      } else {
-        if (loginBtnNav) loginBtnNav.classList.remove('hidden');
-        if (signupBtnNav) signupBtnNav.classList.remove('hidden');
-        if (logoutBtnNav) logoutBtnNav.classList.add('hidden');
-        if(mobileAuthText) mobileAuthText.textContent = '로그인';
-        if(mobileAuthBtn) mobileAuthBtn.onclick = () => openAuthModal(false);
-      }
-    }
-    
-    async function handleAuthSubmit() {
-      if (!authNicknameInput || !authPasswordInput) return;
-      const nickname = authNicknameInput.value.trim();
-      const password = authPasswordInput.value;
-      const contactInput = document.getElementById('auth-contact');
-      const emailInput = document.getElementById('auth-email');
-      const nameInput = document.getElementById('auth-name');
-      const birthInput = document.getElementById('auth-birth');
-      const contact = contactInput ? contactInput.value.trim() : '';
-      const email = emailInput ? emailInput.value.trim() : '';
-      const realname = nameInput ? nameInput.value.trim() : '';
-      const birth = birthInput ? birthInput.value.trim() : '';
-
-      if (!nickname || !password) {
-        showAuthError('닉네임과 비밀번호를 모두 입력해주세요.');
-        return;
-      }
-      if (isAuthModalSignupMode) {
-        if (!realname) {
-          showAuthError('이름을 입력해주세요.');
-          return;
-        }
-        if (!birth) {
-          showAuthError('생년월일을 입력해주세요.');
-          return;
-        }
-        if (!contact) {
-          showAuthError('연락처를 입력해주세요.');
-          return;
-        }
-        if (!email) {
-          showAuthError('이메일을 입력해주세요.');
-          return;
-        }
-      }
-
-      const endpoint = isAuthModalSignupMode ? '/signup' : '/login';
-      const body = isAuthModalSignupMode
-        ? JSON.stringify({ nickname, password, contact, email, realname, birth })
-        : JSON.stringify({ nickname, password });
-      try {
-        const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body
-        });
-        const responseText = await response.text();
-        if (!response.ok) {
-          throw new Error(`Server error! status: ${response.status}. Response: ${responseText.substring(0,100)}`);
-        }
-        const data = JSON.parse(responseText);
-        if (data.success) {
-          if (isAuthModalSignupMode) {
-            alert('회원가입이 완료되었습니다. 로그인 해주세요.');
-            openAuthModal(false);
-          } else {
-            localStorage.setItem('giftshop_community_token', data.token || `demo_token_for_${nickname}`);
-            localStorage.setItem('giftshop_community_nickname', nickname);
-            alert('로그인 되었습니다.');
-            closeAuthModal();
-            updateAuthUI();
-            fetchPosts();
-          }
-        } else {
-          showAuthError(data.error || '요청에 실패했습니다. 서버 응답을 확인해주세요.');
-        }
-      } catch (error) {
-        console.error('Auth API error:', error);
-        showAuthError(`서버와 통신 중 오류가 발생했습니다: ${error.message}. API 서버(${API_BASE_URL})가 실행 중인지 확인해주세요.`);
-      }
-    }
-
-    function showAuthError(message) {
-        if (authErrorDiv) {
-            authErrorDiv.textContent = message;
-            authErrorDiv.classList.remove('hidden');
-        }
-    }
-
-    function handleLogout() {
-        if (confirm('로그아웃 하시겠습니까?')) {
-            localStorage.removeItem('giftshop_community_token');
-            localStorage.removeItem('giftshop_community_nickname');
-            alert('로그아웃 되었습니다.');
-            updateAuthUI();
-            fetchPosts(); 
-        }
-    }
-
-
-    // --- 게시판 CRUD 및 렌더링 ---
-    async function fetchPosts(page = 1, keyword = '') {
-        if (!postListBody) { 
-            console.warn("fetchPosts: postListBody element not found. Aborting.");
-            return;
-        }
-
-        let url = `${API_BASE_URL}/posts?page=${page}&limit=${POSTS_PER_PAGE}`;
-        if (keyword) {
-            url += `&search=${encodeURIComponent(keyword)}`; 
-        }
-        const loggedInUser = getLoggedInNickname();
-        if (loggedInUser) {
-            url += `&my_id=${encodeURIComponent(loggedInUser)}`;
-        }
-        
-        try {
-            console.log(`Fetching posts from: ${url}`); 
-            const response = await fetch(url);
-            const responseText = await response.text(); // 응답 본문을 텍스트로 먼저 읽음
-
-            if (!response.ok) { 
-                // 서버가 오류 상태 코드를 반환한 경우
-                throw new Error(`HTTP error! status: ${response.status} ${response.statusText}. Server response: ${responseText.substring(0, 200)}`);
-            }
-
-            let data;
-            try {
-                data = JSON.parse(responseText); // 텍스트를 JSON으로 파싱
-            } catch (e) {
-                // JSON 파싱 실패 시
-                console.error("Failed to parse API response as JSON:", e);
-                throw new Error(`API 응답을 JSON으로 파싱하는데 실패했습니다. 서버 응답이 올바른 JSON 형식이 아닐 수 있습니다. (오류: ${e.message}). Response text (first 200 chars): ${responseText.substring(0,200)}`);
-            }
-            
-            // 성공적으로 JSON 파싱 후 데이터 처리
-            if (Array.isArray(data)) {
-                 renderPostList(data);
-                 totalPosts = data.length; 
-                 if (page === 1 && data.length < POSTS_PER_PAGE && !keyword) {
-                    totalPosts = data.length;
-                 } else if (!keyword) { 
-                    totalPosts = Math.max(data.length, POSTS_PER_PAGE * 3); 
-                 }
-            } else if (data && Array.isArray(data.posts) && typeof data.totalCount === 'number') { 
-                renderPostList(data.posts);
-                totalPosts = data.totalCount;
-            } else { 
-                console.error("Unexpected API response format:", data);
-                renderPostList([]);
-                totalPosts = 0;
-            }
-            renderPagination();
-
-        } catch (error) { // 네트워크 오류 ("Failed to fetch") 또는 위에서 throw된 오류들을 잡음
-            console.error("게시글 목록 로딩 실패:", error);
-            if (postListBody) postListBody.innerHTML = `<tr><td colspan="5" class="text-center py-10 text-red-500">게시글을 불러오는데 실패했습니다. <br>(${error.message}) <br>API 서버(${API_BASE_URL}) 상태 및 네트워크 연결을 확인해주세요.</td></tr>`;
-            if (postListEmpty) postListEmpty.classList.add('hidden');
-            alert(`게시글 목록을 불러올 수 없습니다.\n\n오류: ${error.message}\n\n가장 먼저 API 서버(주소: ${API_BASE_URL})가 현재 실행 중이고 네트워크 연결이 정상적인지 확인해주세요.\n또한, 브라우저 개발자 도구(F12)의 콘솔에서 CORS 또는 Mixed Content 관련 오류 메시지가 있는지 확인해보세요.`);
-        }
-    }
-
-    function renderPostList(posts) {
-        if (!postListBody || !postListEmpty) return;
-        postListBody.innerHTML = '';
-        if (!posts || posts.length === 0) {
-            postListEmpty.classList.remove('hidden');
-            return;
-        }
-        postListEmpty.classList.add('hidden');
-
-        const myNickname = getLoggedInNickname();
-        const isAdmin = myNickname === 'admin';
-
-        posts.forEach((post, index) => {
-            const tr = document.createElement('tr');
-            const displayId = totalPosts - ((currentPage - 1) * POSTS_PER_PAGE) - index;
-            let contentHtml = '';
-            // 게시글 내용에서 URL 자동 링크 변환
-            if (post.content) {
-                contentHtml = post.content.replace(/(https?:\/\/[^\s]+)/g, function(url) {
-                    // XSS 방지: URL에 작은 따옴표, 큰 따옴표 등 필터링
-                    const safeUrl = url.replace(/['"<>]/g, '');
-                    return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline break-all">${safeUrl}</a>`;
-                });
-            }
-            let titleHtml = `
-                <a href="#" class="text-gray-800 hover:text-blue-600 hover:underline font-medium break-all post-title-link" data-post-id="${post.id}">
-                ${post.title || (post.content ? post.content.substring(0,20) + (post.content.length > 20 ? '...' : '') : '제목 없음')}
-                </a>`;
-            // 비공개 표시
-            if (post.is_private) {
-                titleHtml += '<span class="ml-2 px-2 py-0.5 text-xs rounded bg-pink-100 text-pink-700">비공개(관리자만 보기)</span>';
-            }
-            // 삭제 버튼 노출 조건: 본인 또는 관리자
-            let deleteBtnHtml = '';
-            if ((myNickname && post.writer === myNickname) || isAdmin) {
-                deleteBtnHtml = `<button class="ml-2 text-xs text-red-500 hover:underline delete-post-btn" data-post-id="${post.id}">삭제</button>`;
-            }
-            tr.innerHTML = `
-                <td class="px-4 py-3 text-gray-500">${post.id}</td>
-                <td class="px-4 py-3 flex flex-col items-start">${titleHtml} <div class="mt-1 text-gray-700 break-all">${contentHtml}</div> ${deleteBtnHtml}</td>
-                <td class="px-4 py-3 text-gray-700">${post.writer || '익명'}</td>
-                <td class="px-4 py-3 text-gray-500">${formatDate(post.date)}</td>
-                <td class="px-4 py-3 text-gray-500">${post.view_count || 0}</td>
-            `;
-            postListBody.appendChild(tr);
-        });
-        // 제목 클릭 시 상세보기
-        setTimeout(() => {
-          document.querySelectorAll('.post-title-link').forEach(link => {
-            link.addEventListener('click', async function(e) {
-              e.preventDefault();
-              const postId = this.getAttribute('data-post-id');
-              if (!postId) return;
-              try {
-                const res = await fetch(`${API_BASE_URL}/posts/${postId}`);
-                if (!res.ok) throw new Error('서버 오류');
-                const data = await res.json();
-                openReadOnlyPostModal(data);
-              } catch (err) {
-                alert('글을 불러올 수 없습니다.');
-              }
-            });
-          });
-          // 삭제 버튼 이벤트
-          document.querySelectorAll('.delete-post-btn').forEach(btn => {
-            btn.addEventListener('click', async function(e) {
-              e.preventDefault();
-              const postId = this.getAttribute('data-post-id');
-              if (!postId) return;
-              if (!confirm('정말 삭제하시겠습니까?')) return;
-              try {
-                let url = `${API_BASE_URL}/posts/${postId}`;
-                let my_id = getLoggedInNickname();
-                if (isAdmin) {
-                  url += `?my_id=${encodeURIComponent(my_id)}&is_admin_delete=true`;
-                } else {
-                  url += `?my_id=${encodeURIComponent(my_id)}`;
-                }
-                const res = await fetch(url, { method: 'DELETE' });
-                const result = await res.json();
-                if (result.success) {
-                  alert('게시글이 삭제되었습니다.');
-                  fetchPosts(currentPage, currentSearchKeyword);
-                } else {
-                  alert(result.error || '삭제에 실패했습니다.');
-                }
-              } catch (err) {
-                alert('삭제 중 오류가 발생했습니다.');
-              }
-            });
-          });
-        }, 0);
-    }
-
-    function formatDate(dateString) {
-        if (!dateString) return '-';
-        const date = new Date(dateString);
-        if (isNaN(date.getTime())) return '유효하지 않은 날짜';
-        return date.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
-    }
-
-    function renderPagination() {
-        if (!paginationControls) return;
-        paginationControls.innerHTML = '';
-        if (totalPosts === 0) return;
-
-        const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
-        if (totalPages <= 1) return;
-
-        const prevGroupBtn = document.createElement('button');
-        prevGroupBtn.innerHTML = '&laquo;';
-        prevGroupBtn.className = 'pagination-button px-2.5 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-200 disabled:opacity-50';
-        prevGroupBtn.disabled = currentPage <= 10 && totalPages > 10 ? false : (currentPage <=1) ; 
-        prevGroupBtn.onclick = () => {
-            const currentGroupStart = Math.floor((currentPage -1) / 10) * 10 + 1;
-            changePage(Math.max(1, currentGroupStart - 10));
-        }
-        if (totalPages > 10) paginationControls.appendChild(prevGroupBtn);
-
-        const prevBtn = document.createElement('button');
-        prevBtn.textContent = '이전';
-        prevBtn.className = 'pagination-button px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-200 disabled:opacity-50';
-        prevBtn.disabled = currentPage === 1;
-        prevBtn.onclick = () => changePage(currentPage - 1);
-        paginationControls.appendChild(prevBtn);
-        
-        const pageGroupSize = 10;
-        const currentGroup = Math.floor((currentPage - 1) / pageGroupSize);
-        const startPage = currentGroup * pageGroupSize + 1;
-        const endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
-
-        for (let i = startPage; i <= endPage; i++) {
-            const pageBtn = document.createElement('button');
-            pageBtn.textContent = i;
-            pageBtn.className = `pagination-button px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-200 ${i === currentPage ? 'active' : ''}`;
-            pageBtn.onclick = () => changePage(i);
-            paginationControls.appendChild(pageBtn);
-        }
-
-        const nextBtn = document.createElement('button');
-        nextBtn.textContent = '다음';
-        nextBtn.className = 'pagination-button px-3 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-200 disabled:opacity-50';
-        nextBtn.disabled = currentPage === totalPages;
-        nextBtn.onclick = () => changePage(currentPage + 1);
-        paginationControls.appendChild(nextBtn);
-
-        const nextGroupBtn = document.createElement('button');
-        nextGroupBtn.innerHTML = '&raquo;';
-        nextGroupBtn.className = 'pagination-button px-2.5 py-1 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-200 disabled:opacity-50';
-        nextGroupBtn.disabled = endPage >= totalPages;
-        nextGroupBtn.onclick = () => {
-            changePage(endPage + 1);
-        }
-        if (totalPages > 10) paginationControls.appendChild(nextGroupBtn);
-    }
-
-    function changePage(page) {
-        if (page < 1 || page > Math.ceil(totalPosts / POSTS_PER_PAGE)) return;
-        currentPage = page;
-        fetchPosts(currentPage, currentSearchKeyword);
-    }
-
-    // 읽기 전용 글 상세 모달 열기
-function openReadOnlyPostModal(post) {
-  if (!postModal || !postTitleInput || !postContentInput || !postModalTitle) return;
-  isEditMode = false;
-  editingPostId = null;
-  postModalTitle.textContent = '게시글 보기';
-  postTitleInput.value = post.title || '';
-  postContentInput.value = post.content || '';
-  postTitleInput.readOnly = true;
-  postContentInput.readOnly = true;
-  if (postIsPrivateCheckbox) postIsPrivateCheckbox.checked = !!post.is_private;
-  if (postIsPrivateCheckbox) postIsPrivateCheckbox.disabled = true;
-  if (postModalSubmitBtn) postModalSubmitBtn.style.display = 'none';
-  if (postFormError) postFormError.classList.add('hidden');
-  postModal.classList.remove('hidden');
-}
-
-    // 글쓰기/수정 모달 열 때는 입력 가능하게
-    function openPostModal(editMode = false, post = null) {
-        isEditMode = editMode;
-        editingPostId = post ? post.id : null;
-        if (postModalTitle) postModalTitle.textContent = editMode ? '글 수정' : '새 글 작성';
-        if (postModalSubmitBtn) {
-          postModalSubmitBtn.textContent = editMode ? '수정 완료' : '등록';
-          postModalSubmitBtn.style.display = '';
-        }
-        if (postTitleInput) {
-          postTitleInput.value = post ? post.title || '' : '';
-          postTitleInput.readOnly = false;
-        }
-        if (postContentInput) {
-          postContentInput.value = post ? post.content || '' : '';
-          postContentInput.readOnly = false;
-        }
-        if (postIsPrivateCheckbox) {
-          postIsPrivateCheckbox.checked = post ? !!post.is_private : false;
-          postIsPrivateCheckbox.disabled = false;
-        }
-        if (postAttachmentInput) postAttachmentInput.value = '';
-        if (postFormError) postFormError.classList.add('hidden');
-        if (postModal) postModal.classList.remove('hidden');
-        if (postTitleInput) postTitleInput.focus();
-    }
-
-    function closePostModal() {
-        if (postModal) postModal.classList.add('hidden');
-        if (postForm) postForm.reset();
-        if (postTitleInput) postTitleInput.readOnly = false;
-        if (postContentInput) postContentInput.readOnly = false;
-        if (postIsPrivateCheckbox) postIsPrivateCheckbox.disabled = false;
-        if (postModalSubmitBtn) postModalSubmitBtn.style.display = '';
-    }
-
-    async function handlePostFormSubmit(event) {
-        event.preventDefault();
-        if (!isLoggedIn()) {
-            alert('글을 작성하려면 로그인이 필요합니다.');
-            openAuthModal();
-            return;
-        }
-
-        if (!postTitleInput || !postContentInput || !postIsPrivateCheckbox) return;
-
-        const title = postTitleInput.value.trim();
-        const content = postContentInput.value.trim();
-        const is_private = postIsPrivateCheckbox.checked;
-        const writer = getLoggedInNickname(); 
-        
-        const postData = { writer, title, content, is_private: is_private ? 1 : 0 };
-
-        let url = `${API_BASE_URL}/posts`;
-        let method = 'POST';
-
-        if (isEditMode && editingPostId) {
-            url += `/${editingPostId}`;
-            method = 'PUT';
-            postData.my_id = writer; 
-        }
-        
-        try {
-            const response = await fetch(url, { 
-                method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(postData)
-            });
-            const responseText = await response.text();
-
-            if (!response.ok) {
-                throw new Error(`Server error! status: ${response.status}. Response: ${responseText.substring(0,100)}`);
-            }
-            const result = JSON.parse(responseText);
-
-
-            if (result.success || result.id) { // 서버 응답에 success 또는 id가 있으면 성공으로 간주
-                alert(isEditMode ? '글이 수정되었습니다.' : '글이 등록되었습니다.');
-                closePostModal();
-                fetchPosts(currentPage, currentSearchKeyword); 
-            } else {
-                if (postFormError) {
-                    postFormError.textContent = result.error || '요청 처리 중 오류가 발생했습니다. 서버 응답을 확인해주세요.';
-                    postFormError.classList.remove('hidden');
-                } else {
-                    alert(result.error || '요청 처리 중 오류가 발생했습니다. 서버 응답을 확인해주세요.');
-                }
-            }
-        } catch (error) {
-            console.error("Post form submit error:", error);
-            if (postFormError) {
-                postFormError.textContent = `서버와 통신 중 오류가 발생했습니다: ${error.message}. API 서버(${API_BASE_URL}) 상태를 확인해주세요.`;
-                postFormError.classList.remove('hidden');
-            } else {
-                alert(`서버와 통신 중 오류가 발생했습니다: ${error.message}. API 서버(${API_BASE_URL}) 상태를 확인해주세요.`);
-            }
-        }
-    }
-
-
-    // --- 이벤트 리스너 ---
-    document.addEventListener('DOMContentLoaded', () => {
-        updateAuthUI();
-        fetchPosts(currentPage); 
-
-        if(searchButton) {
-            searchButton.addEventListener('click', () => {
-                if (searchKeywordInput) currentSearchKeyword = searchKeywordInput.value.trim();
-                currentPage = 1; 
-                fetchPosts(currentPage, currentSearchKeyword);
-            });
-        }
-        if(searchKeywordInput) {
-            searchKeywordInput.addEventListener('keypress', (event) => {
-                if (event.key === 'Enter') {
-                    if (searchButton) searchButton.click();
-                }
-            });
-        }
-
-        if(writePostBtn) {
-            writePostBtn.addEventListener('click', () => {
-                if (!isLoggedIn()) {
-                    alert('글을 작성하려면 로그인이 필요합니다.');
-                    openAuthModal();
-                    return;
-                }
-                openPostModal();
-            });
-        }
-
-        if(postModalCloseBtn) postModalCloseBtn.addEventListener('click', closePostModal);
-        if(postModalCancelBtn) postModalCancelBtn.addEventListener('click', closePostModal);
-        if(postForm) postForm.addEventListener('submit', handlePostFormSubmit);
-
-        if(authModalClose) authModalClose.addEventListener('click', closeAuthModal);
-        if(authSubmitBtn) authSubmitBtn.addEventListener('click', handleAuthSubmit);
-        if(authToggleBtn) authToggleBtn.addEventListener('click', () => openAuthModal(!isAuthModalSignupMode));
-        if(loginBtnNav) loginBtnNav.addEventListener('click', () => openAuthModal(false));
-        if(logoutBtnNav) logoutBtnNav.addEventListener('click', handleLogout);
-        if(signupBtnNav) signupBtnNav.addEventListener('click', () => openAuthModal(true));
-        
-        if(mobileAuthBtn && mobileAuthText) {
-            mobileAuthBtn.addEventListener('click', () => {
-                if(isLoggedIn()) {
-                    handleLogout(); 
-                } else {
-                    openAuthModal(false);
-                }
-            });
-        }
-
-        const currentYearEl = getElement('current-year');
-        if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
-    });
-
-    function navigateToIndexSection(sectionName) {
-        localStorage.setItem('targetSection', sectionName); 
-        window.location.href = './index.html';
-    }
-
-    // 모바일 메뉴(햄버거) 토글 기능 추가 (index.html과 동일)
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    // 모바일 메뉴 토글 (기존 코드 유지)
     document.addEventListener('DOMContentLoaded', function() {
       var mobileMenuBtn = document.getElementById('mobile-menu-button');
       var mobileMenu = document.getElementById('mobile-menu');
@@ -849,10 +108,7 @@ function openReadOnlyPostModal(post) {
         mobileMenuBtn.addEventListener('click', function() {
           mobileMenu.classList.toggle('hidden');
         });
-      }
-      // 모바일 메뉴에서 항목 클릭 시 메뉴 닫기
-      if (mobileMenu) {
-        mobileMenu.querySelectorAll('a,button').forEach(function(el) {
+        mobileMenu.querySelectorAll('a').forEach(function(el) {
           el.addEventListener('click', function() {
             mobileMenu.classList.add('hidden');
           });
