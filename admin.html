@@ -73,6 +73,7 @@
   </header>
 
   <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <!-- 상품 관리 섹션 -->
     <section id="product-management-section" class="bg-white shadow sm:rounded-lg p-6 mt-6">
       <h2 class="text-xl font-semibold text-gray-900 mb-4">상품 관리</h2>
       <form id="add-product-form" class="flex flex-wrap gap-2 mb-4">
@@ -95,10 +96,293 @@
       </div>
       <div id="admin-product-empty" class="text-gray-500 text-center py-8 hidden"><p>등록된 상품이 없습니다.</p></div>
     </section>
+
+    <!-- 게시글 관리 섹션 -->
+    <section id="post-management-section" class="bg-white shadow sm:rounded-lg p-6">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">게시글 관리</h2>
+      <div class="mb-4 flex gap-2">
+        <select id="post-filter-category" class="border rounded p-2">
+          <option value="">전체 카테고리</option>
+          <option value="tech">💻 기술</option>
+          <option value="finance">💰 금융</option>
+          <option value="lifestyle">🏠 라이프스타일</option>
+          <option value="news">📰 뉴스</option>
+          <option value="hot">🔥 핫 이슈</option>
+        </select>
+        <input type="text" id="post-search" placeholder="제목 또는 내용 검색..." class="border rounded p-2 flex-1">
+        <button id="refresh-posts-btn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">새로고침</button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 admin-table">
+          <thead class="bg-gray-50">
+            <tr>
+              <th>ID</th><th>제목</th><th>작성자</th><th>카테고리</th><th>조회수</th><th>좋아요</th><th>작성일</th><th>작업</th>
+            </tr>
+          </thead>
+          <tbody id="admin-post-list" class="bg-white divide-y divide-gray-200"></tbody>
+        </table>
+      </div>
+      <div id="admin-post-empty" class="text-gray-500 text-center py-8 hidden">
+        <p>게시글이 없습니다.</p>
+      </div>
+    </section>
   </main>
+
+  <!-- 게시글 수정 모달 -->
+  <div id="edit-post-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto modal-content">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-bold text-gray-800">게시글 수정</h3>
+        <button id="close-edit-modal" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+      </div>
+      
+      <form id="edit-post-form" class="space-y-4">
+        <input type="hidden" id="edit-post-id">
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">카테고리</label>
+          <select id="edit-post-category" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500">
+            <option value="tech">💻 기술</option>
+            <option value="finance">💰 금융</option>
+            <option value="lifestyle">🏠 라이프스타일</option>
+            <option value="news">📰 뉴스</option>
+            <option value="hot">🔥 핫 이슈</option>
+          </select>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">제목</label>
+          <input type="text" id="edit-post-title" required 
+                 class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">작성자</label>
+          <input type="text" id="edit-post-author" required 
+                 class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">내용</label>
+          <textarea id="edit-post-content" rows="10" required
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">태그 (쉼표로 구분)</label>
+          <input type="text" id="edit-post-tags" 
+                 class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500">
+        </div>
+        
+        <div class="flex items-center gap-4">
+          <label class="flex items-center">
+            <input type="checkbox" id="edit-post-featured" class="mr-2">
+            <span class="text-sm text-gray-700">🔥 핫 이슈로 등록</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="edit-post-auto" class="mr-2">
+            <span class="text-sm text-gray-700">🤖 자동 업데이트 허용</span>
+          </label>
+        </div>
+        
+        <div class="flex justify-end gap-3 pt-4">
+          <button type="button" id="cancel-edit-btn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition">
+            취소
+          </button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+            수정 완료
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     // API 서버 주소
     const API_BASE_URL = 'http://localhost:4000/api'; // 로컬 서버로 변경
+    
+    // --- 게시글 관리 로직 ---
+    let allPosts = [];
+    let filteredPosts = [];
+    
+    // 로컬스토리지에서 게시글 데이터 가져오기
+    function loadBlogPosts() {
+      try {
+        const savedPosts = localStorage.getItem('blogPosts');
+        return savedPosts ? JSON.parse(savedPosts) : [];
+      } catch (e) {
+        console.error('게시글 로드 실패:', e);
+        return [];
+      }
+    }
+    
+    // 로컬스토리지에 게시글 데이터 저장
+    function saveBlogPosts() {
+      try {
+        localStorage.setItem('blogPosts', JSON.stringify(allPosts));
+      } catch (e) {
+        console.error('게시글 저장 실패:', e);
+      }
+    }
+    
+    // 카테고리 정보 반환
+    function getCategoryInfo(category) {
+      const categories = {
+        hot: { label: '🔥 핫 이슈', class: 'bg-red-100 text-red-700' },
+        tech: { label: '💻 기술', class: 'bg-blue-100 text-blue-700' },
+        finance: { label: '💰 금융', class: 'bg-green-100 text-green-700' },
+        lifestyle: { label: '🏠 라이프스타일', class: 'bg-purple-100 text-purple-700' },
+        news: { label: '📰 뉴스', class: 'bg-yellow-100 text-yellow-700' }
+      };
+      return categories[category] || { label: '📋 기타', class: 'bg-gray-100 text-gray-700' };
+    }
+    
+    // 게시글 목록 렌더링
+    function renderAdminPostList(posts) {
+      const listEl = document.getElementById('admin-post-list');
+      const emptyEl = document.getElementById('admin-post-empty');
+      
+      if (!listEl || !emptyEl) return;
+      
+      listEl.innerHTML = '';
+      
+      if (!posts || posts.length === 0) {
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+      
+      emptyEl.classList.add('hidden');
+      
+      posts.forEach(post => {
+        const categoryInfo = getCategoryInfo(post.category);
+        const createdDate = new Date(post.createdAt).toLocaleDateString('ko-KR');
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="font-mono text-sm">${post.id}</td>
+          <td class="max-w-xs truncate" title="${post.title}">${post.title}</td>
+          <td>${post.author}</td>
+          <td>
+            <span class="px-2 py-1 rounded-full text-xs font-medium ${categoryInfo.class}">
+              ${categoryInfo.label}
+            </span>
+          </td>
+          <td class="text-center">${post.views.toLocaleString()}</td>
+          <td class="text-center">${post.likes}</td>
+          <td class="text-sm text-gray-600">${createdDate}</td>
+          <td class="space-x-2">
+            <button class="text-blue-600 hover:text-blue-900 text-sm admin-edit-post-btn" data-id="${post.id}">수정</button>
+            <button class="text-red-600 hover:text-red-900 text-sm admin-delete-post-btn" data-id="${post.id}">삭제</button>
+          </td>
+        `;
+        listEl.appendChild(tr);
+      });
+      
+      // 수정 버튼 이벤트
+      document.querySelectorAll('.admin-edit-post-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const postId = parseInt(this.dataset.id);
+          openEditPostModal(postId);
+        });
+      });
+      
+      // 삭제 버튼 이벤트
+      document.querySelectorAll('.admin-delete-post-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const postId = parseInt(this.dataset.id);
+          deletePost(postId);
+        });
+      });
+    }
+    
+    // 게시글 필터링
+    function filterPosts() {
+      const categoryFilter = document.getElementById('post-filter-category').value;
+      const searchTerm = document.getElementById('post-search').value.toLowerCase();
+      
+      filteredPosts = allPosts.filter(post => {
+        const matchesCategory = !categoryFilter || post.category === categoryFilter;
+        const matchesSearch = !searchTerm || 
+          post.title.toLowerCase().includes(searchTerm) ||
+          post.content.toLowerCase().includes(searchTerm);
+        return matchesCategory && matchesSearch;
+      });
+      
+      renderAdminPostList(filteredPosts);
+    }
+    
+    // 게시글 로드
+    function loadAllPosts() {
+      allPosts = loadBlogPosts();
+      filteredPosts = [...allPosts];
+      renderAdminPostList(filteredPosts);
+    }
+    
+    // 게시글 수정 모달 열기
+    function openEditPostModal(postId) {
+      const post = allPosts.find(p => p.id === postId);
+      if (!post) {
+        alert('게시글을 찾을 수 없습니다.');
+        return;
+      }
+      
+      document.getElementById('edit-post-id').value = post.id;
+      document.getElementById('edit-post-category').value = post.category;
+      document.getElementById('edit-post-title').value = post.title;
+      document.getElementById('edit-post-author').value = post.author;
+      document.getElementById('edit-post-content').value = post.content;
+      document.getElementById('edit-post-tags').value = post.tags.join(', ');
+      document.getElementById('edit-post-featured').checked = post.featured || false;
+      document.getElementById('edit-post-auto').checked = post.auto || false;
+      
+      document.getElementById('edit-post-modal').classList.remove('hidden');
+    }
+    
+    // 게시글 수정 모달 닫기
+    function closeEditPostModal() {
+      document.getElementById('edit-post-modal').classList.add('hidden');
+      document.getElementById('edit-post-form').reset();
+    }
+    
+    // 게시글 수정
+    function updatePost(postData) {
+      const postIndex = allPosts.findIndex(p => p.id === postData.id);
+      if (postIndex === -1) {
+        alert('게시글을 찾을 수 없습니다.');
+        return;
+      }
+      
+      // 기존 게시글 데이터 유지하면서 수정
+      allPosts[postIndex] = {
+        ...allPosts[postIndex],
+        ...postData,
+        updatedAt: new Date().toISOString()
+      };
+      
+      saveBlogPosts();
+      loadAllPosts();
+      closeEditPostModal();
+      alert('게시글이 수정되었습니다.');
+    }
+    
+    // 게시글 삭제
+    function deletePost(postId) {
+      const post = allPosts.find(p => p.id === postId);
+      if (!post) {
+        alert('게시글을 찾을 수 없습니다.');
+        return;
+      }
+      
+      if (!confirm(`"${post.title}" 게시글을 정말 삭제하시겠습니까?`)) {
+        return;
+      }
+      
+      allPosts = allPosts.filter(p => p.id !== postId);
+      saveBlogPosts();
+      loadAllPosts();
+      alert('게시글이 삭제되었습니다.');
+    }
+    
     // --- 상품 관리 로직만 남김 ---
     async function fetchAllProducts() {
       try {
@@ -199,8 +483,53 @@
         }
       };
     }
-    // 페이지 로드 시 상품만 불러오기
+    // 페이지 로드 시 초기화
     document.addEventListener('DOMContentLoaded', function() {
+      // 게시글 관리 초기화
+      loadAllPosts();
+      
+      // 게시글 필터 이벤트
+      document.getElementById('post-filter-category').addEventListener('change', filterPosts);
+      document.getElementById('post-search').addEventListener('input', filterPosts);
+      document.getElementById('refresh-posts-btn').addEventListener('click', loadAllPosts);
+      
+      // 게시글 수정 모달 이벤트
+      document.getElementById('close-edit-modal').addEventListener('click', closeEditPostModal);
+      document.getElementById('cancel-edit-btn').addEventListener('click', closeEditPostModal);
+      
+      // 게시글 수정 폼 제출
+      document.getElementById('edit-post-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const postData = {
+          id: parseInt(document.getElementById('edit-post-id').value),
+          category: document.getElementById('edit-post-category').value,
+          title: document.getElementById('edit-post-title').value.trim(),
+          author: document.getElementById('edit-post-author').value.trim(),
+          content: document.getElementById('edit-post-content').value.trim(),
+          tags: document.getElementById('edit-post-tags').value.split(',').map(tag => tag.trim()).filter(tag => tag),
+          featured: document.getElementById('edit-post-featured').checked,
+          auto: document.getElementById('edit-post-auto').checked
+        };
+        
+        if (!postData.title || !postData.content || !postData.author) {
+          alert('제목, 내용, 작성자는 필수 항목입니다.');
+          return;
+        }
+        
+        updatePost(postData);
+      });
+      
+      // ESC 키로 모달 닫기
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          if (!document.getElementById('edit-post-modal').classList.contains('hidden')) {
+            closeEditPostModal();
+          }
+        }
+      });
+      
+      // 상품 관리 초기화
       loadAllProducts();
     });
   </script>
