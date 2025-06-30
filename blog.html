@@ -155,6 +155,33 @@
     </div>
   </main>
 
+  <!-- 글 상세보기 모달 -->
+  <div id="view-post-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
+        <h3 class="text-xl font-bold text-gray-800">📖 게시글 보기</h3>
+        <button id="close-view-modal" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+      </div>
+      
+      <div id="post-detail-content" class="p-6">
+        <!-- 게시글 내용이 여기에 동적으로 삽입됩니다 -->
+      </div>
+      
+      <div class="sticky bottom-0 bg-gray-50 border-t border-gray-200 p-4 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+          <button id="like-post-btn" class="flex items-center gap-2 px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition">
+            <span>❤️</span>
+            <span id="like-count">0</span>
+          </button>
+          <span id="view-count-display" class="text-gray-600">👁️ 조회수: 0</span>
+        </div>
+        <button id="close-view-modal-btn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+          닫기
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- 글쓰기 모달 -->
   <div id="write-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden p-4">
     <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -251,15 +278,49 @@
       categoryBtns: document.querySelectorAll('.category-btn'),
       totalPosts: document.getElementById('total-posts'),
       todayPosts: document.getElementById('today-posts'),
-      hotPosts: document.getElementById('hot-posts')
+      hotPosts: document.getElementById('hot-posts'),
+      viewPostModal: document.getElementById('view-post-modal'),
+      closeViewModal: document.getElementById('close-view-modal'),
+      closeViewModalBtn: document.getElementById('close-view-modal-btn'),
+      postDetailContent: document.getElementById('post-detail-content'),
+      likePostBtn: document.getElementById('like-post-btn'),
+      likeCount: document.getElementById('like-count'),
+      viewCountDisplay: document.getElementById('view-count-display')
     };
+
+    let currentViewingPost = null;
 
     // 초기 데이터 (샘플)
     const samplePosts = [
       {
         id: 1,
         title: "2025년 핫한 투자 트렌드 분석",
-        content: "올해 주목해야 할 투자 분야와 전략을 분석해보겠습니다. AI, 그린에너지, 메타버스 등...",
+        content: `올해 주목해야 할 투자 분야와 전략을 분석해보겠습니다.
+
+🚀 주요 투자 트렌드
+1. AI 및 머신러닝 기술
+   - 인공지능 스타트업 투자 급증
+   - 자동화 솔루션 시장 확대
+   - 대화형 AI 서비스 성장
+
+2. 그린에너지 및 ESG 투자
+   - 태양광, 풍력 에너지 기업
+   - 친환경 기술 개발 회사
+   - ESG 경영 우수 기업들
+
+3. 메타버스 및 디지털 자산
+   - 가상현실(VR) 플랫폼
+   - NFT 및 디지털 아트
+   - 블록체인 기반 서비스
+
+💡 투자 전략 포인트
+- 장기적 관점에서 접근
+- 분산 투자를 통한 리스크 관리
+- 시장 동향 지속적 모니터링
+- 전문가 조언 적극 활용
+
+📈 향후 전망
+2025년은 기술 혁신과 친환경 정책이 투자 시장을 주도할 것으로 예상됩니다. 특히 AI와 그린에너지 분야의 성장 잠재력이 높습니다.`,
         category: "finance",
         tags: ["투자", "트렌드", "2025"],
         author: "투자전문가",
@@ -272,7 +333,33 @@
       {
         id: 2,
         title: "휴대폰 결제 시스템의 미래",
-        content: "모바일 결제 기술의 발전과 앞으로의 전망에 대해 알아보겠습니다...",
+        content: `모바일 결제 기술의 발전과 앞으로의 전망에 대해 알아보겠습니다.
+
+📱 현재 모바일 결제 현황
+한국의 모바일 결제 시장은 세계 최고 수준으로 발전했습니다. 삼성페이, 애플페이, 카카오페이 등 다양한 플랫폼이 경쟁하고 있습니다.
+
+🔮 미래 기술 동향
+1. 생체인식 기술 강화
+   - 지문, 얼굴, 홍채 인식
+   - 다중 생체인식 보안 시스템
+   - 편의성과 보안성 동시 향상
+
+2. AI 기반 결제 서비스
+   - 개인화된 결제 추천
+   - 사기 거래 실시간 탐지
+   - 음성 인식 결제 서비스
+
+3. 블록체인 기반 결제
+   - 분산형 결제 시스템
+   - 암호화폐 연동 서비스
+   - 국경 없는 글로벌 결제
+
+💳 새로운 결제 방식
+- 웨어러블 디바이스 결제
+- IoT 기기 연동 자동 결제
+- AR/VR 환경 내 결제 시스템
+
+앞으로 5년 내에 결제 방식은 더욱 간편하고 안전해질 것입니다.`,
         category: "tech",
         tags: ["모바일", "결제", "핀테크"],
         author: "기술블로거",
@@ -285,7 +372,34 @@
       {
         id: 3,
         title: "🔥 오늘의 핫 이슈: 디지털 화폐 급등",
-        content: "최근 디지털 화폐 시장의 급등 원인과 향후 전망을 분석합니다...",
+        content: `최근 디지털 화폐 시장의 급등 원인과 향후 전망을 분석합니다.
+
+📊 시장 현황
+오늘 오전 비트코인이 15% 급등하며 시장의 주목을 받고 있습니다. 이더리움, 리플 등 주요 알트코인들도 동반 상승세를 보이고 있습니다.
+
+🔍 급등 요인 분석
+1. 제도적 투자자 유입
+   - 대형 투자기관들의 디지털자산 편입
+   - ETF 승인 기대감 상승
+   - 전통 금융권의 암호화폐 서비스 확대
+
+2. 글로벌 경제 불안정성
+   - 인플레이션 대비 자산으로 인식
+   - 달러 약세에 따른 대체 투자처 부상
+   - 지정학적 리스크 증가
+
+3. 기술적 발전
+   - 블록체인 기술 개선
+   - DeFi 생태계 확장
+   - NFT 시장 활성화
+
+⚠️ 투자 주의사항
+- 높은 변동성으로 인한 리스크
+- 규제 환경 변화 가능성
+- 충분한 정보 수집 후 신중한 투자 필요
+
+💡 전문가 의견
+"단기적으로는 상승 모멘텀이 지속될 가능성이 높으나, 장기적 관점에서 신중한 접근이 필요하다"`,
         category: "hot",
         tags: ["디지털화폐", "급등", "분석"],
         author: "시장분석가",
@@ -390,7 +504,7 @@
       const categoryInfo = getCategoryInfo(post.category);
       
       return `
-        <article class="blog-card bg-white rounded-lg shadow-md p-6 border-l-4 border-l-blue-500">
+        <article class="blog-card bg-white rounded-lg shadow-md p-6 border-l-4 border-l-blue-500 cursor-pointer hover:shadow-lg transition-all" onclick="viewPost(${post.id})">
           <div class="flex flex-wrap items-center gap-2 mb-3">
             <span class="category-badge px-3 py-1 rounded-full text-sm font-medium ${categoryInfo.class}">
               ${categoryInfo.label}
@@ -399,7 +513,7 @@
             ${post.auto ? '<span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">🤖 AUTO</span>' : ''}
           </div>
           
-          <h2 class="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition cursor-pointer">
+          <h2 class="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition">
             ${post.title}
           </h2>
           
@@ -419,6 +533,7 @@
             <div class="flex items-center gap-4">
               <span>👁️ ${post.views.toLocaleString()}</span>
               <span>❤️ ${post.likes}</span>
+              <span class="text-blue-600 font-medium">자세히 보기 →</span>
             </div>
           </div>
         </article>
@@ -620,6 +735,128 @@
         };
         
         addPost(postData);
+        elements.writeModal.classList.add('hidden');
+        elements.postForm.reset();
+      });
+      
+      // 게시글 상세보기
+      window.viewPost = function(postId) {
+        const post = posts.find(p => p.id === postId);
+        if (!post) {
+          alert('게시글을 찾을 수 없습니다.');
+          return;
+        }
+
+        // 조회수 증가
+        post.views++;
+        currentViewingPost = post;
+        savePosts();
+        updateStats();
+
+        // 모달 내용 구성
+        const categoryInfo = getCategoryInfo(post.category);
+        const timeAgo = getTimeAgo(post.createdAt);
+        
+        elements.postDetailContent.innerHTML = `
+          <div class="mb-6">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <span class="category-badge px-3 py-1 rounded-full text-sm font-medium ${categoryInfo.class}">
+                ${categoryInfo.label}
+              </span>
+              ${post.featured ? '<span class="hot-badge px-2 py-1 rounded-full text-xs font-medium text-white">🔥 HOT</span>' : ''}
+              ${post.auto ? '<span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">🤖 AUTO</span>' : ''}
+            </div>
+            
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">${post.title}</h1>
+            
+            <div class="flex items-center justify-between text-sm text-gray-600 mb-6 pb-4 border-b border-gray-200">
+              <div class="flex items-center gap-4">
+                <span>👤 ${post.author}</span>
+                <span>🕒 ${timeAgo}</span>
+                <span>📅 ${new Date(post.createdAt).toLocaleDateString('ko-KR')}</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <span>👁️ ${post.views.toLocaleString()}</span>
+                <span>❤️ ${post.likes}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="prose prose-lg max-w-none mb-6">
+            <div class="text-gray-800 leading-relaxed whitespace-pre-wrap">${post.content}</div>
+          </div>
+          
+          ${post.tags.length > 0 ? `
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">🏷️ 태그</h3>
+              <div class="flex flex-wrap gap-2">
+                ${post.tags.map(tag => `<span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">#${tag}</span>`).join('')}
+              </div>
+            </div>
+          ` : ''}
+          
+          <div class="bg-gray-50 rounded-lg p-4">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">💬 이 글이 도움이 되셨나요?</h3>
+            <p class="text-gray-600 text-sm">좋아요 버튼을 눌러 작성자에게 응원을 보내주세요!</p>
+          </div>
+        `;
+
+        // 좋아요 수와 조회수 업데이트
+        elements.likeCount.textContent = post.likes;
+        elements.viewCountDisplay.textContent = `👁️ 조회수: ${post.views.toLocaleString()}`;
+
+        // 모달 표시
+        elements.viewPostModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // 스크롤 방지
+      }
+
+      // 글 상세보기 모달 이벤트
+      if (elements.closeViewModal) {
+        elements.closeViewModal.addEventListener('click', closeViewPostModal);
+      }
+      
+      if (elements.closeViewModalBtn) {
+        elements.closeViewModalBtn.addEventListener('click', closeViewPostModal);
+      }
+      
+      // 좋아요 버튼 이벤트
+      if (elements.likePostBtn) {
+        elements.likePostBtn.addEventListener('click', likePost);
+      }
+
+      // 모달 외부 클릭시 닫기
+      if (elements.viewPostModal) {
+        elements.viewPostModal.addEventListener('click', (e) => {
+          if (e.target === elements.viewPostModal) {
+            closeViewPostModal();
+          }
+        });
+      }
+
+      // ESC 키로 모달 닫기
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (!elements.viewPostModal.classList.contains('hidden')) {
+            closeViewPostModal();
+          }
+          if (!elements.writeModal.classList.contains('hidden')) {
+            elements.writeModal.classList.add('hidden');
+            elements.postForm.reset();
+          }
+        }
+      });
+
+      // 글쓰기 모달
+      elements.writeBtn.addEventListener('click', () => {
+        elements.writeModal.classList.remove('hidden');
+      });
+      
+      elements.closeModal.addEventListener('click', () => {
+        elements.writeModal.classList.add('hidden');
+        elements.postForm.reset();
+      });
+      
+      elements.cancelBtn.addEventListener('click', () => {
         elements.writeModal.classList.add('hidden');
         elements.postForm.reset();
       });
