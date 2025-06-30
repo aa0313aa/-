@@ -46,9 +46,24 @@
         <a href="blog.html" class="text-blue-700 font-bold">블로그</a>
         <a href="customer.html" class="text-gray-700 hover:text-blue-700 transition">고객센터</a>
       </nav>
-      <button id="write-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition font-medium">
-        ✏️ 글쓰기
-      </button>
+      
+      <div class="flex items-center gap-3">
+        <!-- 사용자 정보 표시 -->
+        <div id="user-info" class="hidden items-center gap-2 text-sm text-gray-600">
+          <span>👤</span>
+          <span id="user-nickname">사용자</span>
+        </div>
+        
+        <!-- 로그인/로그아웃 버튼 -->
+        <button id="auth-btn" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition font-medium">
+          🔐 로그인
+        </button>
+        
+        <!-- 글쓰기 버튼 -->
+        <button id="write-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition font-medium hidden">
+          ✏️ 글쓰기
+        </button>
+      </div>
     </div>
   </header>
 
@@ -154,6 +169,88 @@
       </div>
     </div>
   </main>
+
+  <!-- 로그인/회원가입 모달 -->
+  <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h3 id="auth-modal-title" class="text-xl font-bold text-gray-800">로그인</h3>
+          <button id="close-auth-modal" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+        </div>
+        
+        <!-- 로그인 폼 -->
+        <form id="login-form" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">이메일</label>
+            <input type="email" id="login-email" required 
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                   placeholder="이메일을 입력하세요">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">비밀번호</label>
+            <input type="password" id="login-password" required 
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                   placeholder="비밀번호를 입력하세요">
+          </div>
+          
+          <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+            로그인
+          </button>
+          
+          <div class="text-center text-sm text-gray-600">
+            계정이 없으신가요? 
+            <button type="button" id="show-signup" class="text-blue-600 hover:text-blue-800 font-medium">
+              회원가입
+            </button>
+          </div>
+        </form>
+        
+        <!-- 회원가입 폼 -->
+        <form id="signup-form" class="space-y-4 hidden">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">닉네임</label>
+            <input type="text" id="signup-nickname" required 
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                   placeholder="닉네임을 입력하세요">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">이메일</label>
+            <input type="email" id="signup-email" required 
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                   placeholder="이메일을 입력하세요">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">비밀번호</label>
+            <input type="password" id="signup-password" required 
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                   placeholder="비밀번호를 입력하세요 (8자 이상)">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">비밀번호 확인</label>
+            <input type="password" id="signup-password-confirm" required 
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                   placeholder="비밀번호를 다시 입력하세요">
+          </div>
+          
+          <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition">
+            회원가입
+          </button>
+          
+          <div class="text-center text-sm text-gray-600">
+            이미 계정이 있으신가요? 
+            <button type="button" id="show-login" class="text-blue-600 hover:text-blue-800 font-medium">
+              로그인
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- 글 상세보기 모달 -->
   <div id="view-post-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden p-4">
@@ -261,6 +358,7 @@
     let autoRefresh = true;
     let currentPage = 1;
     const postsPerPage = 10;
+    let currentUser = null; // 현재 로그인한 사용자
 
     // DOM 요소
     const elements = {
@@ -285,7 +383,17 @@
       postDetailContent: document.getElementById('post-detail-content'),
       likePostBtn: document.getElementById('like-post-btn'),
       likeCount: document.getElementById('like-count'),
-      viewCountDisplay: document.getElementById('view-count-display')
+      viewCountDisplay: document.getElementById('view-count-display'),
+      authBtn: document.getElementById('auth-btn'),
+      authModal: document.getElementById('auth-modal'),
+      closeAuthModal: document.getElementById('close-auth-modal'),
+      authModalTitle: document.getElementById('auth-modal-title'),
+      loginForm: document.getElementById('login-form'),
+      signupForm: document.getElementById('signup-form'),
+      showSignupBtn: document.getElementById('show-signup'),
+      showLoginBtn: document.getElementById('show-login'),
+      userInfo: document.getElementById('user-info'),
+      userNickname: document.getElementById('user-nickname')
     };
 
     let currentViewingPost = null;
@@ -665,6 +773,956 @@
       addPost(hotPost);
     }
 
+    // === 회원 시스템 관련 함수들 ===
+    
+    // 로그인 상태 확인
+    function checkLoginStatus() {
+      const savedUser = localStorage.getItem('blogUser');
+      if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+        updateUIForLoggedInUser();
+      } else {
+        updateUIForGuestUser();
+      }
+    }
+
+    // 로그인한 사용자를 위한 UI 업데이트
+    function updateUIForLoggedInUser() {
+      elements.authBtn.textContent = '🚪 로그아웃';
+      elements.authBtn.className = 'bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition font-medium';
+      elements.writeBtn.classList.remove('hidden');
+      elements.userInfo.classList.remove('hidden');
+      elements.userInfo.classList.add('flex');
+      elements.userNickname.textContent = currentUser.nickname;
+    }
+
+    // 비로그인 사용자를 위한 UI 업데이트
+    function updateUIForGuestUser() {
+      elements.authBtn.textContent = '🔐 로그인';
+      elements.authBtn.className = 'bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition font-medium';
+      elements.writeBtn.classList.add('hidden');
+      elements.userInfo.classList.add('hidden');
+      elements.userInfo.classList.remove('flex');
+    }
+
+    // 로그인 처리
+    function handleLogin(email, password) {
+      const users = JSON.parse(localStorage.getItem('blogUsers')) || [];
+      const user = users.find(u => u.email === email && u.password === password);
+      
+      if (user) {
+        currentUser = user;
+        localStorage.setItem('blogUser', JSON.stringify(user));
+        updateUIForLoggedInUser();
+        closeAuthModal();
+        showNotification(`${user.nickname}님, 환영합니다! 🎉`);
+        return true;
+      } else {
+        showNotification('이메일 또는 비밀번호가 올바르지 않습니다. ❌', 'error');
+        return false;
+      }
+    }
+
+    // 회원가입 처리
+    function handleSignup(nickname, email, password, passwordConfirm) {
+      // 입력 검증
+      if (password !== passwordConfirm) {
+        showNotification('비밀번호가 일치하지 않습니다. ❌', 'error');
+        return false;
+      }
+      
+      if (password.length < 8) {
+        showNotification('비밀번호는 8자 이상이어야 합니다. ❌', 'error');
+        return false;
+      }
+
+      const users = JSON.parse(localStorage.getItem('blogUsers')) || [];
+      
+      // 이메일 중복 확인
+      if (users.find(u => u.email === email)) {
+        showNotification('이미 사용 중인 이메일입니다. ❌', 'error');
+        return false;
+      }
+
+      // 닉네임 중복 확인
+      if (users.find(u => u.nickname === nickname)) {
+        showNotification('이미 사용 중인 닉네임입니다. ❌', 'error');
+        return false;
+      }
+
+      // 새 사용자 생성
+      const newUser = {
+        id: Date.now(),
+        nickname,
+        email,
+        password,
+        joinDate: new Date().toISOString()
+      };
+
+      users.push(newUser);
+      localStorage.setItem('blogUsers', JSON.stringify(users));
+      
+      showNotification('회원가입이 완료되었습니다! 로그인해주세요. ✅');
+      showLoginForm();
+      return true;
+    }
+
+    // 로그아웃 처리
+    function handleLogout() {
+      currentUser = null;
+      localStorage.removeItem('blogUser');
+      updateUIForGuestUser();
+      showNotification('로그아웃되었습니다. 👋');
+    }
+
+    // 인증 모달 열기
+    function openAuthModal() {
+      if (currentUser) {
+        // 로그아웃 확인
+        if (confirm('로그아웃하시겠습니까?')) {
+          handleLogout();
+        }
+      } else {
+        // 로그인 모달 열기
+        showLoginForm();
+        elements.authModal.classList.remove('hidden');
+      }
+    }
+
+    // 인증 모달 닫기
+    function closeAuthModal() {
+      elements.authModal.classList.add('hidden');
+      elements.loginForm.reset();
+      elements.signupForm.reset();
+    }
+
+    // 로그인 폼 표시
+    function showLoginForm() {
+      elements.authModalTitle.textContent = '로그인';
+      elements.loginForm.classList.remove('hidden');
+      elements.signupForm.classList.add('hidden');
+    }
+
+    // 회원가입 폼 표시
+    function showSignupForm() {
+      elements.authModalTitle.textContent = '회원가입';
+      elements.loginForm.classList.add('hidden');
+      elements.signupForm.classList.remove('hidden');
+    }
+
+    // 글쓰기 권한 확인
+    function checkWritePermission() {
+      if (!currentUser) {
+        showNotification('글쓰기는 로그인한 회원만 가능합니다. 로그인해주세요! 🔐', 'warning');
+        openAuthModal();
+        return false;
+      }
+      return true;
+    }
+
+    // 로컬스토리지에서 데이터 로드
+    function loadPosts() {
+      const savedPosts = localStorage.getItem('blogPosts');
+      if (savedPosts) {
+        posts = JSON.parse(savedPosts);
+      } else {
+        posts = [...samplePosts];
+        savePosts();
+      }
+      filterPosts();
+      updateStats();
+      updateCategoryCounts();
+    }
+
+    // 로컬스토리지에 데이터 저장
+    function savePosts() {
+      localStorage.setItem('blogPosts', JSON.stringify(posts));
+    }
+
+    // 게시글 필터링
+    function filterPosts() {
+      let filtered = [...posts];
+      
+      // 카테고리 필터
+      if (currentCategory !== 'all') {
+        filtered = filtered.filter(post => post.category === currentCategory);
+      }
+      
+      // 검색 필터
+      const searchTerm = elements.searchInput.value.toLowerCase();
+      if (searchTerm) {
+        filtered = filtered.filter(post => 
+          post.title.toLowerCase().includes(searchTerm) ||
+          post.content.toLowerCase().includes(searchTerm) ||
+          post.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+        );
+      }
+      
+      // 정렬
+      const sortBy = elements.sortSelect.value;
+      filtered.sort((a, b) => {
+        switch (sortBy) {
+          case 'latest':
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          case 'popular':
+            return b.likes - a.likes;
+          case 'views':
+            return b.views - a.views;
+          default:
+            return 0;
+        }
+      });
+      
+      filteredPosts = filtered;
+      renderPosts();
+    }
+
+    // 게시글 렌더링
+    function renderPosts() {
+      elements.loadingSpinner.classList.add('hidden');
+      
+      const startIndex = 0;
+      const endIndex = currentPage * postsPerPage;
+      const postsToShow = filteredPosts.slice(startIndex, endIndex);
+      
+      if (postsToShow.length === 0) {
+        elements.postsContainer.innerHTML = `
+          <div class="text-center py-12">
+            <div class="text-6xl mb-4">📝</div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">게시글이 없습니다</h3>
+            <p class="text-gray-600">새로운 게시글을 작성해보세요!</p>
+          </div>
+        `;
+        elements.loadMoreBtn.classList.add('hidden');
+        return;
+      }
+      
+      elements.postsContainer.innerHTML = postsToShow.map(post => createPostCard(post)).join('');
+      
+      // 더보기 버튼 표시/숨김
+      if (endIndex >= filteredPosts.length) {
+        elements.loadMoreBtn.classList.add('hidden');
+      } else {
+        elements.loadMoreBtn.classList.remove('hidden');
+      }
+    }
+
+    // 게시글 카드 생성
+    function createPostCard(post) {
+      const timeAgo = getTimeAgo(post.createdAt);
+      const categoryInfo = getCategoryInfo(post.category);
+      
+      return `
+        <article class="blog-card bg-white rounded-lg shadow-md p-6 border-l-4 border-l-blue-500 cursor-pointer hover:shadow-lg transition-all" onclick="viewPost(${post.id})">
+          <div class="flex flex-wrap items-center gap-2 mb-3">
+            <span class="category-badge px-3 py-1 rounded-full text-sm font-medium ${categoryInfo.class}">
+              ${categoryInfo.label}
+            </span>
+            ${post.featured ? '<span class="hot-badge px-2 py-1 rounded-full text-xs font-medium text-white">🔥 HOT</span>' : ''}
+            ${post.auto ? '<span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">🤖 AUTO</span>' : ''}
+          </div>
+          
+          <h2 class="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition">
+            ${post.title}
+          </h2>
+          
+          <p class="text-gray-600 mb-4 line-clamp-3">
+            ${post.content.length > 150 ? post.content.substring(0, 150) + '...' : post.content}
+          </p>
+          
+          <div class="flex flex-wrap gap-2 mb-4">
+            ${post.tags.map(tag => `<span class="px-2 py-1 bg-gray-100 text-gray-600 rounded text-sm">#${tag}</span>`).join('')}
+          </div>
+          
+          <div class="flex justify-between items-center text-sm text-gray-500">
+            <div class="flex items-center gap-4">
+              <span>👤 ${post.author}</span>
+              <span>🕒 ${timeAgo}</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span>👁️ ${post.views.toLocaleString()}</span>
+              <span>❤️ ${post.likes}</span>
+              <span class="text-blue-600 font-medium">자세히 보기 →</span>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    // 카테고리 정보 반환
+    function getCategoryInfo(category) {
+      const categories = {
+        hot: { label: '🔥 핫 이슈', class: 'bg-red-100 text-red-700' },
+        tech: { label: '💻 기술', class: 'bg-blue-100 text-blue-700' },
+        finance: { label: '💰 금융', class: 'bg-green-100 text-green-700' },
+        lifestyle: { label: '🏠 라이프스타일', class: 'bg-purple-100 text-purple-700' },
+        news: { label: '📰 뉴스', class: 'bg-yellow-100 text-yellow-700' }
+      };
+      return categories[category] || { label: '📋 기타', class: 'bg-gray-100 text-gray-700' };
+    }
+
+    // 시간 표시 함수
+    function getTimeAgo(dateString) {
+      const now = new Date();
+      const postDate = new Date(dateString);
+      const diffMs = now - postDate;
+      const diffMins = Math.floor(diffMs / 60000);
+      const diffHours = Math.floor(diffMs / 3600000);
+      const diffDays = Math.floor(diffMs / 86400000);
+      
+      if (diffMins < 60) return `${diffMins}분 전`;
+      if (diffHours < 24) return `${diffHours}시간 전`;
+      if (diffDays < 7) return `${diffDays}일 전`;
+      return postDate.toLocaleDateString('ko-KR');
+    }
+
+    // 통계 업데이트
+    function updateStats() {
+      const today = new Date().toDateString();
+      const todayCount = posts.filter(post => new Date(post.createdAt).toDateString() === today).length;
+      const hotCount = posts.filter(post => post.featured || post.category === 'hot').length;
+      
+      elements.totalPosts.textContent = posts.length;
+      elements.todayPosts.textContent = todayCount;
+      elements.hotPosts.textContent = hotCount;
+    }
+
+    // 카테고리별 개수 업데이트
+    function updateCategoryCounts() {
+      const counts = {
+        all: posts.length,
+        hot: posts.filter(p => p.category === 'hot' || p.featured).length,
+        tech: posts.filter(p => p.category === 'tech').length,
+        finance: posts.filter(p => p.category === 'finance').length,
+        lifestyle: posts.filter(p => p.category === 'lifestyle').length,
+        news: posts.filter(p => p.category === 'news').length
+      };
+      
+      elements.categoryBtns.forEach(btn => {
+        const category = btn.dataset.category;
+        const text = btn.textContent.replace(/\(\d+\)/, `(${counts[category] || 0})`);
+        btn.textContent = text;
+      });
+    }
+
+    // 새 게시글 추가
+    function addPost(postData) {
+      const newPost = {
+        id: Date.now(),
+        ...postData,
+        author: "사용자",
+        createdAt: new Date().toISOString(),
+        views: 0,
+        likes: 0
+      };
+      
+      posts.unshift(newPost);
+      savePosts();
+      filterPosts();
+      updateStats();
+      updateCategoryCounts();
+      
+      // 성공 메시지
+      showNotification('게시글이 성공적으로 등록되었습니다! 🎉');
+    }
+
+    // 알림 표시
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.remove();
+      }, 3000);
+    }
+
+    // 자동 핫 이슈 생성
+    function generateHotIssue() {
+      const hotTopics = [
+        "🚀 최신 핀테크 동향과 투자 기회",
+        "💎 디지털 자산 시장 분석 리포트",
+        "📱 모바일 결제 보안 강화 방안",
+        "🌟 2025년 주목할 스타트업",
+        "💰 개인 투자자를 위한 포트폴리오 전략",
+        "🔥 급상승 중인 업계 트렌드",
+        "⚡ 실시간 시장 변동 분석",
+        "🎯 효과적인 자산 관리 방법"
+      ];
+      
+      const contents = [
+        "최근 시장 동향을 종합 분석한 결과, 새로운 투자 기회가 부상하고 있습니다...",
+        "전문가들이 주목하는 최신 트렌드와 그 배경을 자세히 살펴보겠습니다...",
+        "데이터 기반으로 분석한 시장 전망과 투자 전략을 공유합니다...",
+        "업계 전문가들의 인사이트를 바탕으로 한 심층 분석 리포트입니다...",
+        "실시간으로 업데이트되는 시장 정보를 통해 최적의 투자 타이밍을 찾아보세요..."
+      ];
+      
+      const randomTopic = hotTopics[Math.floor(Math.random() * hotTopics.length)];
+      const randomContent = contents[Math.floor(Math.random() * contents.length)];
+      
+      const hotPost = {
+        title: randomTopic,
+        content: randomContent + " 이 글은 자동으로 생성된 핫 이슈입니다.",
+        category: "hot",
+        tags: ["핫이슈", "자동생성", "트렌드"],
+        featured: true,
+        auto: true
+      };
+      
+      addPost(hotPost);
+    }
+
+    // === 회원 시스템 관련 함수들 ===
+    
+    // 로그인 상태 확인
+    function checkLoginStatus() {
+      const savedUser = localStorage.getItem('blogUser');
+      if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+        updateUIForLoggedInUser();
+      } else {
+        updateUIForGuestUser();
+      }
+    }
+
+    // 로그인한 사용자를 위한 UI 업데이트
+    function updateUIForLoggedInUser() {
+      elements.authBtn.textContent = '🚪 로그아웃';
+      elements.authBtn.className = 'bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition font-medium';
+      elements.writeBtn.classList.remove('hidden');
+      elements.userInfo.classList.remove('hidden');
+      elements.userInfo.classList.add('flex');
+      elements.userNickname.textContent = currentUser.nickname;
+    }
+
+    // 비로그인 사용자를 위한 UI 업데이트
+    function updateUIForGuestUser() {
+      elements.authBtn.textContent = '🔐 로그인';
+      elements.authBtn.className = 'bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition font-medium';
+      elements.writeBtn.classList.add('hidden');
+      elements.userInfo.classList.add('hidden');
+      elements.userInfo.classList.remove('flex');
+    }
+
+    // 로그인 처리
+    function handleLogin(email, password) {
+      const users = JSON.parse(localStorage.getItem('blogUsers')) || [];
+      const user = users.find(u => u.email === email && u.password === password);
+      
+      if (user) {
+        currentUser = user;
+        localStorage.setItem('blogUser', JSON.stringify(user));
+        updateUIForLoggedInUser();
+        closeAuthModal();
+        showNotification(`${user.nickname}님, 환영합니다! 🎉`);
+        return true;
+      } else {
+        showNotification('이메일 또는 비밀번호가 올바르지 않습니다. ❌', 'error');
+        return false;
+      }
+    }
+
+    // 회원가입 처리
+    function handleSignup(nickname, email, password, passwordConfirm) {
+      // 입력 검증
+      if (password !== passwordConfirm) {
+        showNotification('비밀번호가 일치하지 않습니다. ❌', 'error');
+        return false;
+      }
+      
+      if (password.length < 8) {
+        showNotification('비밀번호는 8자 이상이어야 합니다. ❌', 'error');
+        return false;
+      }
+
+      const users = JSON.parse(localStorage.getItem('blogUsers')) || [];
+      
+      // 이메일 중복 확인
+      if (users.find(u => u.email === email)) {
+        showNotification('이미 사용 중인 이메일입니다. ❌', 'error');
+        return false;
+      }
+
+      // 닉네임 중복 확인
+      if (users.find(u => u.nickname === nickname)) {
+        showNotification('이미 사용 중인 닉네임입니다. ❌', 'error');
+        return false;
+      }
+
+      // 새 사용자 생성
+      const newUser = {
+        id: Date.now(),
+        nickname,
+        email,
+        password,
+        joinDate: new Date().toISOString()
+      };
+
+      users.push(newUser);
+      localStorage.setItem('blogUsers', JSON.stringify(users));
+      
+      showNotification('회원가입이 완료되었습니다! 로그인해주세요. ✅');
+      showLoginForm();
+      return true;
+    }
+
+    // 로그아웃 처리
+    function handleLogout() {
+      currentUser = null;
+      localStorage.removeItem('blogUser');
+      updateUIForGuestUser();
+      showNotification('로그아웃되었습니다. 👋');
+    }
+
+    // 인증 모달 열기
+    function openAuthModal() {
+      if (currentUser) {
+        // 로그아웃 확인
+        if (confirm('로그아웃하시겠습니까?')) {
+          handleLogout();
+        }
+      } else {
+        // 로그인 모달 열기
+        showLoginForm();
+        elements.authModal.classList.remove('hidden');
+      }
+    }
+
+    // 인증 모달 닫기
+    function closeAuthModal() {
+      elements.authModal.classList.add('hidden');
+      elements.loginForm.reset();
+      elements.signupForm.reset();
+    }
+
+    // 로그인 폼 표시
+    function showLoginForm() {
+      elements.authModalTitle.textContent = '로그인';
+      elements.loginForm.classList.remove('hidden');
+      elements.signupForm.classList.add('hidden');
+    }
+
+    // 회원가입 폼 표시
+    function showSignupForm() {
+      elements.authModalTitle.textContent = '회원가입';
+      elements.loginForm.classList.add('hidden');
+      elements.signupForm.classList.remove('hidden');
+    }
+
+    // 글쓰기 권한 확인
+    function checkWritePermission() {
+      if (!currentUser) {
+        showNotification('글쓰기는 로그인한 회원만 가능합니다. 로그인해주세요! 🔐', 'warning');
+        openAuthModal();
+        return false;
+      }
+      return true;
+    }
+
+    // 로컬스토리지에서 데이터 로드
+    function loadPosts() {
+      const savedPosts = localStorage.getItem('blogPosts');
+      if (savedPosts) {
+        posts = JSON.parse(savedPosts);
+      } else {
+        posts = [...samplePosts];
+        savePosts();
+      }
+      filterPosts();
+      updateStats();
+      updateCategoryCounts();
+    }
+
+    // 로컬스토리지에 데이터 저장
+    function savePosts() {
+      localStorage.setItem('blogPosts', JSON.stringify(posts));
+    }
+
+    // 게시글 필터링
+    function filterPosts() {
+      let filtered = [...posts];
+      
+      // 카테고리 필터
+      if (currentCategory !== 'all') {
+        filtered = filtered.filter(post => post.category === currentCategory);
+      }
+      
+      // 검색 필터
+      const searchTerm = elements.searchInput.value.toLowerCase();
+      if (searchTerm) {
+        filtered = filtered.filter(post => 
+          post.title.toLowerCase().includes(searchTerm) ||
+          post.content.toLowerCase().includes(searchTerm) ||
+          post.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+        );
+      }
+      
+      // 정렬
+      const sortBy = elements.sortSelect.value;
+      filtered.sort((a, b) => {
+        switch (sortBy) {
+          case 'latest':
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          case 'popular':
+            return b.likes - a.likes;
+          case 'views':
+            return b.views - a.views;
+          default:
+            return 0;
+        }
+      });
+      
+      filteredPosts = filtered;
+      renderPosts();
+    }
+
+    // 게시글 렌더링
+    function renderPosts() {
+      elements.loadingSpinner.classList.add('hidden');
+      
+      const startIndex = 0;
+      const endIndex = currentPage * postsPerPage;
+      const postsToShow = filteredPosts.slice(startIndex, endIndex);
+      
+      if (postsToShow.length === 0) {
+        elements.postsContainer.innerHTML = `
+          <div class="text-center py-12">
+            <div class="text-6xl mb-4">📝</div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">게시글이 없습니다</h3>
+            <p class="text-gray-600">새로운 게시글을 작성해보세요!</p>
+          </div>
+        `;
+        elements.loadMoreBtn.classList.add('hidden');
+        return;
+      }
+      
+      elements.postsContainer.innerHTML = postsToShow.map(post => createPostCard(post)).join('');
+      
+      // 더보기 버튼 표시/숨김
+      if (endIndex >= filteredPosts.length) {
+        elements.loadMoreBtn.classList.add('hidden');
+      } else {
+        elements.loadMoreBtn.classList.remove('hidden');
+      }
+    }
+
+    // 게시글 카드 생성
+    function createPostCard(post) {
+      const timeAgo = getTimeAgo(post.createdAt);
+      const categoryInfo = getCategoryInfo(post.category);
+      
+      return `
+        <article class="blog-card bg-white rounded-lg shadow-md p-6 border-l-4 border-l-blue-500 cursor-pointer hover:shadow-lg transition-all" onclick="viewPost(${post.id})">
+          <div class="flex flex-wrap items-center gap-2 mb-3">
+            <span class="category-badge px-3 py-1 rounded-full text-sm font-medium ${categoryInfo.class}">
+              ${categoryInfo.label}
+            </span>
+            ${post.featured ? '<span class="hot-badge px-2 py-1 rounded-full text-xs font-medium text-white">🔥 HOT</span>' : ''}
+            ${post.auto ? '<span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">🤖 AUTO</span>' : ''}
+          </div>
+          
+          <h2 class="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition">
+            ${post.title}
+          </h2>
+          
+          <p class="text-gray-600 mb-4 line-clamp-3">
+            ${post.content.length > 150 ? post.content.substring(0, 150) + '...' : post.content}
+          </p>
+          
+          <div class="flex flex-wrap gap-2 mb-4">
+            ${post.tags.map(tag => `<span class="px-2 py-1 bg-gray-100 text-gray-600 rounded text-sm">#${tag}</span>`).join('')}
+          </div>
+          
+          <div class="flex justify-between items-center text-sm text-gray-500">
+            <div class="flex items-center gap-4">
+              <span>👤 ${post.author}</span>
+              <span>🕒 ${timeAgo}</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span>👁️ ${post.views.toLocaleString()}</span>
+              <span>❤️ ${post.likes}</span>
+              <span class="text-blue-600 font-medium">자세히 보기 →</span>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    // 카테고리 정보 반환
+    function getCategoryInfo(category) {
+      const categories = {
+        hot: { label: '🔥 핫 이슈', class: 'bg-red-100 text-red-700' },
+        tech: { label: '💻 기술', class: 'bg-blue-100 text-blue-700' },
+        finance: { label: '💰 금융', class: 'bg-green-100 text-green-700' },
+        lifestyle: { label: '🏠 라이프스타일', class: 'bg-purple-100 text-purple-700' },
+        news: { label: '📰 뉴스', class: 'bg-yellow-100 text-yellow-700' }
+      };
+      return categories[category] || { label: '📋 기타', class: 'bg-gray-100 text-gray-700' };
+    }
+
+    // 시간 표시 함수
+    function getTimeAgo(dateString) {
+      const now = new Date();
+      const postDate = new Date(dateString);
+      const diffMs = now - postDate;
+      const diffMins = Math.floor(diffMs / 60000);
+      const diffHours = Math.floor(diffMs / 3600000);
+      const diffDays = Math.floor(diffMs / 86400000);
+      
+      if (diffMins < 60) return `${diffMins}분 전`;
+      if (diffHours < 24) return `${diffHours}시간 전`;
+      if (diffDays < 7) return `${diffDays}일 전`;
+      return postDate.toLocaleDateString('ko-KR');
+    }
+
+    // 통계 업데이트
+    function updateStats() {
+      const today = new Date().toDateString();
+      const todayCount = posts.filter(post => new Date(post.createdAt).toDateString() === today).length;
+      const hotCount = posts.filter(post => post.featured || post.category === 'hot').length;
+      
+      elements.totalPosts.textContent = posts.length;
+      elements.todayPosts.textContent = todayCount;
+      elements.hotPosts.textContent = hotCount;
+    }
+
+    // 카테고리별 개수 업데이트
+    function updateCategoryCounts() {
+      const counts = {
+        all: posts.length,
+        hot: posts.filter(p => p.category === 'hot' || p.featured).length,
+        tech: posts.filter(p => p.category === 'tech').length,
+        finance: posts.filter(p => p.category === 'finance').length,
+        lifestyle: posts.filter(p => p.category === 'lifestyle').length,
+        news: posts.filter(p => p.category === 'news').length
+      };
+      
+      elements.categoryBtns.forEach(btn => {
+        const category = btn.dataset.category;
+        const text = btn.textContent.replace(/\(\d+\)/, `(${counts[category] || 0})`);
+        btn.textContent = text;
+      });
+    }
+
+    // 새 게시글 추가
+    function addPost(postData) {
+      const newPost = {
+        id: Date.now(),
+        ...postData,
+        author: "사용자",
+        createdAt: new Date().toISOString(),
+        views: 0,
+        likes: 0
+      };
+      
+      posts.unshift(newPost);
+      savePosts();
+      filterPosts();
+      updateStats();
+      updateCategoryCounts();
+      
+      // 성공 메시지
+      showNotification('게시글이 성공적으로 등록되었습니다! 🎉');
+    }
+
+    // 알림 표시
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.remove();
+      }, 3000);
+    }
+
+    // 자동 핫 이슈 생성
+    function generateHotIssue() {
+      const hotTopics = [
+        "🚀 최신 핀테크 동향과 투자 기회",
+        "💎 디지털 자산 시장 분석 리포트",
+        "📱 모바일 결제 보안 강화 방안",
+        "🌟 2025년 주목할 스타트업",
+        "💰 개인 투자자를 위한 포트폴리오 전략",
+        "🔥 급상승 중인 업계 트렌드",
+        "⚡ 실시간 시장 변동 분석",
+        "🎯 효과적인 자산 관리 방법"
+      ];
+      
+      const contents = [
+        "최근 시장 동향을 종합 분석한 결과, 새로운 투자 기회가 부상하고 있습니다...",
+        "전문가들이 주목하는 최신 트렌드와 그 배경을 자세히 살펴보겠습니다...",
+        "데이터 기반으로 분석한 시장 전망과 투자 전략을 공유합니다...",
+        "업계 전문가들의 인사이트를 바탕으로 한 심층 분석 리포트입니다...",
+        "실시간으로 업데이트되는 시장 정보를 통해 최적의 투자 타이밍을 찾아보세요..."
+      ];
+      
+      const randomTopic = hotTopics[Math.floor(Math.random() * hotTopics.length)];
+      const randomContent = contents[Math.floor(Math.random() * contents.length)];
+      
+      const hotPost = {
+        title: randomTopic,
+        content: randomContent + " 이 글은 자동으로 생성된 핫 이슈입니다.",
+        category: "hot",
+        tags: ["핫이슈", "자동생성", "트렌드"],
+        featured: true,
+        auto: true
+      };
+      
+      addPost(hotPost);
+    }
+
+    // === 회원 시스템 관련 함수들 ===
+    
+    // 로그인 상태 확인
+    function checkLoginStatus() {
+      const savedUser = localStorage.getItem('blogUser');
+      if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+        updateUIForLoggedInUser();
+      } else {
+        updateUIForGuestUser();
+      }
+    }
+
+    // 로그인한 사용자를 위한 UI 업데이트
+    function updateUIForLoggedInUser() {
+      elements.authBtn.textContent = '🚪 로그아웃';
+      elements.authBtn.className = 'bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition font-medium';
+      elements.writeBtn.classList.remove('hidden');
+      elements.userInfo.classList.remove('hidden');
+      elements.userInfo.classList.add('flex');
+      elements.userNickname.textContent = currentUser.nickname;
+    }
+
+    // 비로그인 사용자를 위한 UI 업데이트
+    function updateUIForGuestUser() {
+      elements.authBtn.textContent = '🔐 로그인';
+      elements.authBtn.className = 'bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition font-medium';
+      elements.writeBtn.classList.add('hidden');
+      elements.userInfo.classList.add('hidden');
+      elements.userInfo.classList.remove('flex');
+    }
+
+    // 로그인 처리
+    function handleLogin(email, password) {
+      const users = JSON.parse(localStorage.getItem('blogUsers')) || [];
+      const user = users.find(u => u.email === email && u.password === password);
+      
+      if (user) {
+        currentUser = user;
+        localStorage.setItem('blogUser', JSON.stringify(user));
+        updateUIForLoggedInUser();
+        closeAuthModal();
+        showNotification(`${user.nickname}님, 환영합니다! 🎉`);
+        return true;
+      } else {
+        showNotification('이메일 또는 비밀번호가 올바르지 않습니다. ❌', 'error');
+        return false;
+      }
+    }
+
+    // 회원가입 처리
+    function handleSignup(nickname, email, password, passwordConfirm) {
+      // 입력 검증
+      if (password !== passwordConfirm) {
+        showNotification('비밀번호가 일치하지 않습니다. ❌', 'error');
+        return false;
+      }
+      
+      if (password.length < 8) {
+        showNotification('비밀번호는 8자 이상이어야 합니다. ❌', 'error');
+        return false;
+      }
+
+      const users = JSON.parse(localStorage.getItem('blogUsers')) || [];
+      
+      // 이메일 중복 확인
+      if (users.find(u => u.email === email)) {
+        showNotification('이미 사용 중인 이메일입니다. ❌', 'error');
+        return false;
+      }
+
+      // 닉네임 중복 확인
+      if (users.find(u => u.nickname === nickname)) {
+        showNotification('이미 사용 중인 닉네임입니다. ❌', 'error');
+        return false;
+      }
+
+      // 새 사용자 생성
+      const newUser = {
+        id: Date.now(),
+        nickname,
+        email,
+        password,
+        joinDate: new Date().toISOString()
+      };
+
+      users.push(newUser);
+      localStorage.setItem('blogUsers', JSON.stringify(users));
+      
+      showNotification('회원가입이 완료되었습니다! 로그인해주세요. ✅');
+      showLoginForm();
+      return true;
+    }
+
+    // 로그아웃 처리
+    function handleLogout() {
+      currentUser = null;
+      localStorage.removeItem('blogUser');
+      updateUIForGuestUser();
+      showNotification('로그아웃되었습니다. 👋');
+    }
+
+    // 인증 모달 열기
+    function openAuthModal() {
+      if (currentUser) {
+        // 로그아웃 확인
+        if (confirm('로그아웃하시겠습니까?')) {
+          handleLogout();
+        }
+      } else {
+        // 로그인 모달 열기
+        showLoginForm();
+        elements.authModal.classList.remove('hidden');
+      }
+    }
+
+    // 인증 모달 닫기
+    function closeAuthModal() {
+      elements.authModal.classList.add('hidden');
+      elements.loginForm.reset();
+      elements.signupForm.reset();
+    }
+
+    // 로그인 폼 표시
+    function showLoginForm() {
+      elements.authModalTitle.textContent = '로그인';
+      elements.loginForm.classList.remove('hidden');
+      elements.signupForm.classList.add('hidden');
+    }
+
+    // 회원가입 폼 표시
+    function showSignupForm() {
+      elements.authModalTitle.textContent = '회원가입';
+      elements.loginForm.classList.add('hidden');
+      elements.signupForm.classList.remove('hidden');
+    }
+
+    // 글쓰기 권한 확인
+    function checkWritePermission() {
+      if (!currentUser) {
+        showNotification('글쓰기는 로그인한 회원만 가능합니다. 로그인해주세요! 🔐', 'warning');
+        openAuthModal();
+        return false;
+      }
+ }
+      return true;
+    }
+
     // 이벤트 리스너 설정
     function setupEventListeners() {
       // 카테고리 버튼
@@ -705,9 +1763,11 @@
         renderPosts();
       });
       
-      // 글쓰기 모달
+      // 글쓰기 모달 (권한 확인)
       elements.writeBtn.addEventListener('click', () => {
-        elements.writeModal.classList.remove('hidden');
+        if (checkWritePermission()) {
+          elements.writeModal.classList.remove('hidden');
+        }
       });
       
       elements.closeModal.addEventListener('click', () => {
@@ -860,6 +1920,73 @@
         elements.writeModal.classList.add('hidden');
         elements.postForm.reset();
       });
+      
+      // 로그인/회원가입 모달
+      elements.closeAuthModal.addEventListener('click', () => {
+        elements.authModal.classList.add('hidden');
+        elements.loginForm.reset();
+        elements.signupForm.reset();
+      });
+      
+      // === 인증 관련 이벤트 리스너 ===
+      
+      // 로그인/로그아웃 버튼
+      elements.authBtn.addEventListener('click', openAuthModal);
+      
+      // 인증 모달 닫기
+      elements.closeAuthModal.addEventListener('click', closeAuthModal);
+      
+      // 모달 외부 클릭시 닫기
+      elements.authModal.addEventListener('click', (e) => {
+        if (e.target === elements.authModal) {
+          closeAuthModal();
+        }
+      });
+      
+      // 로그인/회원가입 폼 전환
+      elements.showSignupBtn.addEventListener('click', showSignupForm);
+      elements.showLoginBtn.addEventListener('click', showLoginForm);
+      
+      // 로그인 폼 제출
+      elements.loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        handleLogin(email, password);
+      });
+      
+      // 회원가입 폼 제출
+      elements.signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nickname = document.getElementById('signup-nickname').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+        const passwordConfirm = document.getElementById('signup-password-confirm').value;
+        handleSignup(nickname, email, password, passwordConfirm);
+      });
+
+      // 글쓰기 모달 (권한 확인)
+      elements.writeBtn.addEventListener('click', () => {
+        if (checkWritePermission()) {
+          elements.writeModal.classList.remove('hidden');
+        }
+      });
+      
+      elements.closeModal.addEventListener('click', () => {
+        elements.writeModal.classList.add('hidden');
+        elements.postForm.reset();
+      });
+      
+      elements.cancelBtn.addEventListener('click', () => {
+        elements.writeModal.classList.add('hidden');
+        elements.postForm.reset();
+      });
+    }
+
+    // 이메일 유효성 검사
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(String(email).toLowerCase());
     }
 
     // 자동 갱신 시스템
@@ -886,13 +2013,18 @@
 
     // 초기화
     function init() {
+      checkLoginStatus(); // 로그인 상태 확인
       loadPosts();
       setupEventListeners();
       startAutoRefresh();
       
       // 환영 메시지
       setTimeout(() => {
-        showNotification('블로그 게시판에 오신 것을 환영합니다! ✨');
+        if (currentUser) {
+          showNotification(`${currentUser.nickname}님, 다시 오신 것을 환영합니다! ✨`);
+        } else {
+          showNotification('블로그 게시판에 오신 것을 환영합니다! 로그인하고 글을 작성해보세요! ✨');
+        }
       }, 1000);
     }
 
