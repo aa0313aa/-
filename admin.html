@@ -126,6 +126,28 @@
         <p>게시글이 없습니다.</p>
       </div>
     </section>
+
+    <!-- 회원 관리 섹션 -->
+    <section id="user-management-section" class="bg-white shadow sm:rounded-lg p-6 mt-6">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">회원 관리</h2>
+      <div class="mb-4 flex gap-2">
+        <input type="text" id="user-search" placeholder="닉네임 또는 이메일 검색..." class="border rounded p-2 flex-1">
+        <button id="refresh-users-btn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">새로고침</button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 admin-table">
+          <thead class="bg-gray-50">
+            <tr>
+              <th>닉네임</th><th>이메일</th><th>가입일</th><th>좋아요한 글</th><th>상태</th><th>작업</th>
+            </tr>
+          </thead>
+          <tbody id="admin-user-list" class="bg-white divide-y divide-gray-200"></tbody>
+        </table>
+      </div>
+      <div id="admin-user-empty" class="text-gray-500 text-center py-8 hidden">
+        <p>등록된 회원이 없습니다.</p>
+      </div>
+    </section>
   </main>
 
   <!-- 게시글 수정 모달 -->
@@ -187,6 +209,60 @@
         
         <div class="flex justify-end gap-3 pt-4">
           <button type="button" id="cancel-edit-btn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition">
+            취소
+          </button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+            수정 완료
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 회원 수정 모달 -->
+  <div id="edit-user-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto modal-content">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-bold text-gray-800">회원 정보 수정</h3>
+        <button id="close-edit-user-modal" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+      </div>
+      
+      <form id="edit-user-form" class="space-y-4">
+        <input type="hidden" id="edit-user-original-nickname">
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">닉네임</label>
+          <input type="text" id="edit-user-nickname" required 
+                 class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">이메일</label>
+          <input type="email" id="edit-user-email" required 
+                 class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">비밀번호 (변경하지 않으려면 비워두세요)</label>
+          <input type="password" id="edit-user-password" 
+                 class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                 placeholder="새 비밀번호 입력">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">가입일</label>
+          <input type="text" id="edit-user-joined" readonly 
+                 class="w-full border border-gray-300 rounded-md px-3 py-2 bg-gray-50">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">좋아요한 게시글 수</label>
+          <input type="text" id="edit-user-liked-count" readonly 
+                 class="w-full border border-gray-300 rounded-md px-3 py-2 bg-gray-50">
+        </div>
+        
+        <div class="flex justify-end gap-3 pt-4">
+          <button type="button" id="cancel-edit-user-btn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition">
             취소
           </button>
           <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
@@ -520,11 +596,51 @@
         updatePost(postData);
       });
       
+      // 회원 관리 초기화
+      loadAllUsers();
+      
+      // 회원 필터 이벤트
+      document.getElementById('user-search').addEventListener('input', filterUsers);
+      document.getElementById('refresh-users-btn').addEventListener('click', loadAllUsers);
+      
+      // 회원 수정 모달 이벤트
+      document.getElementById('close-edit-user-modal').addEventListener('click', closeEditUserModal);
+      document.getElementById('cancel-edit-user-btn').addEventListener('click', closeEditUserModal);
+      
+      // 회원 수정 폼 제출
+      document.getElementById('edit-user-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const userData = {
+          originalNickname: document.getElementById('edit-user-original-nickname').value,
+          nickname: document.getElementById('edit-user-nickname').value.trim(),
+          email: document.getElementById('edit-user-email').value.trim(),
+          password: document.getElementById('edit-user-password').value.trim()
+        };
+        
+        if (!userData.nickname || !userData.email) {
+          alert('닉네임과 이메일은 필수 항목입니다.');
+          return;
+        }
+        
+        // 이메일 형식 검증
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(userData.email)) {
+          alert('올바른 이메일 형식을 입력해주세요.');
+          return;
+        }
+        
+        updateUser(userData);
+      });
+      
       // ESC 키로 모달 닫기
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           if (!document.getElementById('edit-post-modal').classList.contains('hidden')) {
             closeEditPostModal();
+          }
+          if (!document.getElementById('edit-user-modal').classList.contains('hidden')) {
+            closeEditUserModal();
           }
         }
       });
@@ -532,6 +648,285 @@
       // 상품 관리 초기화
       loadAllProducts();
     });
+    
+    // --- 회원 관리 로직 ---
+    let allUsers = [];
+    let filteredUsers = [];
+    
+    // 로컬스토리지에서 모든 회원 데이터 가져오기
+    function loadAllUsers() {
+      try {
+        allUsers = [];
+        
+        // 로컬스토리지에서 모든 키를 확인하여 사용자 데이터 찾기
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith('blogUser_')) {
+            try {
+              const userData = JSON.parse(localStorage.getItem(key));
+              if (userData && userData.nickname && userData.email) {
+                allUsers.push({
+                  ...userData,
+                  storageKey: key
+                });
+              }
+            } catch (e) {
+              console.error(`사용자 데이터 로드 실패 (${key}):`, e);
+            }
+          }
+        }
+        
+        // 현재 로그인한 사용자도 추가 (blogUser 키)
+        const currentUserData = localStorage.getItem('blogUser');
+        if (currentUserData) {
+          try {
+            const userData = JSON.parse(currentUserData);
+            if (userData && userData.nickname && userData.email) {
+              // 중복 체크
+              const exists = allUsers.some(user => user.nickname === userData.nickname);
+              if (!exists) {
+                allUsers.push({
+                  ...userData,
+                  storageKey: 'blogUser'
+                });
+              }
+            }
+          } catch (e) {
+            console.error('현재 사용자 데이터 로드 실패:', e);
+          }
+        }
+        
+        filteredUsers = [...allUsers];
+        renderAdminUserList(filteredUsers);
+        
+      } catch (e) {
+        console.error('회원 데이터 로드 실패:', e);
+        allUsers = [];
+        filteredUsers = [];
+        renderAdminUserList([]);
+      }
+    }
+    
+    // 회원 목록 렌더링
+    function renderAdminUserList(users) {
+      const listEl = document.getElementById('admin-user-list');
+      const emptyEl = document.getElementById('admin-user-empty');
+      
+      if (!listEl || !emptyEl) return;
+      
+      listEl.innerHTML = '';
+      
+      if (!users || users.length === 0) {
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+      
+      emptyEl.classList.add('hidden');
+      
+      users.forEach(user => {
+        const joinedDate = user.joinedAt ? new Date(user.joinedAt).toLocaleDateString('ko-KR') : '정보 없음';
+        const likedCount = user.likedPosts ? user.likedPosts.length : 0;
+        const status = user.storageKey === 'blogUser' ? '현재 로그인' : '일반 회원';
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="font-medium">${user.nickname}</td>
+          <td>${user.email}</td>
+          <td class="text-sm text-gray-600">${joinedDate}</td>
+          <td class="text-center">${likedCount}개</td>
+          <td>
+            <span class="px-2 py-1 rounded-full text-xs font-medium ${user.storageKey === 'blogUser' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}">
+              ${status}
+            </span>
+          </td>
+          <td class="space-x-2">
+            <button class="text-blue-600 hover:text-blue-900 text-sm admin-edit-user-btn" data-nickname="${user.nickname}">수정</button>
+            <button class="text-red-600 hover:text-red-900 text-sm admin-delete-user-btn" data-nickname="${user.nickname}" ${user.storageKey === 'blogUser' ? 'disabled' : ''}>삭제</button>
+          </td>
+        `;
+        listEl.appendChild(tr);
+      });
+      
+      // 수정 버튼 이벤트
+      document.querySelectorAll('.admin-edit-user-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const nickname = this.dataset.nickname;
+          openEditUserModal(nickname);
+        });
+      });
+      
+      // 삭제 버튼 이벤트
+      document.querySelectorAll('.admin-delete-user-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const nickname = this.dataset.nickname;
+          if (!this.disabled) {
+            deleteUser(nickname);
+          }
+        });
+      });
+    }
+    
+    // 회원 필터링
+    function filterUsers() {
+      const searchTerm = document.getElementById('user-search').value.toLowerCase();
+      
+      filteredUsers = allUsers.filter(user => {
+        return !searchTerm || 
+          user.nickname.toLowerCase().includes(searchTerm) ||
+          user.email.toLowerCase().includes(searchTerm);
+      });
+      
+      renderAdminUserList(filteredUsers);
+    }
+    
+    // 회원 수정 모달 열기
+    function openEditUserModal(nickname) {
+      const user = allUsers.find(u => u.nickname === nickname);
+      if (!user) {
+        alert('회원 정보를 찾을 수 없습니다.');
+        return;
+      }
+      
+      document.getElementById('edit-user-original-nickname').value = user.nickname;
+      document.getElementById('edit-user-nickname').value = user.nickname;
+      document.getElementById('edit-user-email').value = user.email;
+      document.getElementById('edit-user-password').value = '';
+      document.getElementById('edit-user-joined').value = user.joinedAt ? new Date(user.joinedAt).toLocaleString('ko-KR') : '정보 없음';
+      document.getElementById('edit-user-liked-count').value = user.likedPosts ? user.likedPosts.length : 0;
+      
+      document.getElementById('edit-user-modal').classList.remove('hidden');
+    }
+    
+    // 회원 수정 모달 닫기
+    function closeEditUserModal() {
+      document.getElementById('edit-user-modal').classList.add('hidden');
+      document.getElementById('edit-user-form').reset();
+    }
+    
+    // 회원 정보 수정
+    function updateUser(userData) {
+      const originalNickname = userData.originalNickname;
+      const user = allUsers.find(u => u.nickname === originalNickname);
+      
+      if (!user) {
+        alert('회원 정보를 찾을 수 없습니다.');
+        return;
+      }
+      
+      // 닉네임 중복 체크 (본인 제외)
+      if (userData.nickname !== originalNickname) {
+        const nicknameExists = allUsers.some(u => u.nickname === userData.nickname && u.nickname !== originalNickname);
+        if (nicknameExists) {
+          alert('이미 사용 중인 닉네임입니다.');
+          return;
+        }
+      }
+      
+      // 이메일 중복 체크 (본인 제외)
+      if (userData.email !== user.email) {
+        const emailExists = allUsers.some(u => u.email === userData.email && u.nickname !== originalNickname);
+        if (emailExists) {
+          alert('이미 사용 중인 이메일입니다.');
+          return;
+        }
+      }
+      
+      // 사용자 데이터 업데이트
+      const updatedUser = {
+        ...user,
+        nickname: userData.nickname,
+        email: userData.email,
+        updatedAt: new Date().toISOString()
+      };
+      
+      // 비밀번호가 입력되었으면 업데이트
+      if (userData.password) {
+        updatedUser.password = userData.password;
+      }
+      
+      // 로컬스토리지 업데이트
+      try {
+        // 기존 키 삭제 (닉네임이 변경된 경우)
+        if (user.storageKey && user.storageKey !== 'blogUser') {
+          localStorage.removeItem(user.storageKey);
+        }
+        
+        // 새 키로 저장
+        const newStorageKey = user.storageKey === 'blogUser' ? 'blogUser' : `blogUser_${updatedUser.nickname}`;
+        localStorage.setItem(newStorageKey, JSON.stringify(updatedUser));
+        
+        // 현재 로그인한 사용자인 경우 blogUser도 업데이트
+        if (user.storageKey === 'blogUser') {
+          localStorage.setItem('blogUser', JSON.stringify(updatedUser));
+        }
+        
+        // 게시글에서 작성자 이름도 업데이트 (닉네임이 변경된 경우)
+        if (userData.nickname !== originalNickname) {
+          updatePostsAuthor(originalNickname, userData.nickname);
+        }
+        
+        loadAllUsers();
+        closeEditUserModal();
+        alert('회원 정보가 수정되었습니다.');
+        
+      } catch (e) {
+        console.error('회원 정보 저장 실패:', e);
+        alert('회원 정보 저장에 실패했습니다.');
+      }
+    }
+    
+    // 게시글 작성자 이름 업데이트
+    function updatePostsAuthor(oldNickname, newNickname) {
+      try {
+        const posts = loadBlogPosts();
+        let updated = false;
+        
+        posts.forEach(post => {
+          if (post.author === oldNickname) {
+            post.author = newNickname;
+            updated = true;
+          }
+        });
+        
+        if (updated) {
+          localStorage.setItem('blogPosts', JSON.stringify(posts));
+        }
+      } catch (e) {
+        console.error('게시글 작성자 이름 업데이트 실패:', e);
+      }
+    }
+    
+    // 회원 삭제
+    function deleteUser(nickname) {
+      const user = allUsers.find(u => u.nickname === nickname);
+      if (!user) {
+        alert('회원 정보를 찾을 수 없습니다.');
+        return;
+      }
+      
+      if (user.storageKey === 'blogUser') {
+        alert('현재 로그인한 회원은 삭제할 수 없습니다.');
+        return;
+      }
+      
+      if (!confirm(`"${user.nickname}" 회원을 정말 삭제하시겠습니까?\n\n이 회원이 작성한 게시글은 삭제되지 않습니다.`)) {
+        return;
+      }
+      
+      try {
+        // 로컬스토리지에서 삭제
+        if (user.storageKey) {
+          localStorage.removeItem(user.storageKey);
+        }
+        
+        loadAllUsers();
+        alert('회원이 삭제되었습니다.');
+        
+      } catch (e) {
+        console.error('회원 삭제 실패:', e);
+        alert('회원 삭제에 실패했습니다.');
+      }
+    }
   </script>
 </body>
 </html>
