@@ -8,6 +8,7 @@ const db = new sqlite3.Database('./board.db');
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static('.'));
 
 // 테이블에 is_private, writer_id 컬럼 추가 (마이그레이션)
 db.serialize(() => {
