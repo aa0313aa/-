@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시판 | 기프트샵 커뮤니티</title>
+  <meta name="description" content="핫한 이슈와 다양한 카테고리의 블로그 게시판입니다. 자동 업데이트되는 최신 정보를 확인하세요.">
+  <link rel="canonical" href="https://현금화.site/blog.html">
+  <meta name="robots" content="index, follow">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="게시판 | 기프트샵 커뮤니티">
+  <meta name="twitter:description" content="핫한 이슈와 다양한 카테고리의 블로그 게시판입니다. 자동 업데이트되는 최신 정보를 확인하세요.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "기프트샵 커뮤니티 게시판",
+    "url": "/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "홈", "item": "/"},
+      {"@type": "ListItem", "position": 2, "name": "게시판", "item": "/blog.html"}
+    ]
+  }
+  </script>
+  <meta property="og:title" content="게시판 | 기프트샵 커뮤니티">
+  <meta property="og:description" content="핫한 이슈와 다양한 카테고리의 블로그 게시판입니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://현금화.site/blog.html">
+  <meta property="og:image" content="https://현금화.site/img/starbucks-50000-won.webp">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <script src="https://cdn.tailwindcss.com" media="print" onload="this.media='all'"></script>
+  <style>
+    body { font-family: 'Inter', 'Noto Sans KR', sans-serif; }
+    .blog-card { transition: all 0.3s ease; }
+    .blog-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .category-badge { animation: pulse 2s infinite; }
+    .hot-badge { background: linear-gradient(45deg, #ff6b6b, #ee5a24); animation: glow 2s ease-in-out infinite alternate; }
+    @keyframes glow { from { box-shadow: 0 0 5px #ff6b6b; } to { box-shadow: 0 0 20px #ff6b6b, 0 0 30px #ee5a24; } }
+    .search-input:focus { box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+    .loading { animation: spin 1s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    /* 로딩 스피너 숨김 처리 */
+    #loading-spinner.hidden { display: none !important; }
+    #loading-spinner { opacity: 0; transition: opacity 0.3s ease-out; }
+    #loading-spinner.show { opacity: 1; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    
+    /* 탭 스타일 */
+    .tab-active {
+      border-color: #3b82f6;
+      color: #3b82f6;
+    }
+    .tab-inactive {
+      border-color: transparent;
+      color: #6b7280;
+    }
+    
+    /* 미리보기 콘텐츠 스타일 */
+    #preview-content {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- 상단 배너 -->
+  <div id="top-banner" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center py-3 px-2 flex items-center justify-center relative">
+    <svg class="w-5 h-5 mr-2 inline-block text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z"/></svg>
+    <span class="font-semibold">🔥 실시간 핫 이슈 자동 업데이트! <a href="https://pf.kakao.com/_SBFexb/chat" target="_blank" rel="noopener" class="underline hover:text-yellow-200 ml-1">즉시상담</a></span>
+    <button onclick="document.getElementById('top-banner').style.display='none'" class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-yellow-200 text-xl font-bold">&times;</button>
+  </div>
+
+  <!-- 헤더 -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+  <a href="index.html" class="text-2xl font-extrabold text-blue-700 tracking-tight">📝 게시판</a>
+      <nav class="hidden md:flex space-x-6 text-base font-medium">
+        <a href="index.html" class="text-gray-700 hover:text-blue-700 transition">홈</a>
+        <a href="giftshop.html" class="text-gray-700 hover:text-blue-700 transition">기프트샵</a>
+        <a href="cart.html" class="text-gray-700 hover:text-blue-700 transition">휴대폰결제</a>
+        <a href="postpay.html" class="text-gray-700 hover:text-blue-700 transition">후불결제</a>
+  <a href="blog.html" class="text-blue-700 font-bold">게시판</a>
+        <a href="customer.html" class="text-gray-700 hover:text-blue-700 transition">고객센터</a>
+      </nav>
+      
+      <div class="flex items-center gap-3">
+        <!-- 사용자 정보 표시 -->
+        <div id="user-info" class="hidden items-center gap-2 text-sm text-gray-600">
+          <span>👤</span>
+          <span id="user-nickname">사용자</span>
+        </div>
+        
+        <!-- 로그인/로그아웃 버튼 -->
+        <button id="auth-btn" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition font-medium">
+          🔐 로그인
+        </button>
+        
+        <!-- 글쓰기 버튼 -->
+        <button id="write-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition font-medium hidden">
+          ✏️ 글쓰기
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 메인 컨테이너 -->
+  <main class="flex-1 max-w-7xl mx-auto w-full px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      
+      <!-- 사이드바 (카테고리 & 필터) -->
+      <aside class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+          <h3 class="text-lg font-bold text-gray-800 mb-4">🗂️ 카테고리</h3>
+          <div id="category-list" class="space-y-2">
+            <button class="category-btn w-full text-left px-3 py-2 rounded-md bg-blue-50 text-blue-700 font-medium transition hover:bg-blue-100" data-category="all">
+              📋 전체 (0)
+            </button>
+            <button class="category-btn w-full text-left px-3 py-2 rounded-md hover:bg-gray-50 transition" data-category="hot">
+              🔥 핫 이슈 (0)
+            </button>
+            <button class="category-btn w-full text-left px-3 py-2 rounded-md hover:bg-gray-50 transition" data-category="tech">
+              💻 기술 (0)
+            </button>
+            <button class="category-btn w-full text-left px-3 py-2 rounded-md hover:bg-gray-50 transition" data-category="finance">
+              💰 금융 (0)
+            </button>
+            <button class="category-btn w-full text-left px-3 py-2 rounded-md hover:bg-gray-50 transition" data-category="lifestyle">
+              🏠 라이프스타일 (0)
+            </button>
+            <button class="category-btn w-full text-left px-3 py-2 rounded-md hover:bg-gray-50 transition" data-category="news">
+              📰 뉴스 (0)
+            </button>
+          </div>
+        </div>
+
+        <!-- 검색 -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+          <h3 class="text-lg font-bold text-gray-800 mb-4">🔍 검색</h3>
+          <div class="relative">
+            <input type="text" id="search-input" placeholder="키워드를 입력하세요..." 
+                   class="search-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+            <button id="search-btn" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-blue-600 transition">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 통계 -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-lg font-bold text-gray-800 mb-4">📊 통계</h3>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between">
+              <span class="text-gray-600">총 게시글</span>
+              <span id="total-posts" class="font-medium text-blue-600">0</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">오늘 업데이트</span>
+              <span id="today-posts" class="font-medium text-green-600">0</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">핫 이슈</span>
+              <span id="hot-posts" class="font-medium text-red-600">0</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 메인 콘텐츠 -->
+      <div class="lg:col-span-3">
+        <!-- 상단 컨트롤 -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+          <div class="flex items-center gap-4">
+            <h1 class="text-2xl font-bold text-gray-800">📰 최신 게시글</h1>
+            <button id="auto-refresh-btn" class="bg-green-500 text-white px-3 py-1.5 rounded-md text-sm hover:bg-green-600 transition">
+              🔄 자동갱신 ON
+            </button>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-sm text-gray-600">정렬:</span>
+            <select id="sort-select" class="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500">
+              <option value="latest">최신순</option>
+              <option value="popular">인기순</option>
+              <option value="views">조회순</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 게시글 목록 -->
+        <div id="posts-container" class="space-y-6">
+          <!-- 로딩 상태 -->
+          <div id="loading-spinner" class="flex justify-center items-center py-12 hidden">
+            <div class="loading w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full"></div>
+            <span class="ml-3 text-gray-600">게시글을 불러오는 중...</span>
+          </div>
+        </div>
+
+        <!-- 더보기 버튼 -->
+        <div class="text-center mt-8">
+          <button id="load-more-btn" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium hidden">
+            더 많은 게시글 보기
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 로그인/회원가입 모달 -->
+  <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h3 id="auth-modal-title" class="text-xl font-bold text-gray-800">로그인</h3>
+          <button id="close-auth-modal" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+        </div>
+        
+        <!-- 로그인 폼 -->
+        <form id="login-form" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">이메일</label>
+            <input type="email" id="login-email" required 
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                   placeholder="이메일을 입력하세요">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">비밀번호</label>
+            <input type="password" id="login-password" required 
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                   placeholder="비밀번호를 입력하세요">
+          </div>
+          
+          <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+            로그인
+          </button>
+          
+          <div class="text-center text-sm text-gray-600">
+            계정이 없으신가요? 
+            <button type="button" id="show-signup" class="text-blue-600 hover:text-blue-800 font-medium">
+              회원가입
+            </button>
+          </div>
+        </form>
+        
+        <!-- 회원가입 폼 -->
+        <form id="signup-form" class="space-y-4 hidden">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">닉네임</label>
+            <input type="text" id="signup-nickname" required 
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                   placeholder="닉네임을 입력하세요">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">이메일</label>
+            <input type="email" id="signup-email" required 
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                   placeholder="이메일을 입력하세요">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">비밀번호</label>
+            <input type="password" id="signup-password" required 
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                   placeholder="비밀번호를 입력하세요 (8자 이상)">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">비밀번호 확인</label>
+            <input type="password" id="signup-password-confirm" required 
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                   placeholder="비밀번호를 다시 입력하세요">
+          </div>
+          
+          <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition">
+            회원가입
+          </button>
+          
+          <div class="text-center text-sm text-gray-600">
+            이미 계정이 있으신가요? 
+            <button type="button" id="show-login" class="text-blue-600 hover:text-blue-800 font-medium">
+              로그인
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 글 상세보기 모달 -->
+  <div id="view-post-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
+        <h3 class="text-xl font-bold text-gray-800">📖 게시글 보기</h3>
+        <button id="close-view-modal" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+      </div>
+      
+      <div id="post-detail-content" class="p-6">
+        <!-- 게시글 내용이 여기에 동적으로 삽입됩니다 -->
+      </div>
+      
+      <div class="sticky bottom-0 bg-gray-50 border-t border-gray-200 p-4 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+          <button id="like-post-btn" class="flex items-center gap-2 px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition">
+            <span>❤️</span>
+            <span id="like-count">0</span>
+          </button>
+          <span id="view-count-display" class="text-gray-600">👁️ 조회수: 0</span>
+        </div>
+        <button id="close-view-modal-btn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+          닫기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 글쓰기 모달 -->
+  <div id="write-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-bold text-gray-800">✏️ 새 게시글 작성</h3>
+        <button id="close-modal" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+      </div>
+
+      <!-- 탭 버튼 -->
+      <div class="flex border-b border-gray-200 mb-4">
+        <button type="button" id="write-tab" class="py-2 px-4 text-sm font-medium text-blue-600 border-b-2 border-blue-600 focus:outline-none">
+          ✏️ 글쓰기
+        </button>
+        <button type="button" id="preview-tab" class="py-2 px-4 text-sm font-medium text-gray-600 hover:text-blue-600 focus:outline-none">
+          👀 미리보기
+        </button>
+      </div>
+      
+      <form id="post-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">카테고리</label>
+          <select id="post-category" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500">
+            <option value="tech">💻 기술</option>
+            <option value="finance">💰 금융</option>
+            <option value="lifestyle">🏠 라이프스타일</option>
+            <option value="news">📰 뉴스</option>
+            <option value="hot">🔥 핫 이슈</option>
+          </select>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">제목</label>
+          <input type="text" id="post-title" required 
+                 class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                 placeholder="게시글 제목을 입력하세요...">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">내용</label>
+          <textarea id="post-content" rows="8" required
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                    placeholder="게시글 내용을 입력하세요..."></textarea>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">태그 (쉼표로 구분)</label>
+          <input type="text" id="post-tags" 
+                 class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                 placeholder="예: 금융, 투자, 주식">
+        </div>
+        
+        <div class="flex items-center gap-4">
+          <label class="flex items-center">
+            <input type="checkbox" id="post-featured" class="mr-2">
+            <span class="text-sm text-gray-700">🔥 핫 이슈로 등록</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="post-auto" class="mr-2">
+            <span class="text-sm text-gray-700">🤖 자동 업데이트 허용</span>
+          </label>
+        </div>
+        
+        <div class="flex justify-end gap-3 pt-4">
+          <button type="button" id="cancel-btn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition">
+            취소
+          </button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+            게시글 등록
+          </button>
+        </div>
+      </form>
+
+      <!-- 미리보기 영역 -->
+      <div id="post-preview" class="hidden space-y-4">
+        <div class="p-6 border border-gray-200 rounded-lg bg-white shadow-sm">
+          <div class="flex flex-wrap items-center gap-2 mb-3">
+            <span id="preview-category-badge" class="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-700">
+              💻 기술
+            </span>
+            <span id="preview-hot-badge" class="hidden px-2 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r from-red-500 to-orange-500">
+              🔥 HOT
+            </span>
+            <span id="preview-auto-badge" class="hidden px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
+              🤖 AUTO
+            </span>
+          </div>
+          
+          <h2 id="preview-title" class="text-2xl font-bold text-gray-900 mb-3">
+            제목을 입력하세요...
+          </h2>
+          
+          <div class="flex items-center justify-between text-sm text-gray-600 mb-4 pb-3 border-b border-gray-200">
+            <div class="flex items-center gap-4">
+              <span id="preview-author">👤 작성자</span>
+              <span id="preview-time">🕒 방금 전</span>
+              <span>📅 오늘</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span>👁️ 0</span>
+              <span>❤️ 0</span>
+            </div>
+          </div>
+          
+          <div id="preview-content" class="prose max-w-none text-gray-800 leading-relaxed mb-4">
+            내용을 입력하세요...
+          </div>
+          
+          <div id="preview-tags" class="flex flex-wrap gap-2">
+            <!-- 태그가 여기에 동적으로 추가됩니다 -->
+          </div>
+        </div>
+        
+        <div class="flex justify-end gap-3 pt-4">
+          <button type="button" id="preview-cancel-btn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition">
+            취소
+          </button>
+          <button type="button" id="preview-submit-btn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+            게시글 등록
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 푸터 -->
+  <footer class="bg-white border-t border-gray-200 py-8">
+    <div class="max-w-7xl mx-auto px-4 text-center text-gray-600 text-sm">
+      © 2025 기프트샵 커뮤니티. All rights reserved. | 자동 업데이트 시스템 가동중 🤖
+    </div>
+  </footer>
+
+  <script>
+    // 전역 변수
+    let posts = [];
+    let filteredPosts = [];
+    let currentCategory = 'all';
+    let autoRefresh = true;
+    let currentPage = 1;
+    const postsPerPage = 10;
+    let currentUser = null; // 현재 로그인한 사용자
+    let currentViewingPost = null; // 현재 보고 있는 게시글
+
+    // DOM 요소
+    const elements = {
+      postsContainer: document.getElementById('posts-container'),
+      loadingSpinner: document.getElementById('loading-spinner'),
+      loadMoreBtn: document.getElementById('load-more-btn'),
+      searchInput: document.getElementById('search-input'),
+      sortSelect: document.getElementById('sort-select'),
+      autoRefreshBtn: document.getElementById('auto-refresh-btn'),
+      writeBtn: document.getElementById('write-btn'),
+      writeModal: document.getElementById('write-modal'),
+      closeModal: document.getElementById('close-modal'),
+      cancelBtn: document.getElementById('cancel-btn'),
+      postForm: document.getElementById('post-form'),
+      categoryBtns: document.querySelectorAll('.category-btn'),
+      totalPosts: document.getElementById('total-posts'),
+      todayPosts: document.getElementById('today-posts'),
+      hotPosts: document.getElementById('hot-posts'),
+      viewPostModal: document.getElementById('view-post-modal'),
+      closeViewModal: document.getElementById('close-view-modal'),
+      closeViewModalBtn: document.getElementById('close-view-modal-btn'),
+      postDetailContent: document.getElementById('post-detail-content'),
+      likePostBtn: document.getElementById('like-post-btn'),
+      likeCount: document.getElementById('like-count'),
+      viewCountDisplay: document.getElementById('view-count-display'),
+      authBtn: document.getElementById('auth-btn'),
+      authModal: document.getElementById('auth-modal'),
+      closeAuthModal: document.getElementById('close-auth-modal'),
+      authModalTitle: document.getElementById('auth-modal-title'),
+      loginForm: document.getElementById('login-form'),
+      signupForm: document.getElementById('signup-form'),
+      showSignupBtn: document.getElementById('show-signup'),
+      showLoginBtn: document.getElementById('show-login'),
+      userInfo: document.getElementById('user-info'),
+      userNickname: document.getElementById('user-nickname'),
+      // 미리보기 관련 DOM 요소
+      writeTab: document.getElementById('write-tab'),
+      previewTab: document.getElementById('preview-tab'),
+      postPreview: document.getElementById('post-preview'),
+      previewCategoryBadge: document.getElementById('preview-category-badge'),
+      previewHotBadge: document.getElementById('preview-hot-badge'),
+      previewAutoBadge: document.getElementById('preview-auto-badge'),
+      previewTitle: document.getElementById('preview-title'),
+      previewAuthor: document.getElementById('preview-author'),
+      previewTime: document.getElementById('preview-time'),
+      previewContent: document.getElementById('preview-content'),
+      previewTags: document.getElementById('preview-tags'),
+      previewCancelBtn: document.getElementById('preview-cancel-btn'),
+      previewSubmitBtn: document.getElementById('preview-submit-btn')
+    };
+
+  // 샘플 게시글 데이터 제거: 기본은 빈 배열로 시작
+  const samplePosts = [];
+
+    // 서버에서 게시글 로드
+    async function loadPosts() {
+      try {
+        elements.loadingSpinner.classList.remove('hidden');
+  const res = await fetch('/api/posts', { credentials: 'include' });
+        if (!res.ok) throw new Error('게시글을 불러오지 못했습니다');
+        const data = await res.json();
+        // transform server posts to client shape
+        posts = data.map(p => ({
+          id: p.id,
+          title: p.title || (p.content ? p.content.substring(0, 40) : ''),
+          content: p.content || '',
+          category: p.category || 'news',
+          tags: p.tags || [],
+          author: p.writer || p.writer || '뉴스',
+          createdAt: p.date || p.created || new Date().toISOString(),
+          views: p.views || 0,
+          likes: p.likes || 0,
+          featured: p.featured || false,
+          auto: p.writer_id === 'newsbot'
+        }));
+        filterPosts();
+        updateStats();
+        updateCategoryCounts();
+      } catch (e) {
+        console.error(e);
+        showNotification('게시글을 불러오는 중 오류가 발생했습니다', 'error');
+      } finally {
+        elements.loadingSpinner.classList.add('hidden');
+      }
+    }
+
+    // 로컬스토리지에 데이터 저장
+    function savePosts() {
+      localStorage.setItem('blogPosts', JSON.stringify(posts));
+    }
+
+    // 게시글 필터링
+    function filterPosts() {
+      let filtered = [...posts];
+      
+      // 카테고리 필터
+      if (currentCategory !== 'all') {
+        filtered = filtered.filter(post => post.category === currentCategory);
+      }
+      
+      // 검색 필터
+      const searchTerm = elements.searchInput.value.toLowerCase();
+      if (searchTerm) {
+        filtered = filtered.filter(post => 
+          post.title.toLowerCase().includes(searchTerm) ||
+          post.content.toLowerCase().includes(searchTerm) ||
+          post.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+        );
+      }
+      
+      // 정렬
+      const sortBy = elements.sortSelect.value;
+      filtered.sort((a, b) => {
+        switch (sortBy) {
+          case 'latest':
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          case 'popular':
+            return b.likes - a.likes;
+          case 'views':
+            return b.views - a.views;
+          default:
+            return 0;
+        }
+      });
+      
+      filteredPosts = filtered;
+      renderPosts();
+    }
+
+    // 게시글 렌더링
+    function renderPosts() {
+      elements.loadingSpinner.classList.add('hidden');
+      
+      const startIndex = 0;
+      const endIndex = currentPage * postsPerPage;
+      const postsToShow = filteredPosts.slice(startIndex, endIndex);
+      
+      if (postsToShow.length === 0) {
+        elements.postsContainer.innerHTML = `
+          <div class="text-center py-12">
+            <div class="text-6xl mb-4">📝</div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">게시글이 없습니다</h3>
+            <p class="text-gray-600">새로운 게시글을 작성해보세요!</p>
+          </div>
+        `;
+        elements.loadMoreBtn.classList.add('hidden');
+        return;
+      }
+      
+      elements.postsContainer.innerHTML = postsToShow.map(post => createPostCard(post)).join('');
+      
+      // 더보기 버튼 표시/숨김
+      if (endIndex >= filteredPosts.length) {
+        elements.loadMoreBtn.classList.add('hidden');
+      } else {
+        elements.loadMoreBtn.classList.remove('hidden');
+      }
+    }
+
+    // 게시글 카드 생성
+    function createPostCard(post) {
+      const timeAgo = getTimeAgo(post.createdAt);
+      const categoryInfo = getCategoryInfo(post.category);
+      
+      return `
+        <article class="blog-card bg-white rounded-lg shadow-md p-6 border-l-4 border-l-blue-500 cursor-pointer hover:shadow-lg transition-all" onclick="window.viewPost(${post.id})">
+          <div class="flex flex-wrap items-center gap-2 mb-3">
+            <span class="category-badge px-3 py-1 rounded-full text-sm font-medium ${categoryInfo.class}">
+              ${categoryInfo.label}
+            </span>
+            ${post.featured ? '<span class="hot-badge px-2 py-1 rounded-full text-xs font-medium text-white">🔥 HOT</span>' : ''}
+            ${post.auto ? '<span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">🤖 AUTO</span>' : ''}
+          </div>
+          
+          <h2 class="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition">
+            ${post.title}
+          </h2>
+          
+          <p class="text-gray-600 mb-4 line-clamp-3">
+            ${post.content.length > 150 ? post.content.substring(0, 150) + '...' : post.content}
+          </p>
+          
+          <div class="flex flex-wrap gap-2 mb-4">
+            ${post.tags.map(tag => `<span class="px-2 py-1 bg-gray-100 text-gray-600 rounded text-sm">#${tag}</span>`).join('')}
+          </div>
+          
+          <div class="flex justify-between items-center text-sm text-gray-500">
+            <div class="flex items-center gap-4">
+              <span>👤 ${post.author}</span>
+              <span>🕒 ${timeAgo}</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span>👁️ ${post.views.toLocaleString()}</span>
+              <span>❤️ ${post.likes}</span>
+              <span class="text-blue-600 font-medium">자세히 보기 →</span>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    // 카테고리 정보 반환
+    function getCategoryInfo(category) {
+      const categories = {
+        hot: { label: '🔥 핫 이슈', class: 'bg-red-100 text-red-700' },
+        tech: { label: '💻 기술', class: 'bg-blue-100 text-blue-700' },
+        finance: { label: '💰 금융', class: 'bg-green-100 text-green-700' },
+        lifestyle: { label: '🏠 라이프스타일', class: 'bg-purple-100 text-purple-700' },
+        news: { label: '📰 뉴스', class: 'bg-yellow-100 text-yellow-700' }
+      };
+      return categories[category] || { label: '📋 기타', class: 'bg-gray-100 text-gray-700' };
+    }
+
+    // 시간 표시 함수
+    function getTimeAgo(dateString) {
+      const now = new Date();
+      const postDate = new Date(dateString);
+      const diffMs = now - postDate;
+      const diffMins = Math.floor(diffMs / 60000);
+      const diffHours = Math.floor(diffMs / 3600000);
+      const diffDays = Math.floor(diffMs / 86400000);
+      
+      if (diffMins < 60) return `${diffMins}분 전`;
+      if (diffHours < 24) return `${diffHours}시간 전`;
+      if (diffDays < 7) return `${diffDays}일 전`;
+      return postDate.toLocaleDateString('ko-KR');
+    }
+
+    // 통계 업데이트
+    function updateStats() {
+      const today = new Date().toDateString();
+      const todayCount = posts.filter(post => new Date(post.createdAt).toDateString() === today).length;
+      const hotCount = posts.filter(post => post.featured || post.category === 'hot').length;
+      
+      elements.totalPosts.textContent = posts.length;
+      elements.todayPosts.textContent = todayCount;
+      elements.hotPosts.textContent = hotCount;
+    }
+
+    // 카테고리별 개수 업데이트
+    function updateCategoryCounts() {
+      const counts = {
+        all: posts.length,
+        hot: posts.filter(p => p.category === 'hot' || p.featured).length,
+        tech: posts.filter(p => p.category === 'tech').length,
+        finance: posts.filter(p => p.category === 'finance').length,
+        lifestyle: posts.filter(p => p.category === 'lifestyle').length,
+        news: posts.filter(p => p.category === 'news').length
+      };
+      
+      elements.categoryBtns.forEach(btn => {
+        const category = btn.dataset.category;
+        const text = btn.textContent.replace(/\(\d+\)/, `(${counts[category] || 0})`);
+        btn.textContent = text;
+      });
+    }
+
+    // 새 게시글 추가
+    function addPost(postData) {
+      const newPost = {
+        id: Date.now(),
+        ...postData,
+        author: "사용자",
+        createdAt: new Date().toISOString(),
+        views: 0,
+        likes: 0
+      };
+      
+      posts.unshift(newPost);
+      savePosts();
+      filterPosts();
+      updateStats();
+      updateCategoryCounts();
+      
+      // 성공 메시지
+      showNotification('게시글이 성공적으로 등록되었습니다! 🎉');
+    }
+
+    // 알림 표시
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      let bgColor = 'bg-green-500';
+      
+      switch(type) {
+        case 'error':
+          bgColor = 'bg-red-500';
+          break;
+        case 'warning':
+          bgColor = 'bg-yellow-500';
+          break;
+        case 'info':
+          bgColor = 'bg-blue-500';
+          break;
+        default:
+          bgColor = 'bg-green-500';
+      }
+      
+      notification.className = `fixed top-4 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-all transform translate-x-full`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      // 애니메이션 효과
+      setTimeout(() => {
+        notification.classList.remove('translate-x-full');
+      }, 100);
+      
+      setTimeout(() => {
+        notification.classList.add('translate-x-full');
+        setTimeout(() => {
+          notification.remove();
+        }, 300);
+      }, 3000);
+    }
+
+    // 자동 핫 이슈 생성
+    function generateHotIssue() {
+      const hotTopics = [
+        "🚀 최신 핀테크 동향과 투자 기회",
+        "💎 디지털 자산 시장 분석 리포트",
+        "📱 모바일 결제 보안 강화 방안",
+        "🌟 2025년 주목할 스타트업",
+        "💰 개인 투자자를 위한 포트폴리오 전략",
+        "🔥 급상승 중인 업계 트렌드",
+        "⚡ 실시간 시장 변동 분석",
+        "🎯 효과적인 자산 관리 방법"
+      ];
+      
+      const contents = [
+        "최근 시장 동향을 종합 분석한 결과, 새로운 투자 기회가 부상하고 있습니다...",
+        "전문가들이 주목하는 최신 트렌드와 그 배경을 자세히 살펴보겠습니다...",
+        "데이터 기반으로 분석한 시장 전망과 투자 전략을 공유합니다...",
+        "업계 전문가들의 인사이트를 바탕으로 한 심층 분석 리포트입니다...",
+        "실시간으로 업데이트되는 시장 정보를 통해 최적의 투자 타이밍을 찾아보세요..."
+      ];
+      
+      const randomTopic = hotTopics[Math.floor(Math.random() * hotTopics.length)];
+      const randomContent = contents[Math.floor(Math.random() * contents.length)];
+      
+      const hotPost = {
+        title: randomTopic,
+        content: randomContent + " 이 글은 자동으로 생성된 핫 이슈입니다.",
+        category: "hot",
+        tags: ["핫이슈", "자동생성", "트렌드"],
+        featured: true,
+        auto: true
+      };
+      
+      addPost(hotPost);
+    }
+
+    // 로그인 폼 제출 처리: 서버에 POST /api/login
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value.trim();
+      // 서버는 nickname 기반 로그인이라 이메일 대신 nickname 사용을 기대할 수 있음.
+      // 여기서는 간단하게 이메일의 @ 앞부분을 닉네임으로 사용
+      const nickname = email.split('@')[0];
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nickname, password }),
+          credentials: 'include'
+        });
+        const json = await res.json();
+        if (!json.success) {
+          showNotification(json.error || '로그인 실패', 'error');
+          return;
+        }
+        currentUser = { id: json.id, nickname: json.nickname };
+        elements.userNickname.textContent = currentUser.nickname;
+        elements.userInfo.classList.remove('hidden');
+        elements.authBtn.textContent = '로그아웃';
+        elements.writeBtn.classList.remove('hidden');
+        showNotification('로그인 성공', 'success');
+        elements.authModal.classList.add('hidden');
+      } catch (err) {
+        console.error(err);
+        showNotification('서버 연결 오류', 'error');
+      }
+    });
+
+    // === 미리보기 관련 함수들 ===
+    
+    // 글쓰기 탭 활성화
+    function showWriteForm() {
+      elements.writeTab.classList.add('tab-active');
+      elements.writeTab.classList.remove('tab-inactive');
+      elements.previewTab.classList.add('tab-inactive');
+      elements.previewTab.classList.remove('tab-active');
+      elements.postForm.classList.remove('hidden');
+      elements.postPreview.classList.add('hidden');
+    }
+
+    // 미리보기 탭 활성화
+    function showPreviewForm() {
+      elements.previewTab.classList.add('tab-active');
+      elements.previewTab.classList.remove('tab-inactive');
+      elements.writeTab.classList.add('tab-inactive');
+      elements.writeTab.classList.remove('tab-active');
+      elements.postForm.classList.add('hidden');
+      elements.postPreview.classList.remove('hidden');
+      updatePostPreview();
+    }
+
+    // 미리보기 업데이트
+    function updatePostPreview() {
+      const title = document.getElementById('post-title').value;
+      const content = document.getElementById('post-content').value;
+      const category = document.getElementById('post-category').value;
+      const tags = document.getElementById('post-tags').value.split(',').map(tag => tag.trim()).filter(tag => tag);
+      const featured = document.getElementById('post-featured').checked;
+      const auto = document.getElementById('post-auto').checked;
+
+      // 제목 업데이트
+      elements.previewTitle.textContent = title || '제목을 입력하세요...';
+      
+      // 내용 업데이트 (줄바꿈 처리)
+      elements.previewContent.textContent = content || '내용을 입력하세요...';
+      
+      // 작성자 정보 업데이트
+      elements.previewAuthor.textContent = `👤 ${currentUser ? currentUser.nickname : '비회원'}`;
+      elements.previewTime.textContent = '🕒 방금 전';
+
+      // 카테고리 배지 업데이트
+      const categoryInfo = getCategoryInfo(category);
+      elements.previewCategoryBadge.textContent = categoryInfo.label;
+      elements.previewCategoryBadge.className = `px-3 py-1 rounded-full text-sm font-medium ${categoryInfo.class}`;
+
+      // HOT 배지 업데이트
+      if (featured) {
+        elements.previewHotBadge.classList.remove('hidden');
+      } else {
+        elements.previewHotBadge.classList.add('hidden');
+      }
+
+      // AUTO 배지 업데이트
+      if (auto) {
+        elements.previewAutoBadge.classList.remove('hidden');
+      } else {
+        elements.previewAutoBadge.classList.add('hidden');
+      }
+
+      // 태그 업데이트
+      if (tags.length > 0) {
+        elements.previewTags.innerHTML = tags.map(tag => 
+          `<span class="px-2 py-1 bg-gray-100 text-gray-600 rounded text-sm">#${tag}</span>`
+        ).join('');
+      } else {
+        elements.previewTags.innerHTML = '<span class="text-gray-500 text-sm">태그를 입력하세요...</span>';
+      }
+    }
+
+    // 미리보기에서 게시글 등록
+    function submitPostFromPreview() {
+      const postData = {
+        title: document.getElementById('post-title').value,
+        content: document.getElementById('post-content').value,
+        category: document.getElementById('post-category').value,
+        tags: document.getElementById('post-tags').value.split(',').map(tag => tag.trim()).filter(tag => tag),
+        featured: document.getElementById('post-featured').checked,
+        auto: document.getElementById('post-auto').checked
+      };
+      
+      if (!postData.title.trim()) {
+        showNotification('제목을 입력해주세요! ⚠️', 'warning');
+        showWriteForm();
+        document.getElementById('post-title').focus();
+        return;
+      }
+      
+      if (!postData.content.trim()) {
+        showNotification('내용을 입력해주세요! ⚠️', 'warning');
+        showWriteForm();
+        document.getElementById('post-content').focus();
+        return;
+      }
+      
+      addPost(postData);
+      elements.writeModal.classList.add('hidden');
+      elements.postForm.reset();
+      showWriteForm();
+    }
+
+    // === 회원 시스템 관련 함수들 ===
+    
+    // 로그인 상태 확인 (서버 세션 사용)
+    async function checkLoginStatus() {
+      try {
+        const res = await fetch('/api/me', { credentials: 'include' });
+        const json = await res.json();
+        if (json && json.success && json.user) {
+          currentUser = { id: json.user.id, nickname: json.user.nickname };
+          if (!currentUser.likedPosts) currentUser.likedPosts = [];
+          updateUIForLoggedInUser();
+        } else {
+          currentUser = null;
+          updateUIForGuestUser();
+        }
+      } catch (e) {
+        console.error('세션 확인 실패', e);
+        currentUser = null;
+        updateUIForGuestUser();
+      }
+    }
+
+    // 로그인한 사용자를 위한 UI 업데이트
+    function updateUIForLoggedInUser() {
+      elements.authBtn.textContent = '🚪 로그아웃';
+      elements.authBtn.className = 'bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition font-medium';
+      elements.writeBtn.classList.remove('hidden');
+      elements.userInfo.classList.remove('hidden');
+      elements.userInfo.classList.add('flex');
+      elements.userNickname.textContent = currentUser.nickname;
+    }
+
+    // 비로그인 사용자를 위한 UI 업데이트
+    function updateUIForGuestUser() {
+      elements.authBtn.textContent = '🔐 로그인';
+      elements.authBtn.className = 'bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition font-medium';
+      elements.writeBtn.classList.add('hidden');
+      elements.userInfo.classList.add('hidden');
+      elements.userInfo.classList.remove('flex');
+    }
+
+    // 로그인 처리
+    function handleLogin(email, password) {
+      const users = JSON.parse(localStorage.getItem('blogUsers')) || [];
+      const user = users.find(u => u.email === email && u.password === password);
+      
+      if (user) {
+        currentUser = user;
+        localStorage.setItem('blogUser', JSON.stringify(user));
+        updateUIForLoggedInUser();
+        closeAuthModal();
+        showNotification(`${user.nickname}님, 환영합니다! 🎉`);
+        return true;
+      } else {
+        showNotification('이메일 또는 비밀번호가 올바르지 않습니다. ❌', 'error');
+        return false;
+      }
+    }
+
+    // 회원가입 처리
+    function handleSignup(nickname, email, password, passwordConfirm) {
+      // 입력 검증
+      if (password !== passwordConfirm) {
+        showNotification('비밀번호가 일치하지 않습니다. ❌', 'error');
+        return false;
+      }
+      
+      if (password.length < 8) {
+        showNotification('비밀번호는 8자 이상이어야 합니다. ❌', 'error');
+        return false;
+      }
+
+      const users = JSON.parse(localStorage.getItem('blogUsers')) || [];
+      
+      // 이메일 중복 확인
+      if (users.find(u => u.email === email)) {
+        showNotification('이미 사용 중인 이메일입니다. ❌', 'error');
+        return false;
+      }
+
+      // 닉네임 중복 확인
+      if (users.find(u => u.nickname === nickname)) {
+        showNotification('이미 사용 중인 닉네임입니다. ❌', 'error');
+        return false;
+      }
+
+      // 새 사용자 생성
+      const newUser = {
+        id: Date.now(),
+        nickname,
+        email,
+        password,
+        joinDate: new Date().toISOString()
+      };
+
+      users.push(newUser);
+      localStorage.setItem('blogUsers', JSON.stringify(users));
+      
+      showNotification('회원가입이 완료되었습니다! 로그인해주세요. ✅');
+      showLoginForm();
+      return true;
+    }
+
+    // 로그아웃 처리
+    function handleLogout() {
+      currentUser = null;
+      localStorage.removeItem('blogUser');
+      updateUIForGuestUser();
+      showNotification('로그아웃되었습니다. 👋');
+    }
+
+    // 인증 모달 열기
+    function openAuthModal() {
+      if (currentUser) {
+        // 로그아웃 확인
+        if (confirm('로그아웃하시겠습니까?')) {
+          handleLogout();
+        }
+      } else {
+        // 로그인 모달 열기
+        showLoginForm();
+        elements.authModal.classList.remove('hidden');
+      }
+    }
+
+    // 인증 모달 닫기
+    function closeAuthModal() {
+      elements.authModal.classList.add('hidden');
+      elements.loginForm.reset();
+      elements.signupForm.reset();
+    }
+
+    // 로그인 폼 표시
+    function showLoginForm() {
+      elements.authModalTitle.textContent = '로그인';
+      elements.loginForm.classList.remove('hidden');
+      elements.signupForm.classList.add('hidden');
+    }
+
+    // 회원가입 폼 표시
+    function showSignupForm() {
+      elements.authModalTitle.textContent = '회원가입';
+      elements.loginForm.classList.add('hidden');
+      elements.signupForm.classList.remove('hidden');
+    }
+
+    // 글쓰기 권한 확인
+    function checkWritePermission() {
+      if (!currentUser) {
+        showNotification('글쓰기는 로그인한 회원만 가능합니다. 로그인해주세요! 🔐', 'warning');
+        openAuthModal();
+        return false;
+      }
+      return true;
+    }
+
+    // 게시글 상세보기 모달 표시
+    window.viewPost = function(postId) {
+      const post = posts.find(p => p.id === postId);
+      if (!post) {
+        alert('게시글을 찾을 수 없습니다.');
+        return;
+      }
+
+      // 현재 보고 있는 게시글이 아니라면 조회수 증가
+      if (currentViewingPost && currentViewingPost.id !== postId) {
+        currentViewingPost.views++; // 이전에 보던 글의 조회수 반영
+      } else if (!currentViewingPost || currentViewingPost.id !== postId) {
+        post.views++; // 새로 보는 글의 조회수 증가
+      }
+      currentViewingPost = post; // 현재 보고 있는 게시글 설정
+      savePosts(); // 변경된 조회수 저장
+      updateStats(); // 통계 업데이트
+
+      // 모달 내용 구성
+      const categoryInfo = getCategoryInfo(post.category);
+      const timeAgo = getTimeAgo(post.createdAt);
+
+      elements.postDetailContent.innerHTML = `
+        <div class="mb-6">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class="category-badge px-3 py-1 rounded-full text-sm font-medium ${categoryInfo.class}">
+              ${categoryInfo.label}
+            </span>
+            ${post.featured ? '<span class="hot-badge px-2 py-1 rounded-full text-xs font-medium text-white">🔥 HOT</span>' : ''}
+            ${post.auto ? '<span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">🤖 AUTO</span>' : ''}
+          </div>
+          
+          <h1 class="text-3xl font-bold text-gray-900 mb-4">${post.title}</h1>
+          
+          <div class="flex items-center justify-between text-sm text-gray-600 mb-6 pb-4 border-b border-gray-200">
+            <div class="flex items-center gap-4">
+              <span>👤 ${post.author}</span>
+              <span>🕒 ${timeAgo}</span>
+              <span>📅 ${new Date(post.createdAt).toLocaleDateString('ko-KR')}</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span>👁️ ${post.views.toLocaleString()}</span>
+              <span>❤️ ${post.likes}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="prose prose-lg max-w-none mb-6">
+          <div class="text-gray-800 leading-relaxed whitespace-pre-wrap">${post.content}</div>
+        </div>
+        
+        ${post.tags.length > 0 ? `
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">🏷️ 태그</h3>
+            <div class="flex flex-wrap gap-2">
+              ${post.tags.map(tag => `<span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">#${tag}</span>`).join('')}
+            </div>
+          </div>
+        ` : ''}
+        
+        <div class="bg-gray-50 rounded-lg p-4">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">💬 이 글이 도움이 되셨나요?</h3>
+          <p class="text-gray-600 text-sm">좋아요 버튼을 눌러 작성자에게 응원을 보내주세요!</p>
+        </div>
+      `;
+
+      // 좋아요 수와 조회수 업데이트
+      elements.likeCount.textContent = post.likes;
+      elements.viewCountDisplay.textContent = `👁️ 조회수: ${post.views.toLocaleString()}`;
+
+      // 좋아요 버튼 상태 초기화
+      if (currentUser && currentUser.likedPosts && currentUser.likedPosts.includes(post.id)) {
+        elements.likePostBtn.classList.add('bg-red-500', 'text-white');
+        elements.likePostBtn.classList.remove('bg-red-100', 'text-red-700');
+      } else {
+        elements.likePostBtn.classList.add('bg-red-100', 'text-red-700');
+        elements.likePostBtn.classList.remove('bg-red-500', 'text-white');
+      }
+
+      // 모달 표시
+      elements.viewPostModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // 스크롤 방지
+    }
+
+    // 게시글 상세보기 모달 닫기
+    function closeViewPostModal() {
+      elements.viewPostModal.classList.add('hidden');
+      document.body.style.overflow = ''; // 스크롤 허용
+      currentViewingPost = null; // 현재 보고 있는 게시글 초기화
+      renderPosts(); // 게시글 목록 새로고침 (조회수 반영)
+    }
+
+    // 좋아요 기능
+    function likePost() {
+      if (!currentUser) {
+        showNotification('좋아요는 로그인한 회원만 가능합니다. 🔐', 'warning');
+        openAuthModal();
+        return;
+      }
+
+      if (!currentViewingPost) return;
+
+      if (!currentUser.likedPosts) {
+        currentUser.likedPosts = [];
+      }
+
+      const post = posts.find(p => p.id === currentViewingPost.id);
+      if (!post) return;
+
+      if (currentUser.likedPosts.includes(post.id)) {
+        // 이미 좋아요를 눌렀으면 취소
+        post.likes--;
+        currentUser.likedPosts = currentUser.likedPosts.filter(id => id !== post.id);
+        showNotification('좋아요를 취소했습니다. 💔', 'info');
+      } else {
+        // 좋아요 추가
+        post.likes++;
+        currentUser.likedPosts.push(post.id);
+        showNotification('게시글을 좋아합니다! ❤️', 'success');
+      }
+
+      localStorage.setItem('blogUser', JSON.stringify(currentUser)); // 사용자 정보 업데이트
+      savePosts(); // 게시글 정보 업데이트
+      elements.likeCount.textContent = post.likes; // UI 업데이트
+
+      // 좋아요 버튼 상태 변경
+      if (currentUser.likedPosts.includes(post.id)) {
+        elements.likePostBtn.classList.add('bg-red-500', 'text-white');
+        elements.likePostBtn.classList.remove('bg-red-100', 'text-red-700');
+      } else {
+        elements.likePostBtn.classList.add('bg-red-100', 'text-red-700');
+        elements.likePostBtn.classList.remove('bg-red-500', 'text-white');
+      }
+    }
+
+    // 이벤트 리스너 설정
+    function setupEventListeners() {
+      // 카테고리 버튼
+      elements.categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          elements.categoryBtns.forEach(b => b.classList.remove('bg-blue-50', 'text-blue-700', 'font-medium'));
+          btn.classList.add('bg-blue-50', 'text-blue-700', 'font-medium');
+          currentCategory = btn.dataset.category;
+          currentPage = 1;
+          filterPosts();
+        });
+      });
+      
+      // 검색
+      elements.searchInput.addEventListener('input', () => {
+        currentPage = 1;
+        filterPosts();
+      });
+      
+      // 정렬
+      elements.sortSelect.addEventListener('change', () => {
+        currentPage = 1;
+        filterPosts();
+      });
+      
+      // 자동 갱신 토글
+      elements.autoRefreshBtn.addEventListener('click', () => {
+        autoRefresh = !autoRefresh;
+        elements.autoRefreshBtn.textContent = autoRefresh ? '🔄 자동갱신 ON' : '⏸️ 자동갱신 OFF';
+        elements.autoRefreshBtn.className = autoRefresh ? 
+          'bg-green-500 text-white px-3 py-1.5 rounded-md text-sm hover:bg-green-600 transition' :
+          'bg-gray-500 text-white px-3 py-1.5 rounded-md text-sm hover:bg-gray-600 transition';
+      });
+      
+      // 더보기 버튼
+      elements.loadMoreBtn.addEventListener('click', () => {
+        currentPage++;
+        renderPosts();
+      });
+      
+      // === 미리보기 탭 관련 이벤트 리스너 ===
+      
+      // 글쓰기 탭 클릭
+      if (elements.writeTab) {
+        elements.writeTab.addEventListener('click', () => {
+          showWriteForm();
+        });
+      }
+
+      // 미리보기 탭 클릭
+      if (elements.previewTab) {
+        elements.previewTab.addEventListener('click', () => {
+          showPreviewForm();
+        });
+      }
+
+      // 입력 필드 변경 시 실시간 미리보기 업데이트
+      const postTitleInput = document.getElementById('post-title');
+      const postContentInput = document.getElementById('post-content');
+      const postCategoryInput = document.getElementById('post-category');
+      const postTagsInput = document.getElementById('post-tags');
+      const postFeaturedInput = document.getElementById('post-featured');
+      const postAutoInput = document.getElementById('post-auto');
+      
+      if (postTitleInput) {
+        postTitleInput.addEventListener('input', () => {
+          if (!elements.postPreview.classList.contains('hidden')) {
+            updatePostPreview();
+          }
+        });
+      }
+      
+      if (postContentInput) {
+        postContentInput.addEventListener('input', () => {
+          if (!elements.postPreview.classList.contains('hidden')) {
+            updatePostPreview();
+          }
+        });
+      }
+      
+      if (postCategoryInput) {
+        postCategoryInput.addEventListener('change', () => {
+          if (!elements.postPreview.classList.contains('hidden')) {
+            updatePostPreview();
+          }
+        });
+      }
+      
+      if (postTagsInput) {
+        postTagsInput.addEventListener('input', () => {
+          if (!elements.postPreview.classList.contains('hidden')) {
+            updatePostPreview();
+          }
+        });
+      }
+      
+      if (postFeaturedInput) {
+        postFeaturedInput.addEventListener('change', () => {
+          if (!elements.postPreview.classList.contains('hidden')) {
+            updatePostPreview();
+          }
+        });
+      }
+      
+      if (postAutoInput) {
+        postAutoInput.addEventListener('change', () => {
+          if (!elements.postPreview.classList.contains('hidden')) {
+            updatePostPreview();
+          }
+        });
+      }
+
+      // 미리보기에서 취소 버튼
+      if (elements.previewCancelBtn) {
+        elements.previewCancelBtn.addEventListener('click', () => {
+          elements.writeModal.classList.add('hidden');
+          elements.postForm.reset();
+          showWriteForm();
+        });
+      }
+
+      // 미리보기에서 등록 버튼
+      if (elements.previewSubmitBtn) {
+        elements.previewSubmitBtn.addEventListener('click', () => {
+          submitPostFromPreview();
+        });
+      }
+
+      // 게시글 상세보기 모달 닫기
+      if (elements.closeViewModal) {
+        elements.closeViewModal.addEventListener('click', closeViewPostModal);
+      }
+      if (elements.closeViewModalBtn) {
+        elements.closeViewModalBtn.addEventListener('click', closeViewPostModal);
+      }
+      
+      // 좋아요 버튼 이벤트 리스너
+      if (elements.likePostBtn) {
+        elements.likePostBtn.addEventListener('click', likePost);
+      }
+
+      // 모달 외부 클릭시 닫기
+      if (elements.viewPostModal) {
+        elements.viewPostModal.addEventListener('click', (e) => {
+          if (e.target === elements.viewPostModal) {
+            closeViewPostModal();
+          }
+        });
+      }
+
+      // ESC 키로 모달 닫기
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (!elements.viewPostModal.classList.contains('hidden')) {
+            closeViewPostModal();
+          }
+          if (!elements.writeModal.classList.contains('hidden')) {
+            elements.writeModal.classList.add('hidden');
+            elements.postForm.reset();
+          }
+        }
+      });
+
+      // 로그인/회원가입 모달
+      elements.closeAuthModal.addEventListener('click', () => {
+        elements.authModal.classList.add('hidden');
+        elements.loginForm.reset();
+        elements.signupForm.reset();
+      });
+      
+      // === 인증 관련 이벤트 리스너 ===
+      
+      // 로그인/로그아웃 버튼
+      elements.authBtn.addEventListener('click', openAuthModal);
+      
+      // 인증 모달 닫기
+      elements.closeAuthModal.addEventListener('click', closeAuthModal);
+      
+      // 모달 외부 클릭시 닫기
+      elements.authModal.addEventListener('click', (e) => {
+        if (e.target === elements.authModal) {
+          closeAuthModal();
+        }
+      });
+      
+      // 로그인/회원가입 폼 전환
+      elements.showSignupBtn.addEventListener('click', showSignupForm);
+      elements.showLoginBtn.addEventListener('click', showLoginForm);
+      
+  // 로그인 폼 제출은 상단에 서버 POST 핸들러로 이미 처리됨
+      
+      // 회원가입 폼 제출
+      elements.signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nickname = document.getElementById('signup-nickname').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+        const passwordConfirm = document.getElementById('signup-password-confirm').value;
+        handleSignup(nickname, email, password, passwordConfirm);
+      });
+
+      // 글쓰기 모달 (권한 확인)
+      elements.writeBtn.addEventListener('click', () => {
+        if (checkWritePermission()) {
+          elements.writeModal.classList.remove('hidden');
+          showWriteForm(); // 글쓰기 탭으로 시작
+        }
+      });
+      
+      elements.closeModal.addEventListener('click', () => {
+        elements.writeModal.classList.add('hidden');
+        elements.postForm.reset();
+        showWriteForm();
+      });
+      
+      elements.cancelBtn.addEventListener('click', () => {
+        elements.writeModal.classList.add('hidden');
+        elements.postForm.reset();
+        showWriteForm();
+      });
+    }
+
+    // 이메일 유효성 검사
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    // 자동 갱신 시스템
+    function startAutoRefresh() {
+      setInterval(() => {
+        if (autoRefresh) {
+          // 랜덤하게 핫 이슈 생성 (5% 확률)
+          if (Math.random() < 0.05) {
+            generateHotIssue();
+          }
+          
+          // 조회수 랜덤 증가
+          posts.forEach(post => {
+            if (Math.random() < 0.3) {
+              post.views += Math.floor(Math.random() * 10) + 1;
+            }
+          });
+          
+          savePosts();
+          updateStats();
+        }
+      }, 30000); // 30초마다 실행
+    }
+
+    // 초기화
+    function init() {
+      checkLoginStatus(); // 로그인 상태 확인
+      loadPosts();
+      setupEventListeners();
+      startAutoRefresh();
+      
+      // 환영 메시지
+      setTimeout(() => {
+        if (currentUser) {
+          showNotification(`${currentUser.nickname}님, 다시 오신 것을 환영합니다! ✨`);
+        } else {
+          showNotification('블로그 게시판에 오신 것을 환영합니다! 로그인하고 글을 작성해보세요! ✨');
+        }
+      }, 1000);
+    }
+
+    // 페이지 로드 시 초기화
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
